@@ -1,0 +1,178 @@
+% final:
+\documentclass[draft=false,a4paper,11pt,headsepline,headinclude,footinclude=false,twoside,openright,cleardoublepage=empty,parskip=false]{scrbook}
+%\documentclass[draft=false,a4paper,11pt,headsepline,headinclude,footinclude=false,twoside,openright,cleardoublepage=empty,parskip=half,chapterprefix]{scrbook}
+
+%\documentclass[draft=false,a4paper,11pt,headsepline,headinclude,footinclude=false,twoside,openright,cleardoublepage=empty,parskip=half]{scrbook}
+
+% testing:
+%\documentclass[draft=false,a4paper,11pt,headsepline,headinclude,footinclude=false,twoside,openany,parskip=false]{scrbook}
+
+%\usepackage{setspace}
+%\doublespacing
+%\onehalfspacing
+
+%\usepackage{a4wide}
+
+% Postscript
+%\usepackage[dvips]{color}
+
+% language support
+\usepackage[english,ngerman]{babel}
+
+% character Encodings
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% character protrusion (also known as margin kerning) and font expansion
+\usepackage{lmodern}
+\usepackage[activate=alltext]{microtype}
+
+% fonts
+%\usepackage{bookman}
+
+% geometry
+%bindingoffset=0.3cm,
+\usepackage[
+	twoside,
+	heightrounded,
+	lmargin=47.2316pt,
+	textheight=555.00024pt,
+	textwidth=418.25555pt,
+	marginparwidth=2.5cm,
+	bmargin=6.0cm,
+	bindingoffset=1.0cm]{geometry}
+
+%\usepackage[
+%	twoside,
+%	heightrounded,
+%	lmargin=47.2316pt,
+%	textheight=555.00024pt,
+%	textwidth=418.25555pt,
+%	marginparwidth=2.75cm,
+%	bmargin=5.0cm,
+%	bindingoffset=0.5cm]{geometry}
+
+%\pdfoutput=0
+
+% bibliography
+\usepackage[round,authoryear,sort]{natbib}
+ % option elide not yet supported by our version
+
+%\usepackage[style=authoryear,citestyle=alphabetic,backref=false,hyperref=false]{biblatex}
+%\usepackage[style=authoryear]{bibtex}
+
+% graphics
+\usepackage{graphicx}
+%\DeclareGraphicsExtensions{.eps,.ps,.PS,.EPS}
+%\usepackage{psfrag}
+\usepackage{color}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+
+% captions in smaller fonts
+\usepackage[font={small},format=hang,labelfont=bf]{caption}
+\usepackage[font={footnotesize}]{subfig}
+
+% margin comments
+\usepackage{mparhack}
+
+\usepackage{enumitem}
+
+%\usepackage[clearempty]{titlesec}
+
+% formulas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\allowdisplaybreaks[1]
+
+\usepackage[standard]{ntheorem}
+%\renewtheorem*{definition}{Definition}
+
+% produce dropped capitals
+%\usepackage{lettrine}
+%\setcounter{DefaultLines}{2}
+%\renewcommand{\LettrineTextFont}{}
+
+% tables
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+%added by Nichola for block comments
+\usepackage{verbatim}
+%Nichola for the ceil symbol:
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+%Nichola: to control enumerate spacings..
+\newenvironment{my_enumerate}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+% refs
+\usepackage{varioref}
+\usepackage[plainpages=false,pdfpagelabels]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+%pagebackref
+%\renewcommand*{\backref}[1]{Cited on pg.~#1}
+
+% source code
+\usepackage{listings}
+
+% pseudo code
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{algpseudocode}
+
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+
+% to cross out formulas
+\usepackage[makeroom]{cancel}
+
+%\usepackage[style=super, header=none, border=none, number=none, cols=2, toc=true]{glossary}
+
+\hyphenation{}
+
+\newcommand{\atanTwo}{\mathrm{atan2}}
+\newcommand{\minimum}{\mathrm{minimum}}
+\newcommand{\maximum}{\mathrm{maximum}}
+\newcommand{\sign}{\mathrm{sign}}
+
+\newcommand{\angleOf}{\mathbf{angleOf}}
+\newcommand{\axisOf}{\mathbf{axisOf}}
+\newcommand{\slerp}{\mathbf{slerp}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\diff}{\partial}
+\def\argmax{\mathop{\rm argmax}}
+\def\argmin{\mathop{\rm argmin}}
+
+% big-o-notation
+\providecommand{\OO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+
+\newcommand{\Rstar}{{\cal R} }
+\newcommand{\Rx}{R}
+\newcommand{\tx}{t}
+
+% refs
+\def\chapref#1{Chapter~\ref{#1}}
+\def\secref#1{Section~\ref{#1}}
+\def\figref#1{Figure~\ref{#1}}
+\def\tabref#1{Table~\ref{#1}}
+\def\eqref#1{Eq.~(\ref{#1})}
+
+\newcommand{\ie}{\mbox{i.\,e.}}
+\newcommand{\eg}{\mbox{e.\,g.}}

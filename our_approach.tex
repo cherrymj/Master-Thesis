@@ -1,0 +1,29 @@
+\chapter{Our Approach}
+\label{cha:our_approach}
+
+\section{Overview} % (fold)
+\label{sec:overview}
+Unlike the works presented in the related works we were interested in integrating all stages of solving the problem such as perception, mapping model and action planning into one system. We further present an integrated framework for carrying out the task of detecting the parked autos,  integrating occupancy information into a model that is suitable for further planning and planning for actions itself, when carrying out a decision of finding an unocupied parking lot.
+We will further describe the different steps that we have taken on this road as well as the connections between them.
+% section overview (end)
+
+\section{Perception} % (fold)
+\label{sec:perception}
+In order to detect the positions of the parked cars we first needed to find a way for visual recognition of autos. To achieve this goal we looked at a number of approaches for object detection and classification.
+\begin{itemize}
+ 	\item Haar-cascade detection as presented by \cite{violajones2001}
+ 	\item Local binary patterns as presented by \todo{need a citation here}
+ 	\item HOG descriptor based classifier by \cite{dalal2005}  
+\end{itemize} 
+After analyzing the good and the bad sides of these methods we decided to go with the HOG-based method as it outperforms the Haar-based method while providing us with shorter training times when comparing to the local binary patterns based methods.
+% section perception (end)
+
+\section{Model} % (fold)
+\label{sec:model}
+
+% section model (end)
+
+\section{Action Planning} % (fold)
+\label{sec:action_planning}
+
+% section action_planning (end)

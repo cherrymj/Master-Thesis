@@ -1,0 +1,81 @@
+\include{preamble}
+%\include{titlepage}
+%\include{titlepage}
+
+%\documentclass[12pt,pdflatex,a4wide]{report}
+%\usepackage{a4wide}
+%\title{Team Project Report 
+%\\{\small Autonomous Intelligent Systems Laboratory}
+%\\{\small Department of Computer Science}
+%\\{\small University of Freiburg\\}
+%\vspace{10 mm}
+%Efficient Motion Planning for Robotic Manipulators}
+%\author{Nichola Abdo\\
+%\\Supervised by: Cyrill Stachniss}
+%\date{{April 2011}}
+%\usepackage{pifont}
+%\usepackage{alltt}s
+%\usepackage{url}
+%\usepackage{amsmath, amsthm, amssymb, amsfonts}
+%\usepackage{amssymb,amsmath}
+% \usepackage{graphicx,color}
+%\usepackage{float}
+%\usepackage{array}
+%\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+%\setlength\topmargin{0in}
+%\setlength\headheight{0in}
+% \usepackage{subfig}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\renewcommand{\thesection}{\arabic{section}}
+
+%\usepackage{verbatim}
+%\usepackage{lmodern}
+%\usepackage{hyperref}
+%\usepackage{color}
+%\pdfpagewidth 8.5in
+%\pdfpageheight 11in
+%\setlength\headsep{0in}
+%\setlength\textheight{7.7in}
+%\setlength\textwidth{6.25in}
+%\setlength\parindent{0.25in}
+%\setlength\parskip{0.25in}
+%\documentclass[dvipdfm]{article}
+%\usepackage[dvipdfm,colorlinks]{hyperref}
+%\usepackage{hyperref}
+\usepackage{todonotes}
+
+\begin{document}
+
+%\maketitle
+
+\input{titlepage.tex}
+\input{statement.tex}
+% \input{zusammenfassung.tex}
+\input{abstract.tex}
+% \input{acknowledgment.tex}
+% \input{dedication.tex}
+\selectlanguage{english}
+% \input{contents.tex}
+\pagestyle{scrheadings}
+\automark[section]{chapter}
+\ihead{\headmark}
+\ohead{\pagemark}
+
+% \input{introduction.tex}
+\input{related_works.tex}
+\input{background.tex}
+\input{our_approach.tex}
+% \input{experiments.tex}
+% \input{discussion.tex}
+
+%\bibliographystyle{ieeetr}
+\cleardoublepage
+\phantomsection \label{chap:bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{plainnat}
+%\bibliography{bibliography}
+
+\bibliography{refs}
+\end{document}
+
