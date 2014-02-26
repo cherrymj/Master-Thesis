@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.4)  24 FEB 2014 21:48
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.2.4)  26 FEB 2014 23:04
 entering extended mode
  %&-line parsing enabled.
 **Thesis.tex
@@ -1266,7 +1266,7 @@ LaTeX Font Info:    Try loading font information for T1+lmss on input line 26.
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<unilogo.pdf, id=54, 337.26pt x 110.4125pt>
+<unilogo.pdf, id=74, 337.26pt x 110.4125pt>
 File: unilogo.pdf Graphic file (type pdf)
  <use unilogo.pdf>
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 26.
@@ -1369,27 +1369,27 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
 ) (./our_approach.tex [12]
 Chapter 4.
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 15.
-) [13
+ine 16.
+[13
 
 
-] [14
+] [14]) [15] [16
 
 
-] (./Thesis.bbl [15
+] (./Thesis.bbl [17
 
 
-]) [16]
+]) [18]
 \tf@thm=\write5
 \openout5 = `Thesis.thm'.
 
  (./Thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 22674 strings out of 493848
- 382283 string characters out of 1152824
+ 22735 strings out of 493848
+ 383394 string characters out of 1152824
  512703 words of memory out of 3000000
- 25267 multiletter control sequences out of 15000+50000
- 56687 words of font info for 111 fonts, out of 3000000 for 9000
+ 25298 multiletter control sequences out of 15000+50000
+ 60238 words of font info for 121 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  69i,11n,74p,509b,838s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/tex
@@ -1404,9 +1404,9 @@ mf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/lms
 s17.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/
 fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on Thesis.pdf (16 pages, 294536 bytes).
+Output written on Thesis.pdf (18 pages, 306819 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
- 50 named destinations out of 1000 (max. 500000)
- 28786 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 287 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 500000)
+ 30874 words of extra memory for PDF output out of 35830 (max. 10000000)
 

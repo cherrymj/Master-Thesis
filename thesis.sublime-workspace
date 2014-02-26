@@ -1,0 +1,1175 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sub",
+				"subs	Sub Sub Section"
+			],
+			[
+				"relia",
+				"reliable"
+			],
+			[
+				"rang",
+				"range"
+			],
+			[
+				"wor",
+				"world"
+			],
+			[
+				"name",
+				"nameref"
+			],
+			[
+				"it",
+				"itd	\\item[description]"
+			],
+			[
+				"again",
+				"against"
+			],
+			[
+				"wind",
+				"window"
+			],
+			[
+				"detec",
+				"detection"
+			],
+			[
+				"reason",
+				"reasonable"
+			],
+			[
+				"reaso",
+				"reasonable"
+			],
+			[
+				"desc",
+				"descriptor"
+			],
+			[
+				"comm",
+				"comment"
+			],
+			[
+				"f",
+				"fairy"
+			],
+			[
+				"focu",
+				"focused"
+			],
+			[
+				"w",
+				"works"
+			],
+			[
+				"fa",
+				"factionalism"
+			],
+			[
+				"face",
+				"face's"
+			],
+			[
+				"fac",
+				"facelift"
+			],
+			[
+				"arg",
+				"argc"
+			],
+			[
+				"cl",
+				"clang_next"
+			],
+			[
+				"_",
+				"_file"
+			],
+			[
+				"ex",
+				"exit  (function)"
+			],
+			[
+				"seq",
+				"sequenceGenerator"
+			],
+			[
+				"get",
+				"getImagePos"
+			],
+			[
+				"image",
+				"imageLeftName"
+			],
+			[
+				"Utils",
+				"Utils::parseImageName"
+			],
+			[
+				"_image",
+				"_imagePosY"
+			],
+			[
+				"fol",
+				"foLaser"
+			],
+			[
+				"angle",
+				"angleOfCamera"
+			],
+			[
+				"Res",
+				"ResultWriter"
+			],
+			[
+				"date",
+				"dateOfData"
+			],
+			[
+				"Fa",
+				"FAIL"
+			],
+			[
+				"E",
+				"ENDC"
+			],
+			[
+				"time",
+				"timeOfData"
+			],
+			[
+				"spli",
+				"split"
+			],
+			[
+				"pa",
+				"pathToDataFolder"
+			],
+			[
+				"path",
+				"pathToDataFolder"
+			],
+			[
+				"y",
+				"y"
+			],
+			[
+				"xLis",
+				"xListInterp"
+			],
+			[
+				"laseLi",
+				"laserListAngle"
+			],
+			[
+				"laser",
+				"laserListBeamNum"
+			],
+			[
+				"laserL",
+				"laserListAngle"
+			],
+			[
+				"parse",
+				"parseLasers"
+			],
+			[
+				"curr",
+				"currDiff"
+			],
+			[
+				"carme",
+				"carmenLines"
+			],
+			[
+				"cou",
+				"counterImages"
+			],
+			[
+				"counter",
+				"counterImages"
+			],
+			[
+				"coun",
+				"counterLaser"
+			],
+			[
+				"lase",
+				"laserListBeamNum"
+			],
+			[
+				"Ut",
+				"Utils::parseImageName"
+			],
+			[
+				"media",
+				"medianY"
+			],
+			[
+				"the",
+				"theta"
+			],
+			[
+				"fov",
+				"fovStart"
+			],
+			[
+				"utils",
+				"utils"
+			],
+			[
+				"vec",
+				"vector	std::vector"
+			],
+			[
+				"rec",
+				"rect"
+			],
+			[
+				"x",
+				"xVec"
+			],
+			[
+				"tempG",
+				"tempGpsX"
+			],
+			[
+				"pu",
+				"push_back"
+			],
+			[
+				"tem",
+				"tempImageName"
+			],
+			[
+				"co",
+				"cout"
+			],
+			[
+				"an",
+				"angle"
+			],
+			[
+				"sp",
+				"split"
+			],
+			[
+				"c",
+				"curr"
+			],
+			[
+				"retur",
+				"return"
+			],
+			[
+				"las",
+				"laserLogFileName"
+			],
+			[
+				"gps",
+				"gps_point"
+			],
+			[
+				"end",
+				"end_pos"
+			],
+			[
+				"IMAGE",
+				"IMAGE_NAME"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
+				"fil",
+				"fileName"
+			],
+			[
+				"ve",
+				"vector"
+			],
+			[
+				"out",
+				"outFileName"
+			],
+			[
+				"temp",
+				"tempLaserListX"
+			],
+			[
+				"start",
+				"startAngle"
+			],
+			[
+				"split",
+				"splitLine"
+			],
+			[
+				"num",
+				"numBeams"
+			],
+			[
+				"thet",
+				"thetaList"
+			],
+			[
+				"siz",
+				"size	size"
+			],
+			[
+				"all",
+				"allImageNames"
+			],
+			[
+				"fou",
+				"foundRectsWithNames"
+			],
+			[
+				"Seq",
+				"SequenceGenerator"
+			],
+			[
+				"Orde",
+				"OrderType"
+			],
+			[
+				"_max",
+				"_maxIndex"
+			],
+			[
+				"_s",
+				"_startIndex"
+			],
+			[
+				"log",
+				"logfile"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"Ve",
+				"Vec3f"
+			],
+			[
+				"cv",
+				"cv::Vec3f"
+			],
+			[
+				"ima",
+				"imageLeftName"
+			],
+			[
+				"camer",
+				"cameraParams"
+			],
+			[
+				"ce",
+				"centralCol"
+			],
+			[
+				"cent",
+				"centralRow"
+			],
+			[
+				"str",
+				"str	str"
+			],
+			[
+				"getT",
+				"getTestExamples"
+			],
+			[
+				"ra",
+				"randIndex"
+			],
+			[
+				"si",
+				"size	size"
+			],
+			[
+				"genera",
+				"generateSequences"
+			],
+			[
+				"s",
+				"size	size"
+			],
+			[
+				"un",
+				"underscorePos"
+			],
+			[
+				"size",
+				"size_t"
+			],
+			[
+				"LO",
+				"Logger::instance"
+			],
+			[
+				"le",
+				"leftRightNamesMap"
+			],
+			[
+				"bum",
+				"bumblebee_camera_params"
+			],
+			[
+				"depth",
+				"depthEstimator"
+			],
+			[
+				"_de",
+				"_depthMap"
+			],
+			[
+				"getDe",
+				"getDepthFromDisparity"
+			],
+			[
+				"CV_",
+				"CV_32F"
+			],
+			[
+				"su",
+				"substr"
+			],
+			[
+				"find",
+				"find_last_of"
+			],
+			[
+				"val",
+				"validExtensions"
+			],
+			[
+				"st",
+				"str	str"
+			],
+			[
+				"img",
+				"imgDisparity16S"
+			],
+			[
+				"CV",
+				"CV_LOAD_IMAGE_GRAYSCALE"
+			],
+			[
+				"set",
+				"setExistingDepthImageNames"
+			],
+			[
+				"dep",
+				"depthEstimator"
+			],
+			[
+				"De",
+				"DepthEstimator"
+			],
+			[
+				"dire",
+				"directoryParser"
+			],
+			[
+				"getde",
+				"getDepthImageName"
+			],
+			[
+				"col",
+				"colorImageName"
+			],
+			[
+				"de",
+				"depth_estimator"
+			],
+			[
+				"CAR",
+				"CarDetector::LEAVE_OLD_MODEL"
+			],
+			[
+				"O",
+				"OVERWRITE_MODEL"
+			],
+			[
+				"over",
+				"overwriteModel"
+			],
+			[
+				"load",
+				"loadModel"
+			],
+			[
+				"model",
+				"modelPath"
+			],
+			[
+				"save",
+				"saveModel"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "our_approach.tex",
+			"settings":
+			{
+				"buffer_size": 5830,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"command_palette":
+	{
+		"height": 181.0,
+		"selected_items":
+		[
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"spac",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"tra",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"fold",
+				"Code Folding: Fold Tag Attributes"
+			],
+			[
+				"tog",
+				"View: Toggle Menu"
+			],
+			[
+				"togg",
+				"View: Toggle Menu"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
+			],
+			[
+				"check",
+				"LaTeXing: Check System"
+			],
+			[
+				"isntal",
+				"Package Control: Install Package"
+			],
+			[
+				"clang",
+				"Package Control: Enable Package"
+			],
+			[
+				"lin",
+				"SublimeLinter: Disable Linter"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"commi",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add Current File"
+			],
+			[
+				"commit",
+				"Git: Commit"
+			],
+			[
+				"lint",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"linter",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"com",
+				"Git: Commit"
+			],
+			[
+				"add",
+				"Git: Add..."
+			],
+			[
+				"stat",
+				"Git: Status"
+			],
+			[
+				"pu",
+				"Git: Push"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git comm",
+				"Git: Commit"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"sublimeClang",
+				"Preferences: SublimeClang Settings – Default"
+			],
+			[
+				"mark",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"intel",
+				"SublimeCodeIntel: Disable Plugin"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"vmen",
+				"View: Toggle Menu"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: pair"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"git co",
+				"Git: Commit"
+			],
+			[
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"gitstat",
+				"Git: Status"
+			]
+		],
+		"width": 547.0
+	},
+	"console":
+	{
+		"height": 250.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"cpplint",
+			"lint",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/igor/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/igor/Work/Thesis/Text/template/our_approach.tex",
+		"/home/igor/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/igor/.config/sublime-text-3/Packages/User/LaTeX.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/DictionaryAutoComplete/README.md",
+		"/home/igor/.config/sublime-text-3/Packages/LaTeXTools/LaTeXTools Preferences.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/User/LaTeXTools Preferences.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/DictionaryAutoComplete/DictionaryAutoComplete.sublime-settings",
+		"/home/igor/Work/Thesis/Text/template/thesis.sublime-project",
+		"/home/igor/Work/Thesis/MiscCode/MDP_Planner/read_parking_lots.m",
+		"/home/igor/Work/Thesis/Text/thesis/thesis.tex",
+		"/home/igor/Work/Thesis/Text/thesis/ramsstyle.sty",
+		"/home/igor/todo.txt",
+		"/home/igor/Work/Thesis/Text/Test/main.tex",
+		"/home/igor/Work/Thesis/Text/Test/Thesis.cls",
+		"/home/igor/Work/Thesis/Text/related_works.tex",
+		"/home/igor/.vimrc",
+		"/usr/include/c++/4.6/bits/stringfwd.h",
+		"/home/igor/.config/sublime-text-3/Packages/User/SublimeClang.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/SublimeClang/SublimeClang.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/User/Markdown.sublime-settings",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/feature_detector_cpu.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/feature_detector.cpp",
+		"/usr/include/c++/4.6/iostream",
+		"/usr/include/c++/4.7/iostream",
+		"/usr/include/c++/4.6.3/iostream",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/list.todo",
+		"/home/igor/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/main.cpp",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/feature_detector.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/temp_result_writer.cpp",
+		"/home/igor/.config/sublime-text-3/Packages/Git/Git.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/SublimeClang/Default.sublime-keymap",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/find_positions_for_images.py",
+		"/home/igor/.config/sublime-text-3/Packages/PlainTasks/messages/Tutorial.todo",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/README.md",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/lasers_parser.cpp",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/temp_result_writer.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/lasers_parser.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/logger.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/logger.cpp",
+		"/home/igor/.codeintel/codeintel.log",
+		"/home/igor/.config/sublime-text-3/Packages/WhoCalled Function Finder/WhoCalled.sublime-settings",
+		"/home/igor/.config/sublime-text-3/Packages/WhoCalled Function Finder/README.md",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/gps_for_each_image_log_5.txt",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/utils.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/Result/car_pos_log.dat",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/CMakeLists.txt",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/laser_points_5.txt",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/car_detector.cpp",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/feature_detector_cpu.cpp",
+		"/home/igor/logs/log_5_12_2013_____10_52_19/log_5_12_2013_____10_52_19-carmen.log",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/laser_points_9.txt",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/Result/car_rects_log.dat",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/depth_estimator.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/bumblebee_camera_params.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/depth_estimator.cpp",
+		"/home/igor/logs/log_9_12_2013_____11_25_46/result-gps.gm2dl",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/gps_point.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/sequence_generator.h",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/gps_for_each_image_log.txt",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/sequence_generator.cpp",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/shift_to_zero.py",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/svm.cpp",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/HOGclassifier.sublime-project",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/laser_points.txt",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/gps_images_for_gnuplot.txt",
+		"/home/igor/logs/log_5_12_2013_____10_52_19/img_temp/timestamps.txt",
+		"/home/igor/conky-manager/themes/LSD/config/LSD",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/log_images_gps_freiburg.txt",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/car_detector.h",
+		"/home/igor/Work/Thesis/MiscCode/RectifyBumblebee/bumblebee-11123871.cal",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/svm_binder.cpp",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/svm_binder.h",
+		"/home/igor/newFreiburgDataLog.alog",
+		"/home/igor/Work/Thesis/MiscCode/PythonScripts/create_log.py",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/directory_parser.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/feature_detector_gpu.cpp",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/feature_detector_gpu.h",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/directory_parser.cpp",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/CMakeLists.txt",
+		"/home/igor/MyProjects/InformationRetrieval/ib31/exercise-sheet-02/feedback-tutor.txt",
+		"/home/igor/.config/sublime-text-3/Packages/User/make.sublime-build",
+		"/home/igor/Downloads/KML_Samples.kml",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/Result/log.dat",
+		"/home/igor/Work/Thesis/MiscCode/DepthFromStereo/SBM_Sample.cpp",
+		"/home/igor/test.txt",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/build/output_log.dat",
+		"/home/igor/MyProjects/InformationRetrieval/ib31/exercise-sheet-01/src/InvertedIndexTest.java",
+		"/home/igor/MyProjects/InformationRetrieval/ib31/exercise-sheet-01/src/InvertedIndex.java",
+		"/home/igor/MyProjects/InformationRetrieval/ib31/exercise-sheet-01/InvertedIndexTest.Records.tsv",
+		"/home/igor/MyProjects/InformationRetrieval/ib31/exercise-sheet-01/feedback-tutor.txt",
+		"/home/igor/ExternalLibs/opencv-2.4.6.1/modules/gpu/src/cuda/hog.cu",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/DataResolver.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/DataSource.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/DictionaryIndex.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/IDataSource.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/IDictionaryIndex.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/IIndexSource.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/IndexSource.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/ITokenReader.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/ReaderFormat.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/dictionaryindex/reader/TokenReader.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/reader/Readers.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/engine/reader/BaseParser.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/application/util/articlelist/AArticleListModel.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/application/util/articlelist/ArticleList.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/application/util/articlelist/ArticleListMenu.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/application/util/articlelist/ArticlesListModel.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/application/util/articlelist/IArticleListMenuSupport.java",
+		"/home/igor/MyProjects/StarDict/ja/lingo/application/util/articlelist/MutableArticleListModel.java",
+		"/home/igor/MyProjects/StarDict/com/xduke/xswing/DataTipCell.java",
+		"/home/igor/MyProjects/StarDict/com/xduke/xswing/DataTipComponent.java",
+		"/home/igor/MyProjects/StarDict/com/xduke/xswing/DataTipListener.java",
+		"/home/igor/MyProjects/StarDict/com/xduke/xswing/DataTipManager.java",
+		"/home/igor/MyProjects/StarDict/com/xduke/xswing/DataTipPopup.java",
+		"/home/igor/MyProjects/StarDict/com/xduke/xswing/ListDataTipCell.java",
+		"/home/igor/MyProjects/StarDict/com/xduke/xswing/ListDataTipListener.java",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/pos/degree_0/.model",
+		"/home/igor/Downloads/people.tsv",
+		"/home/igor/Work/Thesis/MiscCode/RectifyBumblebee/bumblebeeRectify.cpp",
+		"/home/igor/Work/Thesis/MiscCode/RectifyBumblebee/bumblebeeRectify.h",
+		"/tmp/bash-fc-1382437184",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/build/source/CMakeFiles/train_and_predict.dir/CXX.includecache",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/build/source/CMakeFiles/temp_result_writer_lib.dir/CXX.includecache",
+		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/build/source/CMakeFiles/car_detection_lib.dir/CXX.includecache"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"shift",
+			"false",
+			"auto*.*complete",
+			"auto*complete",
+			"show*auto*complete",
+			"show",
+			"auto",
+			"insert_best_completion",
+			"auto",
+			"t",
+			"angle",
+			"90",
+			"_file",
+			"LogFile",
+			"logfile",
+			"LogFile",
+			"logfile",
+			"folder",
+			"OKGREEN",
+			"timeOfData",
+			"/home/igor/logs/log_15_1_2014_____16_20_41",
+			"log_5_12_2013_____10_52_19",
+			"rawLaserList",
+			"rows",
+			"parseImageName",
+			"log_11_12_2013_____14_12_34",
+			"log_9_12_2013_____11_25_46",
+			"fovStart",
+			"float",
+			"X",
+			"float",
+			"std::string",
+			"s",
+			"log_6_12_2013_____11_25_14",
+			"log_5_12_2013_____10_52_19",
+			"log_11_12_2013_____14_12_34",
+			"yList",
+			"xList",
+			"log_11_12_2013_____11_25_46",
+			"log_9_12_2013_____11_25_46",
+			"log_5_12_2013_____10_52_19",
+			"x",
+			"log_9_12_2013_____11_25_46",
+			"log_6_12_2013_____11_25_14",
+			"log_5_12_2013_____10_52_19",
+			"size",
+			"2",
+			"testDirName",
+			"logfile",
+			"// ",
+			"Foobar",
+			"max",
+			"startIndex",
+			"_startIndex",
+			"pixels",
+			"CV_32F",
+			"getDepthMedian",
+			"scores",
+			"imageLeftName",
+			"name",
+			"image",
+			"imgDisparity16S",
+			"imgLeft",
+			"number",
+			"imageName",
+			"Found",
+			"feature_detector",
+			"h",
+			"feature_detector",
+			"FeatureDetector",
+			"_hogTestCpu",
+			"FEATURE_DETECTOR_H",
+			"detectMultiScaleCpu",
+			"detectMultiScaleGpu",
+			"setTestHogFromHyperplane",
+			"str",
+			"unordered_map",
+			"std::multimap",
+			"squarePosDirs",
+			"degree_0",
+			"sampleShape",
+			"Train",
+			"Camera",
+			"Image",
+			"[i]",
+			"temp_result_writer",
+			"SVR_Q",
+			"svm_predict_values",
+			"this->getModel()",
+			"singleDetectorVector",
+			"TODO",
+			"i",
+			"Kernel",
+			"SVR_Q",
+			"solve_epsilon_svr",
+			"svm_train_one",
+			"svm_train",
+			"setProblemTrain",
+			"kernel_function",
+			"Solve",
+			"svm_node",
+			"dot",
+			"kernel_function",
+			"SVR_Q",
+			"Solve",
+			"solve_epsilon_svr",
+			"svm_train_one",
+			"svm_train",
+			"setProblemTrain",
+			"Point",
+			"_trainHog",
+			"Rect",
+			"_hog",
+			"imageFilename",
+			"Mat",
+			"Size",
+			"TRA",
+			"pos_left",
+			"HistType",
+			"histogram_",
+			"images",
+			"detectTest",
+			"imread",
+			"showDetections",
+			"hog",
+			"patches",
+			"Patch",
+			"storeCursor"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"std::multimap",
+			"cv::Size",
+			"hogs",
+			"vector<float> ",
+			"hog_classifier"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "our_approach.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5830,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 684.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.clang":
+	{
+		"height": 159.0
+	},
+	"output.clang_static_analyzer":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 249.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 112.0
+	},
+	"output.git-commit":
+	{
+		"height": 112.0
+	},
+	"output.git-push":
+	{
+		"height": 112.0
+	},
+	"output.markdown":
+	{
+		"height": 112.0
+	},
+	"project": "thesis.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/MyProjects/InformationRetrieval/ib31/exercise-sheet-02/src/ex2.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 79.0,
+		"selected_items":
+		[
+			[
+				"show",
+				"showDetections"
+			],
+			[
+				"median",
+				"getMedian"
+			]
+		],
+		"width": 759.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 233.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

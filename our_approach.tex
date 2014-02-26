@@ -1,26 +1,73 @@
+%!TEX root = Thesis.tex
 \chapter{Our Approach}
 \label{cha:our_approach}
 
 \section{Overview} % (fold)
 \label{sec:overview}
-Unlike the works presented in the related works we were interested in integrating all stages of solving the problem such as perception, mapping model and action planning into one system. We further present an integrated framework for carrying out the task of detecting the parked autos,  integrating occupancy information into a model that is suitable for further planning and planning for actions itself, when carrying out a decision of finding an unocupied parking lot.
+Unlike the works presented in the related works we were interested in integrating all stages of solving the problem such as perception, mapping model and action planning into one system. We further present an integrated framework for carrying out the task of detecting the parked cars, integrating occupancy information into a model that is suitable for further planning and planning for actions itself, when carrying out a decision of finding an unoccupied parking lot.
 We will further describe the different steps that we have taken on this road as well as the connections between them.
 % section overview (end)
 
 \section{Perception} % (fold)
 \label{sec:perception}
-In order to detect the positions of the parked cars we first needed to find a way for visual recognition of autos. To achieve this goal we looked at a number of approaches for object detection and classification.
-\begin{itemize}
- 	\item Haar-cascade detection as presented by \cite{violajones2001}
- 	\item Local binary patterns as presented by \todo{need a citation here}
- 	\item HOG descriptor based classifier by \cite{dalal2005}  
-\end{itemize} 
-After analyzing the good and the bad sides of these methods we decided to go with the HOG-based method as it outperforms the Haar-based method while providing us with shorter training times when comparing to the local binary patterns based methods.
+    In order to detect the positions of the parked cars we first needed to find a way for visual recognition of cars. To achieve this goal we looked at a number of approaches for object detection and classification.
+    \begin{itemize}
+        \item Haar-cascade detection as presented by \cite{violajones2001}
+        \item Local binary patterns as presented by \todo{need a citation here}
+        \item HOG descriptor based classifier by \cite{dalal2005}
+    \end{itemize}
+    However, whichever algorithm we use, we still need to make a transition from the image space to the 3D world. For each detected car we want to know precisely where is it situated with relation to the agent's current position.
+    For this purpose we need to use depth information, which we may obtain from one of these sources:
+    \begin{itemize}
+        \item Sonar Based Depth
+        \item Stereo Camera Based Depth
+        \item Laser Range Finder Based Depth
+    \end{itemize}
+    We will further focus on the second two of them.
+    As soon as we know a relative position of the detected car to the camera, we can move on to the next section - \nameref{sec:model}, where we stack many detections together in order to model the joint occupancy information.
+    For now, let's look into some more details in each perception step:
+    \subsection{HOG Detector} % (fold)
+    \label{sub:hog_detector}
+        After analyzing the good and the bad sides of these methods we decided to go with the HOG-based method as it outperforms the Haar-based method while providing us with shorter training times when comparing to the local binary patterns based methods.
+        There are still some differences between our approach and the one presented by \cite{dalal2005}. These differences are due to the fact that we were interested in detecting cars, while the original paper is on detecting people.
+        We were mainly focusing on detecting front/rear facing cars, but the approach is easily extended onto the side-view as-well.
+        To be able to detect the front and read sides of the cars, we needed to switch the size of the hog descriptor window from $128 \times 64$ to $128 \times 128$.
+        In the training faze we have considered around 1000 manually chosen $128 \times 128$ patches containing cars and around 8000 negative examples. Each HOG descriptor is then unfolded into a point in a $128 * 128 * bla-bla = ~8000$ \todo{size of HOG not defined} dimensional space.
+    % subsection hog_classifier (end)
+
+    \subsection{SVM Classifier} % (fold)
+    \label{sub:svm_classifier}
+        In order to afterwards carry out the decision in the test data, we have trained a linear SVM classifier on top of all HOG descriptors.
+        A more complex decision boundary could of course also be used, but linear SVM, despite its simplicity, and remembering that visual detection was not the key contribution of this work, provides reasonable results in reasonable time.
+        The test data detection is carried out in a cascade fashion as presented by \cite{violajones2001} via the sliding window approach. For each sliding window content we create a HOG descriptor which is then tested against the pre-trained SVM classifier in order to find out on which side of the decision boundary it is. If the current HOG belongs to the area where cars are then the current sliding window is a region of interest and contains a car.
+        Each detection is then stored as a rectangle in the coordinates of the image it belongs to.
+        This ends the visual detection part and allows us to move on to the 3D world.
+    % subsection svm_classifier (end)
+
+    \subsection{Depth Information} % (fold)
+    \label{sub:depth_information}
+        As we have pointed out before, we were mainly focusing on stereo cameras and laser range finders for depth acquisition. We did not consider using the sonar because it is by far not as reliable as a laser, while likewise needs a complicated setup. The stereo cameras, on the contrary, hardly need specific setup, but, on the down side, produce noisy information. However, for testing purposes, we decided to try using both - the stereo camera and the laser.
+        \subsubsection{Stereo Camera} % (fold)
+        \label{ssub:stereo_camera}
+            \todo{no info here}
+        % subsubsection stereo_camera (end)
+        \subsubsection{Laser Range Finder} % (fold)
+        \label{ssub:laser_range_finder}
+            \todo{no info here}
+        % subsubsection laser_range_finder (end)
+    % subsection depth_information (end)
 % section perception (end)
 
 \section{Model} % (fold)
 \label{sec:model}
+\subsection{Occupancy Grids} % (fold)
+\label{sub:occupancy_grids}
 
+% subsection occupancy_grids (end)
+\subsection{Static State Binary Filter in Pre-defined Positions} % (fold)
+\label{sub:static_state_binary_filter_in_pre_defined_positions}
+
+% subsection static_state_binary_filter_in_pre_defin (end)
 % section model (end)
 
 \section{Action Planning} % (fold)
