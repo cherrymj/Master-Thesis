@@ -49,25 +49,47 @@ We will further describe the different steps that we have taken on this road as 
         As we have pointed out before, we were mainly focusing on stereo cameras and laser range finders for depth acquisition. We did not consider using the sonar because it is by far not as reliable as a laser, while likewise needs a complicated setup. The stereo cameras, on the contrary, hardly need specific setup, but, on the down side, produce noisy information. However, for testing purposes, we decided to try using both - the stereo camera and the laser.
         \subsubsection{Stereo Camera} % (fold)
         \label{ssub:stereo_camera}
-            \todo{no info here}
-        % subsubsection stereo_camera (end)
+            In order to find the depth from the stereo camera, we need to first calculate the disparity image from left and right images taken from the video stream.
+            Knowing the internal camera parameters we can then reconstruct the relative position of each pixel of the disparity image.
+            We first find the distance along the camera $Z$ axis: $Z = \frac{fB}{d}$, where $f$ is the focal length of the camera, $B$ is the baseline and $d$ is the disparity.
+            After $Z$ is determined we can focus on finding $X$ and $Y$ coordinates from the ordinary projection equations:
+            $$X = \frac{uZ}{f}$$
+            $$Y = \frac{vZ}{f}$$
+            where $u$ and $v$ are the pixel location in the $2D$ image, $X, Y, Z$ is the real $3D$ position.
+            When we have the $3D$ positions for every pixel in the images, we can combine this information with the visual detection part. From the previous part we have a region of interest in the image coordinates, which allows us to accumulate the depth of all pixels that fall into it. We can then analyze all of these values to find the distance to the car, that is contained in this particular region of interest.
+            We considered taking either the mean or the median of the chosen values. Given, that the depth that comes from the stereo camera is quite noisy and that the depth values of the pixels originate on the surface of the car and therefore contain quite a big amount of variance, we picked a median as an option as it is the most resistant statistic, having a breakdown point of 50$\%$: so long as no more than half the data is contaminated, the median will not give an arbitrarily large result.
+        % sub-subsection stereo_camera (end)
         \subsubsection{Laser Range Finder} % (fold)
         \label{ssub:laser_range_finder}
-            \todo{no info here}
-        % subsubsection laser_range_finder (end)
+            Even though the stereo camera setup is a lot cheaper and easier to mount, it lacks robustness due to the noise that is present in disparity images and to some degree to the erroneous values that fall into the detected region of interest (such as around the car or in the glass parts of it). We therefore also tested a setup with a laser range finder. We used a EUROPA robot Obeliks which has a $270^\circ$ laser mounted approximately on the human knee level. This setup proves to be a lot more robust in terms of finding the exact $3D$ information about the position of the detected car.
+            However, when using laser we need a different approach because there we only have images from a monocular camera and thus do not have a per-pixel association with the depth field the way we have it using the stereo camera.
+            As the laser mounted on the robot provides us with $270^\circ$ span it is able to cover approximately all the space related to the image from the camera. We then need to find the beams, that span through the area covered by the image. Given the fact, that the camera is mounted on the same $Z$ axis as the laser this can be done in a straightforward fashion. We are interested in the beams, the numbers of which follows this law:
+            $$ \{ beam_n | \forall n : \gamma_{start} < \alpha_{camera} + \alpha_{0} + \alpha_{n} < \gamma_{end} \}$$
+            where $\alpha_{camera}$ is the angle of the camera with respect to the direction of the laser, $\gamma_{start}$ and $\gamma_{end}$ are the starting and ending angle of the detection bounding box in the image, $\alpha_{n}$ is the angle of the $n$-th beam in the laser frame.
+            All the beam endpoints along with the direction of the beams provide us with consistent $3D$ information. In order to account for possible occlusions or mistakes we take the median of these values as a true position of the detected car.
+            After finding the correct car position we may move on to the next part and aggregate occupancy information into a consistent spacio-temporal map.
+        % sub-subsection laser_range_finder (end)
     % subsection depth_information (end)
 % section perception (end)
 
 \section{Model} % (fold)
 \label{sec:model}
-\subsection{Occupancy Grids} % (fold)
-\label{sub:occupancy_grids}
+    In the previous sections we have shown the steps of visual detection of the cars and finding their real $3D$ world position.
+    Whichever path we take in the previous step, now we have a number of real world coordinates, that need to be integrated into a consistent map. In this section we will present two approaches that we have chosen to target this task.
+    \subsection{Occupancy Grids} % (fold)
+    \label{sub:occupancy_grids}
+        The first straightforward decision for mapping the occupancy is using the occupancy grid maps (see \nameref{cha:background}: \nameref{sec:occupancy_grids}). In this case we model each cell's occupancy as a static state Bayes filter.
+        Let $z_t$ be an occupancy probability estimate of a cell in the environment in time $t$. Considering the probabilistic nature of occupancy of every distinct cell we integrate multiple measurement, taken in different times into one model. We achieve that by using the static state binary Bayes filter that integrates occupancy probability for each cell $i$ in $M$. Following the work of \cite{moravec1988}, we can compute a recursive update formula for $P(a^i | z_{1:t})$
+        \begin{equation}
+        \label{eq:static_state}
+            P(a^i | z_{1:t}) = \left[1 + \frac{1 - P(a^i | z_{t})}{P(a^i | z_{t})} \frac{1 - P(a^i | z_{1:t-1})}{P(a^i | z_{1:t-1})} \frac{P(a^i)}{1 - P(a^i)} \right]^{-1}
+        \end{equation}
+        In order to gain efficiency, one can furthermore use the log-odds formulation of \cite{moravec1988}, so that the operations in \eqref{eq:static_state} are realized via addition and subtractions in the log-odds space.
+    % subsection occupancy_grids (end)
+    \subsection{Static State Binary Filter in Pre-defined Positions} % (fold)
+    \label{sub:static_state_binary_filter_in_pre_defined_positions}
 
-% subsection occupancy_grids (end)
-\subsection{Static State Binary Filter in Pre-defined Positions} % (fold)
-\label{sub:static_state_binary_filter_in_pre_defined_positions}
-
-% subsection static_state_binary_filter_in_pre_defin (end)
+    % subsection static_state_binary_filter_in_pre_defin (end)
 % section model (end)
 
 \section{Action Planning} % (fold)

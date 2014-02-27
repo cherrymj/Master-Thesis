@@ -531,9 +531,49 @@
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 181.0,
+		"height": 400.0,
 		"selected_items":
 		[
+			[
+				"stat",
+				"Git: Status"
+			],
+			[
+				"sta",
+				"Git: Status"
+			],
+			[
+				"pus",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"add",
+				"Git: Add..."
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"pu",
+				"Git: Push"
+			],
+			[
+				"commi",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"delete",
+				"LaTexTools: Delete temporary files"
+			],
 			[
 				"remo",
 				"Package Control: Remove Package"
@@ -587,18 +627,6 @@
 				"SublimeLinter: Disable Linter"
 			],
 			[
-				"push",
-				"Git: Push"
-			],
-			[
-				"commi",
-				"Git: Commit"
-			],
-			[
-				"git add",
-				"Git: Add Current File"
-			],
-			[
 				"commit",
 				"Git: Commit"
 			],
@@ -613,18 +641,6 @@
 			[
 				"com",
 				"Git: Commit"
-			],
-			[
-				"add",
-				"Git: Add..."
-			],
-			[
-				"stat",
-				"Git: Status"
-			],
-			[
-				"pu",
-				"Git: Push"
 			],
 			[
 				"git push",
@@ -1046,7 +1062,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 684.0,
+						"translation.y": 323.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1139,7 +1155,7 @@
 		[
 			[
 				"",
-				"~/MyProjects/InformationRetrieval/ib31/exercise-sheet-02/src/ex2.sublime-project"
+				"~/Work/Thesis/MiscCode/MDP_Planner/mdp_planner.sublime-project"
 			]
 		],
 		"width": 380.0
