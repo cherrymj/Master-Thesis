@@ -88,14 +88,18 @@ We will further describe the different steps that we have taken on this road as 
         We can therefore model the probability of each cell to be occupied by a parked car at each time $t$.
         This information can be accumulated at any needed time as well as on different days.
         In order to fully define the equation given above we need to define and observation model $P(a^i | z_t)$
-        $$ f(n) = \begin{cases} 0.45, & \mbox{if } \mbox{ before detection} \\ 0.9, & \mbox{if } \mbox{ cell stores detection} \\ \mbox{prior}, & \mbox{if } \mbox{ after detection} \end{cases} $$
+        \begin{equation}
+        \label{eq:observation_model}
+            f(n) = \begin{cases} 0.45, & \mbox{if } \mbox{ before detection} \\ 0.9, & \mbox{if } \mbox{ cell stores detection} \\ \mbox{prior}, & \mbox{if } \mbox{ after detection} \end{cases}
+        \end{equation}
         Furthermore, the the observation model is defined along the rays, that span from the camera position to the defined $z_{max}$ and along the defined for the camera field of view. Of course, we have an occupancy grid based world, so there has to be a way to compute the cells that fall into the field of view. In order to carry out this action, we first compute left and right further points. We find the cells that form the end frontier by using the Bresenham algorithm as defined by \cite{bresenham1965}. Then, for each cell we carry out the same algorithm from camera cell to this query cell. Whenever we encounter a cell, where a car is situated, the next cell is also updated as occupied, while all the ones that come afterwards are not updated as \"not visible\".
         This gives us the means of formulating full occupancy grid that can store occupancy information from different days. It is theoretically then possible to move on to planning.
     % subsection occupancy_grids (end)
     \subsection{Static State Binary Filter in Pre-defined Positions} % (fold)
     \label{sub:static_state_binary_filter_in_pre_defined_positions}
         However, occupancy grids have their drawbacks. One of them, especially for our setup, is the discretization error. Whenever there are multiple detections of the same car from different angles it may happen, that the detection is assigned to different cells of the occupancy grids. This leads us to the problems with data association and therefore difficulties in creating a meaningful accumulated map. This, in its turn, can lead to wrong decisions of occupancy and may ruin or at east make it harder for a planner to carry out a decision.
-        For now we decided to use a pre-defined set of parking lots, that can be set from on-ground data or from aerial images (such as Google Maps). The rest of the theory stays untouched. We still make use of the static state binary Bayes filter as defined in \ref{eq:static_state}
+        For now we decided to use a pre-defined set of parking lots, that can be set from on-ground data or from aerial images (such as Google Maps). The rest of the theory stays untouched. We still make use of the static state binary Bayes filter as defined in \ref{eq:static_state}. However, the observation model has changed to to the absence of the occupancy grid. We now have different distinct parking lots, that are represented by a point in the space with its coordinates. When we get an observation of occupancy during one full session of measurements, we pick the point to update by using the closest neighbor from the number of available parking lots. The chosen parking lot is updated in a similar way to the occupied case of \ref{eq:observation_model}. After the full session of observation is carried out, the untouched cells are updated as free.
+        though this approach does not provide us with a consistent map of the environment we still get the occupancy information of the correctly situated in space parking lots, which allows us to form a graph that represents the environment and move on to the next part: \ref{sec:action_planning}.
     % subsection static_state_binary_filter_in_pre_defin (end)
 % section model (end)
 
