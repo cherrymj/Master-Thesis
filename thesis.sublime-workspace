@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"sq",
+				"sqrt	sqrt"
+			],
+			[
+				"prob",
+				"probability"
+			],
+			[
+				"arrri",
+				"arrowright"
+			],
+			[
+				"probab",
+				"probabilities"
+			],
+			[
+				"corres",
+				"correspond"
+			],
+			[
+				"transt",
+				"transition"
+			],
+			[
 				"ss",
 				"sssection	subsubsection"
 			],
@@ -490,30 +514,6 @@
 			[
 				"CV_",
 				"CV_32F"
-			],
-			[
-				"su",
-				"substr"
-			],
-			[
-				"find",
-				"find_last_of"
-			],
-			[
-				"val",
-				"validExtensions"
-			],
-			[
-				"st",
-				"str	str"
-			],
-			[
-				"img",
-				"imgDisparity16S"
-			],
-			[
-				"CV",
-				"CV_LOAD_IMAGE_GRAYSCALE"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "our_approach.tex",
 			"settings":
 			{
-				"buffer_size": 14918,
+				"buffer_size": 21042,
 				"line_ending": "Unix"
 			}
 		},
@@ -579,12 +579,32 @@
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 400.0,
+		"height": 216.0,
 		"selected_items":
 		[
 			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"git commi",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"togg",
+				"View: Toggle Menu"
+			],
+			[
 				"insta",
 				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
 			],
 			[
 				"isntal",
@@ -601,14 +621,6 @@
 			[
 				"comm",
 				"Git: Commit"
-			],
-			[
-				"git add",
-				"Git: Add..."
-			],
-			[
-				"push",
-				"Git: Push"
 			],
 			[
 				"commi",
@@ -639,10 +651,6 @@
 				"LaTexTools: Delete temporary files"
 			],
 			[
-				"remo",
-				"Package Control: Remove Package"
-			],
-			[
 				"spac",
 				"Indentation: Convert to Spaces"
 			],
@@ -656,10 +664,6 @@
 			],
 			[
 				"tog",
-				"View: Toggle Menu"
-			],
-			[
-				"togg",
 				"View: Toggle Menu"
 			],
 			[
@@ -937,6 +941,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			" ---",
+			"up",
 			"auto",
 			"$",
 			"shift",
@@ -1062,9 +1068,7 @@
 			"images",
 			"detectTest",
 			"imread",
-			"showDetections",
-			"hog",
-			"patches"
+			"showDetections"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1096,15 +1100,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14918,
+						"buffer_size": 21042,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14885,
-								14885
+								21008,
+								21008
 							]
 						],
 						"settings":
@@ -1262,7 +1266,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2736.0,
+						"translation.y": 3125.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -2002,7 +2006,7 @@
 			1.0
 		]
 	},
-	"menu_visible": true,
+	"menu_visible": false,
 	"output.clang":
 	{
 		"height": 159.0
