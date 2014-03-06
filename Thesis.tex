@@ -43,8 +43,6 @@
 %\documentclass[dvipdfm]{article}
 %\usepackage[dvipdfm,colorlinks]{hyperref}
 %\usepackage{hyperref}
-\usepackage{todonotes}
-
 \begin{document}
 
 %\maketitle
@@ -62,19 +60,21 @@
 \ihead{\headmark}
 \ohead{\pagemark}
 
+\cleardoublepage
+\tableofcontents
+
 \input{intro.tex}
 \input{related_works.tex}
 \input{background.tex}
 \input{our_approach.tex}
 \input{results.tex}
-% \input{discussion.tex}
+\input{conclusion.tex}
 
 %\bibliographystyle{ieeetr}
 \cleardoublepage
 \phantomsection \label{chap:bibliography}
 \addcontentsline{toc}{chapter}{Bibliography}
 \bibliographystyle{plainnat}
-%\bibliography{bibliography}
 
 \bibliography{refs}
 \end{document}
