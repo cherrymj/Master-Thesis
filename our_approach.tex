@@ -1,4 +1,13 @@
 %!TEX root = Thesis.tex
+
+\newcommand\Bx{x}
+\newcommand\Bm{m}
+\def\v{\vm{v}}
+\newcommand\vm[1]{\bm{\mathrm{#1}}}
+\renewcommand{\v}{{\mbox{a}^i}}
+\newcommand{\z}{z_{t}}
+\newcommand{\y}{z_{1:t-1}}
+
 \chapter{Our Approach}
 \label{cha:our_approach}
 
@@ -78,26 +87,79 @@ We will further describe the different steps that we have taken on this road as 
     Whichever path we take in the previous step, now we have a number of real world coordinates, that need to be integrated into a consistent map. In this section we will present two approaches that we have chosen to target this task.
     \subsection{Occupancy Grids}\label{sub:occupancy_grids}
         The first straightforward decision for mapping the occupancy is using the occupancy grid maps (see \nameref{cha:background}: \nameref{sec:occupancy_grids}). In this case we model each cell's occupancy as a static state Bayes filter.
-        Let $z_t$ be an occupancy probability estimate of a cell in the environment in time $t$. Considering the probabilistic nature of occupancy of every distinct cell we integrate multiple measurement, taken in different times into one model. We achieve that by using the static state binary Bayes filter that integrates occupancy probability for each cell $i$ in $M$. Following the work of~\cite{moravec1988}, we can compute a recursive update formula for $P(a^i | z_{1:t})$
+        Let $P(\v)$ be an occupancy probability estimate of a cell $i$ in the environment. Considering the probabilistic nature of occupancy of every distinct cell we integrate multiple measurement, taken in different times into one model. Following the work of~\cite{moravec1988}, we obtain an update rule for $P(a_t\mid z_{1:t})$. First, we apply Bayes' rule and obtain
         \begin{equation}
-        \label{eq:static_state}
-            P(a^i | z_{1:t}) = \left[ {1 + \frac{1 - P(a^i | z_{t})}{P(a^i | z_{t})} \frac{1 - P(a^i | z_{1:t-1})}{P(a^i | z_{1:t-1})} \frac{P(a^i)}{1 - P(a^i)}} \right]^{-1}
+        P(a_t \mid  z_{1:t} ) = \frac{P(z_t \mid a_t, \y) P(a_t \mid \y)}{P(z_t \mid \y)}.
         \end{equation}
-        In order to gain efficiency, one can furthermore use the log-odds formulation of~\cite{moravec1988}, so that the operations in \eqref{eq:static_state} are realized via addition and subtractions in the log-odds space.
-        We can therefore model the probability of each cell to be occupied by a parked car at each time $t$.
+        \noindent
+        We then compute the ratio
+        \begin{equation}
+        \frac{P(\v\mid z_{1:t})}{P(\neg\v \mid z_{1:t})}
+        =
+        \frac{P(\z \mid \v, \y)}{P(\z \mid \neg\v, \y)}   \frac{P(\v\mid \y)}{ P(\neg\v\mid \y)}.
+        \end{equation}
+        \noindent
+        Similarly, we obtain
+        \begin{equation}
+        \nonumber
+        \frac{P(\v\mid \z)}{P(\neg\v \mid \z)} = \frac{P(\z \mid \v)}{P(\z \mid \neg\v)}   \frac{P(\v)}{ P(\neg\v)},
+        \end{equation}
+        \noindent
+        which can be transformed to
+        \begin{equation}
+        \frac{P(\z \mid \v)}{P(\z \mid \neg\v)}
+        =
+        \frac{P(\v \mid \z)}{P(\neg\v \mid \z)}   \frac{P(\neg\v)}{ P(\v)}.
+        \end{equation}
+        \noindent
+        Applying the Markov assumption that the current observation is
+        independent of previous observations given we know that a patch
+        contains a parked vehicle gives
+        \begin{equation}
+        P(\z \mid \v, \y) = P(\z \mid \v),
+        \end{equation}
+        \noindent
+        and utilizing the fact that $P(\neg \v) = 1 - P(\v)$, we obtain
+        \begin{eqnarray}
+        \lefteqn{\frac{ P(\v \mid z_{1:t}) }{ 1 - P(\v \mid z_{1:t})} = } \nonumber \\
+        &&\frac{ P( \v \mid \z)}{ 1 - P(\v \mid \z)}   \frac{ P(\v \mid \y)}{ 1 - P(\v \mid  \y)}   \frac{ 1 - P(\v)}{ P(\v)}.
+        \end{eqnarray}
+
+        \noindent
+        This equation can be transformed into the following update formula:
+        \begin{eqnarray}
+        \label{eq:rec_update}
+        \hspace{-6mm}\lefteqn{P(\v\mid z_{1:t})=} \nonumber \\
+        && \hspace{-10mm} \left[ 1 + \frac{1 - P(\v\mid \z)}{P(\v \mid \z)}
+           \frac{1 - P(\v \mid \y)}{P(\v \mid \y)}   \frac{P(\v)}{1 - P(\v)}  \right]^{-1}
+        \end{eqnarray}
+        \noindent
+        In order to gain efficiency, one can furthermore use the log-odds formulation of~\cite{moravec1988}, so that the operations in~\eqref{eq:rec_update} are realized via addition and subtractions in the log-odds space.
+        We can therefore model the probability of each cell to be occupied by a parked vehicle at each time $t$.
         This information can be accumulated at any needed time as well as on different days.
-        In order to fully define the equation given above we need to define and observation model $P(a^i | z_t)$
+        In order to fully define the equation given above, we need to define the observation model $P(\v \mid z)$
         \begin{equation}
         \label{eq:observation_model}
             P(a^i | z_t) = \begin{cases} 0.45, & \mbox{if } \mbox{ before detection} \\ 0.9, & \mbox{if } \mbox{ cell stores detection} \\ \mbox{prior}, & \mbox{if } \mbox{ after detection} \end{cases}
         \end{equation}
-        Furthermore, the the observation model is defined along the rays, that span from the camera position to the defined $z_{\max}$ and along the defined for the camera field of view. Of course, we have an occupancy grid based world, so there has to be a way to compute the cells that fall into the field of view. In order to carry out this action, we first compute left and right further points. We find the cells that form the end frontier by using the Bresenham algorithm as defined by~\cite{bresenham1965}. Then, for each cell we carry out the same algorithm from camera cell to this query cell. Whenever we encounter a cell, where a car is situated, the next cell is also updated as occupied, while all the ones that come afterwards are not updated as ``not visible''.
+        Furthermore, the observation model is defined along the rays, that span from the camera position to the defined $z_{\max}$ and along the defined for the camera field of view. Of course, we have an occupancy grid based world, so there has to be a way to compute the cells that fall into the field of view. In order to carry out this action, we first compute left and right further points. We find the cells that form the end frontier by using the Bresenham algorithm as defined by~\cite{bresenham1965}.
+        \begin{wrapfigure}{r}{0.4\textwidth}
+            \begin{center}
+                \includegraphics[width=0.35\textwidth]{pictures/testmap.png}
+            \end{center}
+            \vspace{-20pt}
+            \caption{An example of Bresenham based update from a single image with two detected cars.}
+            \vspace{-30pt}
+            \label{fig:maptest}
+        \end{wrapfigure}
+        Then, for each cell we carry out the same algorithm from camera cell to this query cell. Whenever we encounter a cell, where a car is situated, the next cell is also updated as occupied, while all the ones that come afterwards are not updated as ``not visible''.
+        This can be seen in a small example in Figure~\ref{fig:maptest}.
         This gives us the means of formulating full occupancy grid that can store occupancy information from different days. It is theoretically then possible to move on to planning.
     % subsection occupancy_grids (end)
     \subsection{Static State Binary Filter in Pre-defined Positions}\label{sub:static_state_binary_filter_in_pre_defined_positions}
         However, occupancy grids have their drawbacks. One of them, especially for our setup, is the discretization error. Whenever there are multiple detections of the same car from different angles it may happen, that the detection is assigned to different cells of the occupancy grids. This leads us to the problems with data association and therefore difficulties in creating a meaningful accumulated map. This, in its turn, can lead to wrong decisions of occupancy and may ruin or at east make it harder for a planner to carry out a decision.
-        For now we decided to use a pre-defined set of parking lots, that can be set from on-ground data or from aerial images (such as Google Maps). The rest of the theory stays untouched. We still make use of the static state binary Bayes filter as defined in~\ref{eq:static_state}. However, the observation model has changed to to the absence of the occupancy grid. We now have different distinct parking lots, that are represented by a point in the space with its coordinates. When we get an observation of occupancy during one full session of measurements, we pick the point to update by using the closest neighbor from the number of available parking lots. The chosen parking lot is updated in a similar way to the occupied case of~\ref{eq:observation_model}. After the full session of observation is carried out, the untouched cells are updated as free.
-        though this approach does not provide us with a consistent map of the environment we still get the occupancy information of the correctly situated in space parking lots, which allows us to form a graph that represents the environment and move on to the next part:~\ref{sec:action_planning}.
+        For now we decided to use a pre-defined set of parking lots, that can be set from on-ground data or from aerial images (such as Google Maps). The rest of the theory stays untouched. We still make use of the static state binary Bayes filter as defined in~\eqref{eq:rec_update}. However, the observation model has changed to to the absence of the occupancy grid. We now have different distinct parking lots, that are represented by a point in the space with its coordinates. When we get an observation of occupancy during one full session of measurements, we pick the point to update by using the closest neighbor from the number of available parking lots. The chosen parking lot is updated in a similar way to the occupied case of~\ref{eq:observation_model}. After the full session of observation is carried out, the untouched cells are updated as free.
+        though this approach does not provide us with a consistent map of the environment we still get the occupancy information of the correctly situated in space parking lots, which allows us to form a graph that represents the environment and move on to the next part:~\nameref{sec:action_planning}.
     % subsection static_state_binary_filter_in_pre_defin (end)
 % section model (end)
 
@@ -145,6 +207,6 @@ We will further describe the different steps that we have taken on this road as 
     This guarantees, that the agent will try to find the way to maximize the reward he gets from parking in the described locations.
     Combining the defined transition model and the reward function allows us to fully define the MDP, which we are then able to solve with the policy iteration method as described in section \nameref{sec:markov_descision_processes}. The solution to the MDP guarantees to find an optimal solution to the given problem, which, given the nature of our reward functions is also an optimal solution from the human point of view.
 
-    However, the MDP can fail on the given problem. The failure can be described as follows: the agent carries out an optimal strategy up to the point when he needs to carry out the parking decision. Let us imagine for a moment that the parking lot at which the agent wants to park is occupied. From the point of view of the MDPs the optimal decision would be to wait and try once again, which is clearly a suboptimal decision. Therefore, we also need to plug in the observations of the world. Whenever we move past some parking lot we check if it is occupied and update the occupancy probability in this state to 1 or 0 respectively. We are then able to carry out a decision having a better background. To find what the next optimal action would be, we start the policy iteration on the newly defined graph for MDPs, providing the last found policy as initial. Under the assumption, that changing the occupancy probability of the observed vertices does not dramatically change the movement strategy of the agent, this yields optimal planning time because the policy iteration algorithm is carried out to the point when the policy does not change.
+    However, the MDPs can sometimes fail on the given problem. The failure can be described as follows: the agent carries out an optimal strategy up to the point when he needs to carry out the parking decision. Let us imagine for a moment that the parking lot at which the agent wants to park is occupied. From the point of view of the MDPs the optimal decision would be to wait and try once again, which is clearly a suboptimal decision. Therefore, we also need to plug in the observations of the world. Whenever we move past some parking lot we check if it is occupied and update the occupancy probability in this state to 1 or 0 respectively. We are then able to carry out a decision having a better background. To find what the next optimal action would be, we start the policy iteration on the newly defined graph for MDPs, providing the last found policy as initial. Under the assumption, that changing the occupancy probability of the observed vertices does not dramatically change the movement strategy of the agent, this yields optimal planning time because the policy iteration algorithm is carried out to the point when the policy does not change.
 
 % section action_planning (end)

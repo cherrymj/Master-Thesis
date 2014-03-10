@@ -2,31 +2,30 @@
 \chapter{Related Works}\label{cha:related_works}
 
 The problem of finding a free parking lot receives more attention with the
-never-ending growth of the cities and their population.
-However, most of the work is oriented on providing people with simple
-information on the occupancy status of a particular parking garage or parking
-lot.
+never-ending growth of the cities and their population. However, most of the
+work is oriented on providing people with simple information on the occupancy
+status of a particular parking garage or parking lot.
 
-There is quite significant amount of work done in the field of detection of the
-parked vehicles using either a static monocular camera or a set of such cameras.
-In the work of~\cite{qizhang06} the authors present an unsupervised system to
-monitor the occupied parking slots. They were using a stationary monocular
-camera to detect parked vehicles.
-In their work car detection is solely based on color, SVM is used to distinguish
-between occupied and free parking lots. The authors pre-process the ground truth
-images of the parking lots and search for color differences between actual
-measurements and the ground truth measured for an empty parking lot.
+There is quite significant amount of work done in the field of detection of
+the parked vehicles using either a static monocular camera or a set of such
+cameras. In the work of~\cite{qizhang06} the authors present an unsupervised
+system to monitor the occupied parking slots. They were using a stationary
+monocular camera to detect parked vehicles. In their work car detection is
+solely based on color, SVM is used to distinguish between occupied and free
+parking lots. The authors pre-process the ground truth images of the parking
+lots and search for color differences between actual measurements and the
+ground truth measured for an empty parking lot.
 
-Another work by~\cite{nicolastrue} is showing a similar approach. Alike with the
-previous paper, an unsupervised system for parking lots detection is presented.
-The author is using an overhead static camera. He uses human-labeled parking
-lots' positions to define the spacial arrangement of the parking lots. The
-author distributes chrominance channels of the images from the camera into bins,
-storing a histogram of these values for each parking lot. The histograms are
-then classified into free vs. occupied using either k-nearest neighbors or SVM.
-He also presents a variant of the work based on classifying color patches that
-are situated around corner detector's regions of interest, this however proves
-to be not sufficiently efficient.
+Another work by~\cite{nicolastrue} is showing a similar approach. Alike with
+the previous paper, an unsupervised system for parking lots detection is
+presented. The author is using an overhead static camera. He uses human-
+labeled parking lots' positions to define the spacial arrangement of the
+parking lots. The author distributes chrominance channels of the images from
+the camera into bins, storing a histogram of these values for each parking
+lot. The histograms are then classified into free vs. occupied using either
+k-nearest neighbors or SVM. He also presents a variant of the work based on
+classifying color patches that are situated around corner detector's regions
+of interest, this however proves to be not sufficiently efficient.
 
 The authors of the next paper ---~\cite{yusnita12} proposed a system to detect
 occupancy status of the parking lots of indoor parkings. They are using an
@@ -55,11 +54,11 @@ effect, perspective distortion, and the inter-occlusion among vehicles showing
 great detection rates.
 
 The authors of this paper~\cite{ichihashi} have developed a system that uses a
-system of overhead cameras for occupancy detection in indoor and outdoor scenes.
-The focus is put on the clustering algorithms, showing that the performance of
-the detector based on the fuzzy c-means (FCM) clustering and the hyper-parameter
-tuning by particle swarm optimization (PSO) significantly outperforms SVM both
-in speed and accuracy of detection.
+system of overhead cameras for occupancy detection in indoor and outdoor
+scenes. The focus is put on the clustering algorithms, showing that the
+performance of the detector based on the fuzzy c-means (FCM) clustering and
+the hyper-parameter tuning by particle swarm optimization (PSO) significantly
+outperforms SVM both in speed and accuracy of detection.
 
 However, there is also work done in the field of the in-vehicle detection of
 the parking lots. Some works present approaches that rely on the fusion of
@@ -71,12 +70,12 @@ sensor mounted on the car with conjunction with a visual 3D estimation setup
 based on the tracking of the interest points in the images seen from different
 angles.
 
-In these papers the authors used the ultrasonic sensor and 3D vision sensor that
-detects points of interest on the bodies of the parked cars and tracks them to
-compare their positions from different points of view. The cars are then
-modeled by vertical planes of two different orientations that are fit into the
-3D data from the sensors. Empty parking lots are then modeled by empty spaces
-between the planes.
+In these papers the authors used the ultrasonic sensor and 3D vision sensor
+that detects points of interest on the bodies of the parked cars and tracks
+them to compare their positions from different points of view. The cars are
+then modeled by vertical planes of two different orientations that are fit
+into the 3D data from the sensors. Empty parking lots are then modeled by
+empty spaces between the planes.
 
 The paper by~\cite{vladimircoric} also moves focus from static overhead
 cameras on the developed parking lot to estimating parking lots for on-street
@@ -97,13 +96,12 @@ detected on the given grid by analyzing occupancy grid cells on curb and on
 other parked cars. This provides relatively precise estimation of the parking
 lot in 3D that allows for precise parking.
 
-The authors of this paper by~\cite{suhr10} proposed a system that is able to detect
-parking lots from 3D data acquired from stereo-based multi-view 3D
-reconstruction. The authors select point correspondences using a
-de-rotation-based method and mosaic 3D structures by estimating similarity
-transformation. While relying solely on this information and not using the
-odometry they were able to achieve reliable results with the detection rate of
-90\%
+The authors of this paper by~\cite{suhr10} proposed a system that is able to
+detect parking lots from 3D data acquired from stereo-based multi-view 3D
+reconstruction. The authors select point correspondences using a de-rotation-
+based method and mosaic 3D structures by estimating similarity transformation.
+While relying solely on this information and not using the odometry they were
+able to achieve reliable results with the detection rate of 90\%
 
 Some works, however focus not on car detection, but on detecting the parking
 slots markings which can prove to be useful when analyzing a free outdoor
