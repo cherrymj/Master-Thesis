@@ -4,9 +4,11 @@
 \label{cha:conclusion_and_further_work}
     We have build a system that integrate perception, mapping and planning for solving a task of efficiently finding a free on-street parking lot.
 
-    The algorithms presented in this work relies on visual detection of the cars in the streets. As no reliable fast car detector was found we have written one, which is going to be made open-source in the near future.
+    The algorithm presented in this work relies on visual detection of the cars in the streets. As no reliable fast car detector was found we have written one, which is going to be made open-source in the near future.
 
     Throughout the course of the work we have experimented with different methods for combining metric information with visual detections such as depth from stereo cameras or lasers. Currently the laser range scanners have proven to provide a better result, however it is of great interest to build a system that would provide the same level of detail using purely visual information.
+
+    It is important to have a reliable depth estimate only in case of having a good estimate of the position in the world. We use SLAM (\cite{stachniss11isrr,kuemmerle11auro,kretzschmar10ki}) for this purpose.
 
     Not only we have experimented with perception, but also with mapping. We have implemented the the occupancy grids based approach, which however suffers from the discretization errors as well as from ad-hoc estimation of the position (including orientation) of the detected cars in the occupancy grid. Eventually we stick to the system where we provide our system with additional knowledge about where the parking lots are situated. This information has to be obtained only once for a new environment.
 

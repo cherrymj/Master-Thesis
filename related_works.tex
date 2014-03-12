@@ -1,113 +1,145 @@
 %!TEX root = Thesis.tex
-\chapter{Related Works}\label{cha:related_works}
+\chapter{Related Works}
+\label{cha:related_works}
 
-The problem of finding a free parking lot receives more attention with the
-never-ending growth of the cities and their population. However, most of the
-work is oriented on providing people with simple information on the occupancy
-status of a particular parking garage or parking lot.
+The problem of finding free parking lots receives more attention with the
+continuous growth of the cities and their population. As far as we have found
+out, we can divide the works in the field in two main categories depending on
+the sensor setup. The detection of the parking lots is either carried out via
+the usage of static-mounted cameras or the on-vehicle sensor systems. We will
+further focus more on each of these options.
 
-There is quite significant amount of work done in the field of detection of
-the parked vehicles using either a static monocular camera or a set of such
-cameras. In the work of~\cite{qizhang06} the authors present an unsupervised
-system to monitor the occupied parking slots. They were using a stationary
-monocular camera to detect parked vehicles. In their work car detection is
-solely based on color, SVM is used to distinguish between occupied and free
-parking lots. The authors pre-process the ground truth images of the parking
-lots and search for color differences between actual measurements and the
-ground truth measured for an empty parking lot.
+\section{Detection with static monocular cameras} % (fold)
+\label{sec:detection_with_monocular_cameras}
 
-Another work by~\cite{nicolastrue} is showing a similar approach. Alike with
-the previous paper, an unsupervised system for parking lots detection is
-presented. The author is using an overhead static camera. He uses human-
-labeled parking lots' positions to define the spacial arrangement of the
-parking lots. The author distributes chrominance channels of the images from
-the camera into bins, storing a histogram of these values for each parking
-lot. The histograms are then classified into free vs. occupied using either
-k-nearest neighbors or SVM. He also presents a variant of the work based on
-classifying color patches that are situated around corner detector's regions
-of interest, this however proves to be not sufficiently efficient.
+To the best of our knowledge, the main purpose of such systems is to simplify
+the sensor setup for occupancy detection in the modern parking garages. These
+works differ in the features utilized for car detection as well as in methods
+of clustering these features.
 
-The authors of the next paper ---~\cite{yusnita12} proposed a system to detect
-occupancy status of the parking lots of indoor parkings. They are using an
-overhead, strictly vertically oriented camera. The parking lots are manually
-labeled by a marker that states their occupancy state. For each query parking
-lot the authors produce a binary image which is then analyzed to find if the
-parking lot is empty or occupied. This process is carried out by comparing the
-shape of the detection with the shape of the prior that reassembles the circle
-shape of the marker drawn on the floor of the parking slot.
+\cite{qizhang06} presents an unsupervised system to monitor the occupied
+parking slots. The authors were using a stationary monocular camera to detect
+parked vehicles. In their \todo{their or his?} work, car detection is solely
+based on color. The authors use the support vector machines (SVM) to cluster
+the features to distinguish between occupied and free parking lots. They pre-
+process the ground truth images of the parking lots and search for color
+differences between the measurements and the ground truth measured for an
+empty parking lot.
 
-Another work that utilizes a static monocular camera~\cite{tschentscher} shows a
-comparison of several different features for occupancy analysis. As in the works
-presented above the authors of this paper have an overhead camera pointing to
-the parking lots, which are manually labeled in the images. They compare a
-couple of visual features such as color histograms, gradient histograms,
-difference of Gaussian histograms and Haar features. They also explore different
-methods for training a classifier such as k-nearest neighbors, linear
-discriminant analysis and SVM. They achieved detection rate of 98\% while
-performing in real time.
+\cite{nicolastrue} shows a similar approach. Alike with the previous papers he
+presents an unsupervised system for parking lots detection. The author uses an
+overhead static camera. He uses human-labeled parking lots' positions to
+define the spacial arrangement of the parking lots. The author distributes
+chrominance channels of the images from the camera into bins, storing a
+histogram of these values for each parking lot, then he classifies these
+histograms as free or occupied using either k-nearest neighbors or SVM\@. He
+also presents a variant of the work based on classifying color patches
+situated around corner detector's regions of interest, but he proves it to be
+less efficient.
 
-In the works of~\cite{chingchun10},~\cite{chingjao10}, the authors are using a
-static monocular overhead camera and a 3-layer Bayesian hierarchical framework
- (BHF) the authors of the paper specifically addressed the challenges of vacant
-parking space inference that come from dramatic luminance variations, shadow
-effect, perspective distortion, and the inter-occlusion among vehicles showing
-great detection rates.
+\cite{tschentscher} utilizes a static monocular camera and shows a comparison
+of different features for occupancy analysis. As in the works mentioned above,
+the authors propose using an overhead camera pointing to the parking lots,
+which are manually labeled in the images. They study the influence of the
+visual features such as color histograms, gradient histograms, difference of
+Gaussian histograms and Haar features on the detection performance. They also
+explore the variance in methods for training a classifier based on the chosen
+feature set, such as k-nearest neighbors, linear discriminant analysis and
+SVM\@. They achieve detection rate of 98\% while performing in real time.
 
-The authors of this paper~\cite{ichihashi} have developed a system that uses a
-system of overhead cameras for occupancy detection in indoor and outdoor
-scenes. The focus is put on the clustering algorithms, showing that the
-performance of the detector based on the fuzzy c-means (FCM) clustering and
-the hyper-parameter tuning by particle swarm optimization (PSO) significantly
-outperforms SVM both in speed and accuracy of detection.
+\cite{ichihashi} shows a system that uses a set of overhead cameras for
+occupancy detection in indoor and outdoor scenes. The focus is set on the
+clustering algorithms, showing that the performance of the detector based on
+the fuzzy c-means (FCM) clustering and the hyper-parameter tuning by particle
+swarm optimization (PSO) outperforms SVM both in speed and accuracy of
+detection.
 
-However, there is also work done in the field of the in-vehicle detection of
-the parking lots. Some works present approaches that rely on the fusion of
-sonar/laser data with visual information.
+\cite{chingchun10} and~\cite{chingjao10}, use a static monocular overhead
+camera and a 3-layer Bayesian hierarchical framework  (BHF) the authors of the
+paper specifically addressed the challenges of vacant parking space inference
+that come from dramatic luminance variations, shadow effect, perspective
+distortion, and the inter-occlusion among vehicles showing great detection
+rates of up to 99\%.
 
-The authors of the next two papers ---~\cite{fintyelvestri} and
-\cite{abadvestri} are modeling free parking lots locally based on the 3D sonar
-sensor mounted on the car with conjunction with a visual 3D estimation setup
-based on the tracking of the interest points in the images seen from different
-angles.
+Some works change the focus from detecting the parked cars to detecting the
+appearance of the markers pre-painted on each parking lot.
 
-In these papers the authors used the ultrasonic sensor and 3D vision sensor
+\cite{yusnita12} proposes a system to detect occupancy status of the parking
+lots of indoor parkings. They are using an overhead, strictly vertically
+oriented camera. The parking lots are manually labeled by a marker that states
+their occupancy state. For each query parking lot the authors produce a binary
+image which is then analyzed to find if the parking lot is empty or occupied.
+This process is carried out by comparing the shape of the detection with the
+shape of the prior that reassembles the circle shape of the marker drawn on
+the floor of the parking slot. % section detection_with_monocular_cameras
+(end)
+
+\section{In-vehicle detection} % (fold)
+\label{sec:in_vehicle_detection}
+
+The main area of interest for us is the in-vehicle detection of the parking
+lots. We are specifically interested in the works that present approaches
+relying on the fusion of sonar/laser data with visual information.
+
+\cite{fintyelvestri} and~\cite{abadvestri} model free parking lots locally
+based on the 3D sonar sensor mounted on the car with conjunction with a visual
+3D estimation setup based on the tracking of the interest points in the images
+seen from different angles.
+
+In these papers the authors use the ultrasonic sensor and 3D vision sensor
 that detects points of interest on the bodies of the parked cars and tracks
 them to compare their positions from different points of view. The cars are
 then modeled by vertical planes of two different orientations that are fit
-into the 3D data from the sensors. Empty parking lots are then modeled by
+into the 3D data from the sensors. The authors model the empty parking lots by
 empty spaces between the planes.
 
-The paper by~\cite{vladimircoric} also moves focus from static overhead
-cameras on the developed parking lot to estimating parking lots for on-street
-parking. In this paper they use an ultra-sonic sensor mounted to the side of
-the car to estimate the parking possibilities along particular streets. The
-authors use a straightforward threshold method to distinguish between free and
-occupied space. They also make use of an idea that the more time a car was
-observed in a place the more it is likely that the space occupied by this car
-is a valid parking spot. As a result all measurements were incorporated with
-the GPS measurements to form a global map of parked cars, which the authors
-used to detect wrongly parked cars.
+\cite{vladimircoric} also moves focus from static overhead cameras on the
+developed parking lot to estimating parking lots for on-street parking. They
+\todo{he????} use an ultra-sonic sensor mounted to the side of the car to
+estimate the parking possibilities along particular streets. The authors use a
+straightforward threshold method to distinguish between free and occupied
+space. They also make use of an idea that the more time a car was observed in
+a place the more it is likely that the space occupied by this car is a valid
+parking spot. As a result all measurements were incorporated with the GPS
+measurements to form a global map of parked cars, which the authors used to
+detect wrongly parked cars.
 
-Another paper, that focuses on the on-vehicle sensor setup for occupancy
-modeling by~\cite{schmid11} utilizes an on-board short-range radar. The
-measurements from three radars are stored into a 3D occupancy grid, that
-represents the local surroundings of the car. Free parking lots are then
-detected on the given grid by analyzing occupancy grid cells on curb and on
-other parked cars. This provides relatively precise estimation of the parking
-lot in 3D that allows for precise parking.
+Following the focus on the in-vehicle sensor setup,~\cite{schmid11} utilizes
+an on-board short-range radar. The measurements from three radars are stored
+into a 3D occupancy grid, that represents the local surroundings of the car.
+Free parking lots are then detected on the given grid by analyzing occupancy
+grid cells on curb and on other parked cars. This provides an estimate of the
+parking lot in 3D that allows for precise parking.
 
-The authors of this paper by~\cite{suhr10} proposed a system that is able to
-detect parking lots from 3D data acquired from stereo-based multi-view 3D
-reconstruction. The authors select point correspondences using a de-rotation-
-based method and mosaic 3D structures by estimating similarity transformation.
-While relying solely on this information and not using the odometry they were
-able to achieve reliable results with the detection rate of 90\%
+\cite{suhr10} proposes a system that is able to detect parking lots from 3D
+data acquired from stereo-based multi-view 3D reconstruction. The authors
+select point correspondences using a de-rotation- based method and mosaic 3D
+structures by estimating similarity transformation. While relying solely on
+this information and not using the odometry they are able to achieve reliable
+results with the detection rate of 90\%
 
 Some works, however focus not on car detection, but on detecting the parking
 slots markings which can prove to be useful when analyzing a free outdoor
 parking.
 
 A fully automatic system for detection of parking slots' markings is presented
-by~\cite{suhr13}. The authors are utilizing a tree structure performing a
-bottom-up and a top-down approach in order to classify all parking slots as
-such and leave out all false detections.
+by~\cite{suhr13}. The authors utilize a tree structure performing a bottom-up
+and a top-down approach in order to classify all parking slots as such and
+leave out all false detections.
+
+% section in_vehicle_detection (end)
+
+\section{The contribution of this thesis} % (fold)
+\label{sec:the_contribution_of_this_thesis}
+
+In this thesis, following the works in \nameref{sec:in_vehicle_detection}, we
+present a system that is capable of detecting parked cars utilizing the in-
+vehicle sensor setup, consisting of a stereo camera or a monocular camera
+fused with laser range finder. We also extend this functionality by estimating
+the occupancy probability for each parking lot in a global map and
+additionally present a planner capable of efficiently finding a route to a
+free parking lot.
+
+% section the_contribution_of_this_thesis (end)
+
+\todo{My own contribution???}
