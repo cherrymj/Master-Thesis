@@ -17,7 +17,7 @@ the sensor setup for occupancy detection in the modern parking garages. These
 works differ in the features utilized for car detection as well as in methods
 of clustering these features.
 
-\cite{qizhang06} presents an unsupervised system to monitor the occupied
+\citet{qizhang06} presents an unsupervised system to monitor the occupied
 parking slots. The authors were using a stationary monocular camera to detect
 parked vehicles. In their \todo{their or his?} work, car detection is solely
 based on color. The authors use the support vector machines (SVM) to cluster
@@ -26,7 +26,7 @@ process the ground truth images of the parking lots and search for color
 differences between the measurements and the ground truth measured for an
 empty parking lot.
 
-\cite{nicolastrue} shows a similar approach. Alike with the previous papers he
+\citet{nicolastrue} shows a similar approach. Alike with the previous papers he
 presents an unsupervised system for parking lots detection. The author uses an
 overhead static camera. He uses human-labeled parking lots' positions to
 define the spacial arrangement of the parking lots. The author distributes
@@ -37,7 +37,7 @@ also presents a variant of the work based on classifying color patches
 situated around corner detector's regions of interest, but he proves it to be
 less efficient.
 
-\cite{tschentscher} utilizes a static monocular camera and shows a comparison
+\citet{tschentscher} utilizes a static monocular camera and shows a comparison
 of different features for occupancy analysis. As in the works mentioned above,
 the authors propose using an overhead camera pointing to the parking lots,
 which are manually labeled in the images. They study the influence of the
@@ -47,14 +47,14 @@ explore the variance in methods for training a classifier based on the chosen
 feature set, such as k-nearest neighbors, linear discriminant analysis and
 SVM\@. They achieve detection rate of 98\% while performing in real time.
 
-\cite{ichihashi} shows a system that uses a set of overhead cameras for
+\citet{ichihashi} shows a system that uses a set of overhead cameras for
 occupancy detection in indoor and outdoor scenes. The focus is set on the
 clustering algorithms, showing that the performance of the detector based on
 the fuzzy c-means (FCM) clustering and the hyper-parameter tuning by particle
 swarm optimization (PSO) outperforms SVM both in speed and accuracy of
 detection.
 
-\cite{chingchun10} and~\cite{chingjao10}, use a static monocular overhead
+\citet{chingchun10} and~\citet{chingjao10}, use a static monocular overhead
 camera and a 3-layer Bayesian hierarchical framework  (BHF) the authors of the
 paper specifically addressed the challenges of vacant parking space inference
 that come from dramatic luminance variations, shadow effect, perspective
@@ -64,7 +64,7 @@ rates of up to 99\%.
 Some works change the focus from detecting the parked cars to detecting the
 appearance of the markers pre-painted on each parking lot.
 
-\cite{yusnita12} proposes a system to detect occupancy status of the parking
+\citet{yusnita12} proposes a system to detect occupancy status of the parking
 lots of indoor parkings. They are using an overhead, strictly vertically
 oriented camera. The parking lots are manually labeled by a marker that states
 their occupancy state. For each query parking lot the authors produce a binary
@@ -81,7 +81,7 @@ The main area of interest for us is the in-vehicle detection of the parking
 lots. We are specifically interested in the works that present approaches
 relying on the fusion of sonar/laser data with visual information.
 
-\cite{fintyelvestri} and~\cite{abadvestri} model free parking lots locally
+\citet{fintyelvestri} and~\citet{abadvestri} model free parking lots locally
 based on the 3D sonar sensor mounted on the car with conjunction with a visual
 3D estimation setup based on the tracking of the interest points in the images
 seen from different angles.
@@ -93,7 +93,7 @@ then modeled by vertical planes of two different orientations that are fit
 into the 3D data from the sensors. The authors model the empty parking lots by
 empty spaces between the planes.
 
-\cite{vladimircoric} also moves focus from static overhead cameras on the
+\citet{vladimircoric} also moves focus from static overhead cameras on the
 developed parking lot to estimating parking lots for on-street parking. They
 \todo{he????} use an ultra-sonic sensor mounted to the side of the car to
 estimate the parking possibilities along particular streets. The authors use a
@@ -104,14 +104,14 @@ parking spot. As a result all measurements were incorporated with the GPS
 measurements to form a global map of parked cars, which the authors used to
 detect wrongly parked cars.
 
-Following the focus on the in-vehicle sensor setup,~\cite{schmid11} utilizes
+Following the focus on the in-vehicle sensor setup,~\citet{schmid11} utilizes
 an on-board short-range radar. The measurements from three radars are stored
 into a 3D occupancy grid, that represents the local surroundings of the car.
 Free parking lots are then detected on the given grid by analyzing occupancy
 grid cells on curb and on other parked cars. This provides an estimate of the
 parking lot in 3D that allows for precise parking.
 
-\cite{suhr10} proposes a system that is able to detect parking lots from 3D
+\citet{suhr10} proposes a system that is able to detect parking lots from 3D
 data acquired from stereo-based multi-view 3D reconstruction. The authors
 select point correspondences using a de-rotation- based method and mosaic 3D
 structures by estimating similarity transformation. While relying solely on
@@ -123,7 +123,7 @@ slots markings which can prove to be useful when analyzing a free outdoor
 parking.
 
 A fully automatic system for detection of parking slots' markings is presented
-by~\cite{suhr13}. The authors utilize a tree structure performing a bottom-up
+by~\citet{suhr13}. The authors utilize a tree structure performing a bottom-up
 and a top-down approach in order to classify all parking slots as such and
 leave out all false detections.
 

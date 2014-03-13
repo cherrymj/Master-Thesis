@@ -334,67 +334,136 @@ We will further describe the different steps that we have taken on this road as 
 \section{Action Planning} % (fold)
 \label{sec:action_planning}
 
-    Once we have defined the model for mapping, we are able to formally define
-    the action planning framework that can lead to an optimal decision in the
-    means of picking a path on our way to the parking lot. It depends on the
-    application what an optimal decision is. Whenever we try to find a parking
-    space it is usually the case, that there are parts of the parking lot
-    which are better suited for parking. Usually it means, that these parts
-    are closer to the destination where all the people lean to. This also
-    means that the ``better'' parts of the parking lots are more occupied than
-    the other, which leads us to a trade-off between going straight to the
-    closest, but likely occupied parking lot, which results in spending time
-    searching for a new one or parking in a more distant area, most likely
-    free, but it takes a while to walk from there to the goal. Given the
-    constraints described above, the framework that we present focuses on
-    finding the solution that minimizes the expected time spent on finding a
-    free parking spot and walking from the found one to the goal.
+    In this section we formally define the action planning framework that
+    searches for an optimal path on the way to finding a free parking lot. It
+    depends on the application what an optimal solution to this problem is.
 
-    As stated in the work of~\cite{tipaldiICRA11}, MDPs can be used when there is a need to maximize the joint rewards instead of greedily going for the best possible goal.
-    We follow similar approach, while defining rewards and transition probabilities based on the environment that we have in our problem.
+    There are typically parts of the parking, which are better in the sense of
+    their distance to a common destination. This also means that the
+    ``better'' parts of the parking lots are more likely to be occupied than
+    the other, which leads to a trade-off between driving straight to the
+    closest-to-goal, but likely occupied parking lot, and parking in a more
+    distant area, most likely free. It takes less time to drive a car than to
+    walk by foot, but it can take longer to find a free parking lot closer to
+    the goal than walking from a more distant one. Given the constraints
+    described above, the framework that we present focuses on finding the
+    solution that minimizes the expected time spent on finding a free parking
+    lot and walking from the found one to the goal.
 
-    In order to solve the given problem in an optimal way, we define rewards, which depict the time spent for each transition from state to state an agent can take. We then use the Markov Decision Processes as described in section~\ref{sec:markov_descision_processes} to find a path that maximizes the reward.
-    The resulting path does not go for the best spot, but maximizes the probability of encountering a free parking lot, while trying keeping the length of the search path as short as possible.
+    As stated in the work of~\citet{tipaldiICRA11}, MDPs can be used when
+    there is a need to maximize the joint rewards instead of greedily going
+    for the best possible goal. We follow similar approach, defining rewards
+    and transition probabilities based on the environment that we have in our
+    problem.
 
-    As it is stated in section~\ref{sec:markov_descision_processes}, we need to define rewards and actions in order to fully define an MDP problem.
-    First, lets start, by defining the state space. The states are defined as the vertices of the graph $V$, each of which represents a point in space. The graph also has edges $E$ a function $V \rightarrow V$, that correspond to the actions that can be carried out from one state to another. In the grid based situation, the states are the grids cells. In the case, where we explicitly map the parking lots --- they, along with their spacial information form the vertices of the graph.
-    In order to define rewards and probabilities of actions we need to define the set of all actions that can be carried out. We are assuming to be in a world, where only five actions are defined --- ``up'': $\uparrow$,
-    ``down'': $\downarrow$, ``left'': $\leftarrow$, ``right'': $\rightarrow$ and ``park''. Formally:
+    We define rewards, that depict the time spent for each transition from
+    state to state an agent can take. We use the Markov Decision Processes as
+    described in section~\ref{sec:markov_descision_processes} to find a path
+    that maximizes the reward. The resulting path does not go for the best
+    spot, but maximizes the probability of encountering a free parking lot,
+    while trying to keep the length of the search path as short as possible.
+
+    We define rewards and actions along with the probability of these actions
+    in order to fully define an MDP problem.
+
+    We formally describe the parking as a graph. The states are defined as the
+    vertices of the graph $V$, each of which represents a point in space. The
+    graph also has edges $E$ --- a function $V \rightarrow V$, that correspond
+    to the actions that can be carried out from one state to another. In the
+    grid based situation, the states are the grids cells and the edges are
+    connecting the adjacent cells. In the case, where we explicitly map the
+    parking lots --- they, along with their spacial information, form the
+    vertices of the graph. In this case we define the edges so that they hold
+    the spacial information of the parking. In both cases all vertices are
+    connected to the goal state. The probability of the action that allows the
+    agent to follow such edges is defined further.
+
+    We define the set of all actions that can be carried out in any state. It
+    consists of five distinct actions: ``up'': $\uparrow$, ``down'':
+    $\downarrow$, ``left'': $\leftarrow$, ``right'': $\rightarrow$ and
+    ``park''. Formally:
+
     \begin{eqnarray}
         A_{\mbox{move}} = \{ \uparrow, \downarrow, \leftarrow, \rightarrow \} \\
         a_{\mbox{park}} = \mbox{``park''} \\
         A = A_{\mbox{move}} \cup a_{\mbox{park}}
     \end{eqnarray}
-    Now we can define the reward function $R(s, s', a)$ as well as transition function $P(s| s', a)$.
-    Let us first start with probabilities. For four actions that describe moving around the parking lot in a car we considered the probability of moving from any state to the next one (if possible) to be equal to 1, while the probability of parking in a particular state is equal to the occupancy probability of the state:
-    \begin{eqnarray}
-        \forall (s, s') \in E, \forall a \in A_{\mbox{move}} : P(s| s', a) = 1 \\
-        \forall s \in V, (s,s_{\mbox{goal}}) \in E : P(s| s_{\mbox{goal}}, a_{\mbox{park}}) = P(\mbox{free})
-    \end{eqnarray}
-    where $P(\mbox{free})$ is a probability of a parking lot to be free, observed through a period of time.
-    To be consistent and to fully define the transaction model, we also need to set the remaining probabilities (the ones not set before) to the values such that $\forall s, s' \in V, (s, s') \in E : \sum_{s'}P(s| s', a) = 1$.
-    This resolves to staying in the same state when trying to carry out an unavailable or improbable action in any state. \\
-    For example: it is clear, that staying in the left most corner of the parking lot and carrying an action to go left, should result in staying in the same spot and while carrying out an action of parking, with the probability of $0.6$ has a $0.4$ chance to stay in the same place.
 
-    Another part of defining the MDP is the definition of the reward function
-    $R(s,s',a)$. The motivation behind the rewards is based on the time it
-    takes an agent to carry out an action. For now we assume, that it takes us
-    a constant time for moving from one state $s$ to another $s'$. If we
-    cannot carry out the action and are forced to stay in the same position,
-    we anyway lose the time. This describes the fact that each action takes
-    time. We therefore define a negative reward for carrying out any movement:
+    We utilize the defined actions to specify the reward function $R(s, s',
+    a)$ and the transition function $P(s \mid s', a)$.
+
+    For four actions that describe driving around the parking, we consider the
+    probability of moving from any state to the next one (if possible) to be
+    equal to 1, while the probability of parking in a particular state is
+    equal to the occupancy probability of the state:
+
+    \begin{eqnarray}
+        \forall (s, s') \in E, \forall a \in A_{\mbox{move}} : P(s \mid s', a) = 1 \\
+        \forall s \in V, (s,s_{\mbox{goal}}) \in E : P(s \mid s_{\mbox{goal}}, a_{\mbox{park}}) = P(\mbox{free})
+    \end{eqnarray}
+
+    where $P(\mbox{free})$ is a probability of a parking lot to be free,
+    observed through a period of time. To be consistent, we set the remaining
+    probabilities to the values such that $\forall s, s' \in V, (s, s') \in E
+    : \sum_{s'}P(s \mid s', a) = 1$. This ensures that the outcome of each
+    action the agent can take is defined. This resolves to staying in the same
+    state when trying to carry out an unavailable or improbable action in any
+    state.
+
+    For example: it is clear, that staying in the left most corner of the
+    parking lot and carrying an action to go left, should result in staying in
+    the same spot and while carrying out an action of parking, with the
+    probability of $0.6$ has a $0.4$ chance to stay in the same place.
+
+    Along with the transition model we define the reward function $R(s,s',a)$.
+    The motivation behind the rewards is based on the time it takes the agent
+    to carry out an action. We assume, that the agent needs a constant time
+    for moving from one state $s$ to another $s'$. If he cannot carry out the
+    action and is forced to stay in the same position, he regardlessly loses
+    time. We therefore define a negative reward driving around the parking
+    that penalizes longer paths:
 
     \begin{equation}
         \forall (s, s') \in E, \forall a \in A_{\mbox{move}}: R(s, s', a) = R(s, s, a) = \mbox{-const}
     \end{equation}
 
-    We have defined the costs of moving, which ``tells'' our agent, that the best strategy would be to stay in one place. However, this is not the behavior we expect from an intelligent agent, so we need to define the rewards of reaching the goal state. The rewards should still be time based, but they have to form a decreasing linear function as the state closer to the destination should get a bigger reward than the one that is situated further. We decided to set the reward to $r_{\max} - r_s$, where $r_s = \sqrt{(s - s_{\mbox{goal}}) {(s - s_{\mbox{goal}})}^T}$ is a distance between the arbitrary state $s \in \mathbb{R}^2$ and $r_{\max} = \max_{s \in V}r_s$ is the greatest of those distances. Therefore:
+    We also define the rewards that the agent receives when he successfully
+    carries out parking actions. These rewards are likewise time based. They
+    form a decreasing linear function --- therefore the state closer to the
+    destination gets a bigger reward than the one that is situated further. We
+    define the reward to be $r_{\max} - r_s$, where $r_s = \sqrt{(s -
+    s_{\mbox{goal}}) {(s - s_{\mbox{goal}})}^T}$ is a distance between the
+    arbitrary state $s \in \mathbb{R}^2$ and $r_{\max} = \max_{s \in V}r_s$ is
+    the greatest of those distances. Formally:
+
     \begin{equation}
         \forall s \in V, (s,\mbox{goal}) \in E : R(s, s_{\mbox{goal}}, a_{\mbox{park}}) = r_{\max} - r_s
     \end{equation}
-    This guarantees, that the agent will try to find the way to maximize the reward he gets from parking in the described locations.
-    Combining the defined transition model and the reward function allows us to fully define the MDP, which we are then able to solve with the policy iteration method as described in section \nameref{sec:markov_descision_processes}. The solution to the MDP guarantees to find an optimal solution to the given problem, which, given the nature of our reward functions is also an optimal solution from the human point of view.
 
-    However, the MDPs can sometimes fail on the given problem. The failure can be described as follows: the agent carries out an optimal strategy up to the point when he needs to carry out the parking decision. Let us imagine for a moment that the parking lot at which the agent wants to park is occupied. From the point of view of the MDPs the optimal decision would be to wait and try once again, which is clearly a suboptimal decision. Therefore, we also need to plug in the observations of the world. Whenever we move past some parking lot we check if it is occupied and update the occupancy probability in this state to 1 or 0 respectively. We are then able to carry out a decision having a better background. To find what the next optimal action would be, we start the policy iteration on the newly defined graph for MDPs, providing the last found policy as initial. Under the assumption, that changing the occupancy probability of the observed vertices does not dramatically change the movement strategy of the agent, this yields optimal planning time because the policy iteration algorithm is carried out to the point when the policy does not change.
+    The proposed reward function guarantees, that the agents tries to find the
+    way find a trade-off between shorter driving and walking paths, weighted
+    by the occupancy probability of the parking lots.
+
+    The solution to the MDP guarantees to find a solution to the given problem
+    that minimizes the expected time spent on searching for the free parking
+    lot and walking from the found one to the goal.
+
+    \todo{explicitly state about replanning}
+
+    The agent carries out an optimal strategy up to the point when he needs to
+    carry out the parking decision. Let us imagine for a moment that the
+    parking lot at which the agent wants to park is occupied. From the point
+    of view of the MDPs the optimal decision would be to wait and try once
+    again, which is clearly a suboptimal decision. Therefore, we also utilize
+    the observations of the world.
+
+    Whenever we move past a parking lot, we check if it is occupied and update
+    the occupancy probability in the related state to 1 or 0 respectively.
+    This allows for carrying out a decision based on the better background.
+
+    Because the graph is updated, we carry out the policy iteration algorithm
+    once more to define the new optimal actions for each state.
+
+    We repeat this re-planning step until we find a free parking lot.
 
 % section action_planning (end)
