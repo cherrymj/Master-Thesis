@@ -1,0 +1,15 @@
+ ✔ fix the citations - no commas @done (14-03-13 16:42)
+ ✔ fix the citations - journals, conferences @done (14-03-13 16:42)
+ ☐ light strip detection
+ ✔ move the background to our_approach @done (14-03-14 16:33)
+ ☐ add a graphical representation of the graph based on the parking lot
+ ☐ rename our_approach
+ ☐ add photos of parking lots, robot, aerial images etc.
+ ☐ San-francisco parking system into introduction
+ ☐ have a proof for every statement
+ ✔ devide the figures. @done (14-03-14 16:33)
+ ✔ the figure with svm goes to svm part @done (14-03-14 16:33)
+ ☐ summarize the stereo bm part for disparity image estimation
+ ☐ be more precise in describing how we get depth from the disparity
+ ☐ don't confuse people with saying monocular camera in the laser part
+ ✔ describe more precisely how we choose the laser beams that we need @done (14-03-14 16:35)

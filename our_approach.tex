@@ -13,457 +13,571 @@
 
 \section{Overview} % (fold)
 \label{sec:overview}
-Unlike the works presented in the related work we are interested in integrating all stages in solving the problem such as perception, mapping model and action planning into one system. We further present an integrated framework for carrying out the task of detecting the parked cars, integrating occupancy information into a model that is suitable for further planning and planning for actions itself, when carrying out a decision of finding an unoccupied parking lot.
-We will further describe the different steps that we have taken on this road as well as the connections between them.
 
-\begin{figure}[ht]%
-\centering
-\subfloat{\includegraphics[width=0.6\textwidth]{pictures/detections.pdf}}
-\subfloat{\includegraphics[width=0.4\textwidth]{pictures/svm.pdf}}\\
-\subfloat{\includegraphics[width=0.6\textwidth]{pictures/laser_fusion.pdf}} \\
-\subfloat{\includegraphics[width=0.6\textwidth]{pictures/occupancy_cars.pdf}} \\
-\subfloat{\includegraphics[width=0.6\textwidth]{pictures/parking_lots_detections.pdf}} \\
-\caption{Illustration of HOG-based detection and clustering with SVM.}
-\label{fig:det_to_svm}
-\end{figure}
+In this chapter we describe in detail the three main components of our system:
+visual car detection, creation of the map of parking spaces capable to store
+their occupancy information and a planner able to find a free parking lot in
+the minimum expected time. We also present the way of combining these parts
+into one system.
+
+We start by a coarse outline of the way these different parts are
+interconnected. Later in the chapter we show each of the sub-parts in detail.
+
+\begin{itemize}
+
+\item \emph{Perception:} We visually detect cars in the images from the camera and find out how far from the image plane are they situated by fusing the detections with the depth data, received either from the stereo camera setup or from the laser range finder (Section~\ref{sec:perception}).
+
+\item \emph{Mapping:} The positions of the detected cars are fused into one global representation of the world observed by the agent. This representation also contains occupancy information, perceived through multiple runs (Section~\ref{sec:model}).
+
+\item \emph{Planning:} In the modeled environment we search for actions that minimize the time spent on searching for a parking space and walking from it to the goal (Section~\ref{sec:planning}).
+
+\end{itemize}
 
 % section overview (end)
 
 \section{Perception} % (fold)
 \label{sec:perception}
-    In order to detect the positions of the parked cars we first need to visually recognize the parked cars. To achieve this goal we compared a number of approaches for object detection and classification.
 
-    The work of~\cite{violajones2001} provides good results in the means of
-    detection. The main drawback of the proposed method is that it suffers
-    from in plane and out of plane rotations and from the illumination
-    changes. For the task of car detection it is important to allow for some
-    deviations as the cars can differ in shape and angle of detection and it
-    may be observed in different lighting conditions. Utilizing the local
-    binary patterns (LBPs) as presented by~\cite{lbp2010} solves the
-    illumination issues and overall boosts the performance. It is, however,
-    alike to Haar features, also vulnerable to rotation and shape changes.
-    Also, to the extent of our knowledge, LBP-based method becomes slow on the
-    training stage, which is not a problem, but still is an important
-    argument, especially on implementation stage.
+We start by motivating the choice of the visual detection framework. There is
+a number of object detection methods to choose from. We focus on three
+approaches, utilizing different visual features: Haar features, local binary
+patterns (LBPs) and histograms of oriented gradients (HOGs). We further
+provide a short comparison of these with relation to our problem.
 
-    Considering the above, we decided to apply the HOG-based detector as
-    presented by~\cite{dalal2005}. This method is based on the gradient and it
-    therefore deals well with illumination and brightness changes and stays
-    robust to the changes in rotation and shape.
+The work of~\citet{violajones2001}, introduces the Haar feature based object
+detection. It provides good detection rates when applied to face detection.
+The main drawback of the proposed method for our setup is that it suffers from
+the changes in the shape of the object, rotations, occlusions and from the
+illumination changes. For the task of car detection it is important to allow
+for a certain degree of deviation for the reason that the cars can differ in
+shape and angle from which they are observed. They also can be occluded by
+people walking in front of them or other cars. In addition to these
+variations, we may also observe them in different lighting conditions.
 
-    However, whichever algorithm we use, we must make a transition from the
-    image space to the world frame. For each detected car we want to know
-    precisely where it is situated with relation to the agent's current
-    position.
+Utilizing the local binary patterns (LBPs) as presented by~\citet{lbp2010}
+addresses the illumination issues and overall boosts the detection rates and
+performance. It is, however, similarly to Haar features, vulnerable to
+rotation and shape changes. Moreover, to the extent of our knowledge, LBP-
+based methods are slow on the training stage, which is, while not being a big
+problem, still is an important argument, especially on implementation stage.
+\todo{not sure about this part}
 
-    The relative position of the detected car to the camera, along with the
-    global position and orientation of the camera itself, is necessary for
-    modeling the occupancy on the global map.
+Considering the above, we apply the HOG-based detector following the work
+of~\citet{dalal2005}. It relies on the gradient-based features and is
+therefore invariant to illumination and brightness changes. Additionally, the
+presented method stays robust to slight changes in rotation and shape.
 
-    For this purpose we need to exploit depth information, which we obtain
-    from either the range-finder measurements or from the stereo camera.
-    We will further focus on each of these options more precisely.
+\subsection{HOG Detector}\label{sub:hog_detector}
 
-    \subsection{HOG Detector}\label{sub:hog_detector}
+The HOG representation has several advantages. It captures edge or
+gradient structure that is very characteristic of local shape, and it does
+so in a local representation with an easily controllable degree of
+invariance to local geometric and photometric transformations:
+translations or rotations make little difference if they are much smaller
+than the local spatial or orientation bin size.
 
-    Even though we mostly follow the work of~\cite{dalal2005}, there are still
-    differences between our approach and the one presented him. These
-    differences are due to the fact that we are interested in detecting cars,
-    while the original paper is on detecting people. We are mainly focusing on
-    detecting front/rear facing cars, but the approach is easily extended onto
-    the side-view as-well. To be able to detect the front and read sides of
-    the cars, we need to switch the size of the hog descriptor window from
-    $128 \times 64$ pixels to $128 \times 128$ pixels. The idea behind this
-    decision is based on generally square-like shape of the cars, when seen
-    from front or rear. Therefore, the square drawn around the car will
-    contain higher percentage of useful information in comparison to a
-    rectangle.
+Following the work of~\citet{dalal2005}, we make use of the histograms of
+oriented gradients placed in a dense grid on the query images. For each $8
+\times 8$ pixel block in the image a histogram is formed by assigning the
+gradient orientations to 9 bins, that cover the angle of $180^{\circ}$. One
+HOG descriptor consists of several such histograms.
 
-    In the training phase we have considered around 1000 manually chosen $128
-    \times 128$ pixel patches containing cars and around 8000 negative
-    examples. Each HOG descriptor is then unfolded into a point in a multi-
-    dimensional space. These points then have to be clustered into positive
-    and negative ones. We describe the background for this decision in the
-    next section.
+To detect the front and read sides of the cars, we set the size of the hog
+descriptor window to $128 \times 128$ pixels. The idea behind this decision is
+based on generally square-like shape of the cars, when seen from front or
+rear. Therefore, the square drawn around the car will contain higher
+percentage of useful information in comparison to a rectangle. To detect the
+side of the car, the descriptor window should be changed to $128 \times 64$
+pixels following the same logic.
 
-    % subsection hog_classifier (end)
+These window sizes yield the number of the histograms that fit inside each
+window which is the number of $8 \times 8$ pixel blocks contained in the
+descriptor window. This results in 256 histograms for front/rear view and 128
+histograms for the side view.
 
-    \subsection{SVM Classifier}\label{sub:svm_classifier}
+\begin{figure}[t]%
+\centering
+\subfloat{\includegraphics[width=0.6\textwidth]{pictures/detections.pdf}}
+\subfloat{\includegraphics[width=0.4\textwidth]{pictures/svm.pdf}}
+\caption{Illustration of HOG-based detection and clustering with SVM.}
+\label{fig:det_to_svm}
+\end{figure}
 
-        In order to carry out the decision in the test data, we train a linear
-        SVM classifier on top of all HOG descriptors. A more complex decision
-        boundary could of course also be used, but linear SVM, despite its
-        simplicity, provides reasonable results as can be seen in
-        Section~\ref{cha:experimental_results}.
+We form a vector from all the 9 bin values from each of 256 or 128 histograms
+contained in the detection window. This results in the vectors of sizes
+respectively 2304 and 1152 values for front/rear and side view detection
+windows. We view this vector as a point in the space of similar
+dimensionality. We further search for a hyperplane to divide these points into
+positive and negative ones with the use of the support vector machines. This
+is illustrated in Figure~\ref{fig:det_to_svm}
 
-        SVM is a well known and arguably the most popular algorithm in binary
-        clustering, therefore many implementation are readily available. In
-        this work we make extensive use of libSVM by~\cite{libSVM2011}.
+% subsection hog_classifier (end)
 
-        The test data detection is carried out in a cascade fashion as
-        presented by~\cite{violajones2001} via the sliding window approach.
-        For each sliding window content we create a HOG descriptor which is
-        then tested against the pre-trained SVM classifier in order to find
-        out on which side of the decision boundary it is. If the current HOG
-        belongs to the area where cars are then the current sliding window is
-        a region of interest and contains a car. Each detection is then stored
-        as a rectangle in the coordinates of the image it belongs to. This
-        ends the visual detection part and allows us to move on to the 3D
-        world.
+\subsection{SVM Classifier}\label{sub:svm_classifier}
+
+In order to carry out the decision in the test data, we train a linear Support
+Vector Machines (SVM) classifier on top of all HOG descriptors. Alternatively,
+a more complex decision boundary can be used, but linear SVM, despite its
+simplicity, provides reasonable results. We show the detection performance in
+the \nameref{cha:experimental_results} section.
+
+\citet{svm} presented the support vector machines as a method to solve a two
+class classification problem. For a dataset of points in $n$ dimensional space
+SVM finds a hyperplane ($n-1$ dimensional plane) that optimally assigns them
+to two classes maximizing the distance between the two resulting datasets. In
+the linear SVM the decision boundary is linear.
+
+SVM is a well known and arguably the most popular algorithm in binary
+clustering, therefore many implementations are readily available. In this work
+we make extensive use of libSVM library by~\citet{libSVM2011}.
+
+\begin{wrapfigure}{I}{0.3\textwidth}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{pictures/bumblebee.jpg}
+\end{center}
+\vspace{-20pt}
+\caption{Point Grey Bumblebee2 stereo camera.}\
+\vspace{-10pt}
+\label{fig:bumblebee}
+\end{wrapfigure}
+
+Based on the trained classifier, we carry out the detection in a cascade
+fashion via the sliding window approach. For each sliding window content we
+create a HOG descriptor which we test against the pre-trained SVM classifier
+to find out on which side of the decision boundary it is. If the current HOG
+belongs to the side where the SVM has assigned the cars then the current
+sliding window is a region of interest and contains a car. We store each
+detection as a rectangle by storing the pixel positions of the corners of the
+detection window around the car.
 
 % subsection svm_classifier (end)
 
-    \subsection{Depth Information}\label{sub:depth_information}
+\subsection{Depth Information}\label{sub:depth_information}
 
-        In this section we will describe in details how the depth information
-        was acquired and combined with the visual detections.
+In this section we describe in details how the depth information is acquired
+and combined with the visual detections described in the previous sections.
 
-        \subsubsection{Stereo Camera}\label{ssub:stereo_camera}
+\subsubsection{Stereo Camera}\label{ssub:stereo_camera}
 
-            In order to find the depth from the stereo camera, we need to
-            first calculate the disparity image from left and right images
-            taken from the video stream. Knowing the internal camera
-            parameters we can then reconstruct the relative position of each
-            pixel of the disparity image. We first find the distance along the
-            camera $Z$ axis: $Z = \frac{fB}{d}$, where $f$ is the focal length
-            of the camera, $B$ is the baseline and $d$ is the disparity. After
-            $Z$ is determined we can focus on finding $X$ and $Y$ coordinates
-            from the ordinary projection equations:
+In order to find the depth from the stereo camera, we calculate the disparity
+image from left and right images taken from the video stream. Knowing the
+internal camera parameters we reconstruct the relative position of each pixel
+of the disparity image.
 
-            \begin{eqnarray}
-            X = \frac{uZ}{f}
-            Y = \frac{vZ}{f}
-            \end{eqnarray}
+The distance along the camera $Z$ axis: $Z = \frac{fB}{d}$, where $f$ is the
+focal length of the camera, $B$ is the baseline and $d$ is the disparity.
+Given $Z$, we focus on finding $X$ and $Y$ coordinates from the projection
+equations:
 
-            where $u$ and $v$ are the pixel location in the $2D$ image, $X, Y,
-            Z$ is the $3D$ position in the camera frame. When we have the $3D$
-            positions for every pixel in the images, we can combine this
-            information with the visual detection part. From the previous part
-            we have a region of interest in the image coordinates, which
-            allows us to accumulate the depth of all pixels that fall into it.
-            We can then analyze all of these values to find the distance to
-            the car, that is contained in this particular region of interest.
-            We considered taking either the mean or the median of the chosen
-            values. Given, that the depth that comes from the stereo camera is
-            quite noisy and that the depth values of the pixels originate on
-            the surface of the car and therefore contain quite a big amount of
-            variance, we picked a median as an option as it is the most
-            resistant statistic, having a breakdown point of 50$\%$: so long
-            as no more than half the data is contaminated, the median will not
-            give an arbitrarily large result.
+\begin{equation}
+X = \frac{uZ}{f}
+\hspace{10 mm}
+Y = \frac{vZ}{f}
+\end{equation}
 
-        % sub-subsection stereo_camera (end)
-        \subsubsection{Laser Range Finder}\label{ssub:laser_range_finder}
+where $u$ and $v$ are the pixel location in the $2D$ image and $X, Y, Z$ is
+the $3D$ position that corresponds to the pixel $(u,v)$ in the camera frame.
+$3D$ position that corresponds to every pixel in the image allows us to
+combine this information with visual detections.
 
-            Even though the stereo camera setup is a lot cheaper and easier to
-            mount, it lacks robustness due to the noise that is present in
-            disparity images and to some degree to the erroneous values that
-            fall into the detected region of interest (such as around the car
-            or in the glass parts of it). We therefore also tested a setup
-            with a laser range finder. We used a EUROPA robot Obelix which has
-            a $270^\circ$ laser mounted approximately on the human knee level.
-            This setup proves to be a lot more robust in terms of finding the
-            exact $3D$ information about the position of the detected car.
-            However, when using laser we need a different approach because
-            there we only have images from a monocular camera and thus do not
-            have a per-pixel association with the depth field the way we have
-            it using the stereo camera. As the laser mounted on the robot
-            provides us with $270^\circ$ span it is able to cover
-            approximately all the space related to the image from the camera.
-            We then need to find the beams, that span through the area covered
-            by the image. Given the fact, that the camera is mounted on the
-            same $Z$ axis as the laser this can be done in a straightforward
-            fashion. We are interested in the beams, the numbers of which
-            follows this law:
+Considering, that each detection is stored in the form of a region of interest
+in the image coordinates, we are able to accumulate the depth of all pixels
+that fall into it to estimate the joint depth of the detected car.
 
-            \begin{equation}
-                 \{ beam_n | \forall n : \gamma_{start} < \alpha_{camera} + \alpha_{0} + \alpha_{n} < \gamma_{end} \}
-            \end{equation}
+To find the distance to the car, that is contained in this particular region
+of interest we consider taking the median of all depth values that fall into
+the given region of interest. These depth values contain high variance. The
+first reason for this is that they originate on the surface of the car and the
+variance represents the difference in the distance between different parts of
+the car. The second reason comes from the method in which these depth values
+were acquired. The depth map from the stereo camera setup proves to be noisy
+in the urban environments with homogeneous regions like the sides or the hood
+of the car. Moreover parts of the environment are seen through the windows of
+the car, adding additional noise to measurements.
 
-            where $\alpha_{camera}$ is the angle of the camera with respect to
-            the direction of the laser, $\gamma_{start}$ and $\gamma_{end}$
-            are the starting and ending angle of the detection bounding box in
-            the image, $\alpha_{n}$ is the angle of the $n$-th beam in the
-            laser frame. All the beam endpoints along with the direction of
-            the beams provide us with consistent $3D$ information. In order to
-            account for possible occlusions or mistakes we take the median of
-            these values as a true position of the detected car. After finding
-            the correct car position we move on to the next part and aggregate
-            occupancy information into a consistent spacio-temporal map.
+This high variance of the input data results in somewhat unreliable results.
+We further describe the method that uses the laser range finder for the same
+task of finding the relative position of the detected car to the camera.
 
-        % sub-subsection laser_range_finder (end)
-    % subsection depth_information (end)
+% sub-subsection stereo_camera (end)
+\subsubsection{Laser Range Finder}\label{ssub:laser_range_finder}
+
+In order to use a laser range finder to detect the parked cars we used a
+EUROPA robot Obelix which has a laser with an opening angle of $270^\circ$
+mounted approximately on the human knee level. This setup proves to be more
+robust in terms of finding the exact relative position of the detected car.
+
+The laser mounted on the robot provides a sufficient opening angle in order to
+cover all the space related to the image from the camera. We search for the
+beams, that span through the area covered by the image. The camera is mounted
+on the same $Z$ axis with the laser. This yields the choice of the laser
+beams, that contain depth values associated with the car:
+
+\begin{equation}
+Z = \{ \mbox{beam}_n | \forall n : \beta_{l} < \alpha_{\mbox{camera}} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
+\end{equation}
+
+where $\alpha_{camera}$ is the angle of the camera with respect to the
+direction of the laser, $\beta_{l}$ and $\beta_{r}$ are the angles of left and
+right margins of the detection bounding box in the camera frame, $\alpha_{n}$
+is the angle of the $n$-th beam in the laser frame. $\alpha_{0}$ is the angle
+of the first beam in the laser frame. In the setup we use, this angle is equal
+to $-\frac{3\pi}{4}$.
+
+The endpoints of the beams in $Z$ provide us with consistent $3D$ information.
+In order to account for possible occlusions or measurement errors we take the
+median of these values.
+
+% sub-subsection laser_range_finder (end)
+% subsection depth_information (end)
 % section perception (end)
 
 \section{Model} % (fold)
 \label{sec:model}
 
-    In the previous sections we have shown the steps of visual detection of
-    the cars and finding their real $3D$ world position. Whichever path we
-    take in the previous step, now we have a number of real world coordinates,
-    that need to be integrated into a consistent map. In this section we will
-    present two approaches that we have chosen to target this task.
+The methods mentioned above provide the cars positions relative to the camera.
+Integrating this information with GPS measurements or SLAM-based pose
+estimates, we calculate the positions of the detected cars in the world frame.
+In this sections we present two approaches for storing these detections. We
+also describe the approach to modeling the positions of the parking lots and
+their occupancy probability.
 
-    \subsection{Occupancy Grids}\label{sub:occupancy_grids}
+\subsection{Occupancy Grids}
+\label{sub:occupancy_grids}
 
-        In order to map the parking lots along with the occupancy information
-        we utilize grid maps (see \nameref{cha:background}:
-        \nameref{sec:occupancy_grids}). In this case we model each cell's
-        occupancy as a static state Bayes filter.
+The first approach that we consider utilizes the grid maps. Grid maps
+partition the space into a grid of rectangular cells. Each grid contains
+information about the corresponding area in the environment. We make use of
+one particular realization of grid maps --- the \emph{occupancy grid maps} as
+presented by \citet{occupancy_grids}. Occupancy grid maps assume that each
+grid cell is either occupied by an obstacle or free. In our case, each cell
+stores the probability that the particular cell is occupied by a car.
 
-        Let $P(\v)$ be an occupancy probability estimate of a cell $i$ in the
-        environment. Considering the probabilistic nature of occupancy of
-        every distinct cell we integrate multiple measurement, taken in
-        different times into one model. Following the work
-        of~\cite{occupancy_grids}, we obtain an update rule for $P(a_t\mid
-        z_{1:t})$. First, we apply Bayes' rule and obtain
+The occupancy grid maps are an efficient approach for representing
+uncertainty. Grid maps allow for detailed representation of an environment
+without a predefined feature extractor. As they have the ability to represent
+occupied space, empty space and unknown (unobserved) space, grid maps are well
+suited for tasks such as path-planning, obstacle avoidance and exploration. In
+contrast to most representations based on features, grid maps offer constant
+time access to cells.
 
-        \begin{equation}
-        P(a_t \mid  z_{1:t} ) = \frac{P(z_t \mid a_t, \y) P(a_t \mid \y)}{P(z_t \mid \y)}.
-        \end{equation}
-        \noindent
-        We then compute the ratio
-        \begin{equation}
-        \frac{P(\v\mid z_{1:t})}{P(\neg\v \mid z_{1:t})}
-        =
-        \frac{P(\z \mid \v, \y)}{P(\z \mid \neg\v, \y)}   \frac{P(\v\mid \y)}{ P(\neg\v\mid \y)}.
-        \end{equation}
-        \noindent
-        Similarly, we obtain
-        \begin{equation}
-        \nonumber
-        \frac{P(\v\mid \z)}{P(\neg\v \mid \z)} = \frac{P(\z \mid \v)}{P(\z \mid \neg\v)}   \frac{P(\v)}{ P(\neg\v)},
-        \end{equation}
-        \noindent
-        which can be transformed to
-        \begin{equation}
-        \frac{P(\z \mid \v)}{P(\z \mid \neg\v)}
-        =
-        \frac{P(\v \mid \z)}{P(\neg\v \mid \z)}   \frac{P(\neg\v)}{ P(\v)}.
-        \end{equation}
-        \noindent
-        Applying the Markov assumption that the current observation is
-        independent of previous observations given we know that a patch
-        contains a parked vehicle gives
-        \begin{equation}
-        P(\z \mid \v, \y) = P(\z \mid \v),
-        \end{equation}
-        \noindent
-        and utilizing the fact that $P(\neg \v) = 1 - P(\v)$, we obtain
-        \begin{eqnarray}
-        \lefteqn{\frac{ P(\v \mid z_{1:t}) }{ 1 - P(\v \mid z_{1:t})} = } \nonumber \\
-        &&\frac{ P( \v \mid \z)}{ 1 - P(\v \mid \z)}   \frac{ P(\v \mid \y)}{ 1 - P(\v \mid  \y)}   \frac{ 1 - P(\v)}{ P(\v)}.
-        \end{eqnarray}
+Let $P(\v)$ be an occupancy probability estimate of a cell $i$ in the
+environment. Considering the probabilistic nature of occupancy of every
+distinct cell we integrate multiple measurements, taken in different times
+into one model. Following the work of~\citet{occupancy_grids}, we obtain an
+update rule for $P(a_t\mid z_{1:t})$. We apply Bayes' rule and obtain
 
-        \noindent
-        This equation can be transformed into the following update formula:
-        \begin{eqnarray}
-        \label{eq:rec_update}
-        \hspace{-6mm}\lefteqn{P(\v\mid z_{1:t})=} \nonumber \\
-        && \hspace{-10mm} \left[ 1 + \frac{1 - P(\v\mid \z)}{P(\v \mid \z)}
-           \frac{1 - P(\v \mid \y)}{P(\v \mid \y)}   \frac{P(\v)}{1 - P(\v)}  \right]^{-1}
-        \end{eqnarray}
-        \noindent
+\begin{equation}
+P(a_t \mid  z_{1:t} ) = \frac{P(z_t \mid a_t, \y) P(a_t \mid \y)}{P(z_t \mid \y)}.
+\end{equation}
+\noindent
+We then compute the ratio
+\begin{equation}
+\frac{P(\v\mid z_{1:t})}{P(\neg\v \mid z_{1:t})}
+=
+\frac{P(\z \mid \v, \y)}{P(\z \mid \neg\v, \y)}   \frac{P(\v\mid \y)}{ P(\neg\v\mid \y)}.
+\end{equation}
+\noindent
+Similarly, we obtain
+\begin{equation}
+\nonumber
+\frac{P(\v\mid \z)}{P(\neg\v \mid \z)} = \frac{P(\z \mid \v)}{P(\z \mid \neg\v)}   \frac{P(\v)}{ P(\neg\v)},
+\end{equation}
+\noindent
+which can be transformed to
+\begin{equation}
+\frac{P(\z \mid \v)}{P(\z \mid \neg\v)}
+=
+\frac{P(\v \mid \z)}{P(\neg\v \mid \z)}   \frac{P(\neg\v)}{ P(\v)}.
+\end{equation}
+\noindent
 
-        In order to gain efficiency, one can furthermore use the log-odds
-        formulation of~\cite{moravec1988}, so that the operations
-        in~\eqref{eq:rec_update} are realized via addition and subtractions in
-        the log-odds space. We can therefore model the probability of each
-        cell to be occupied by a parked vehicle at each time $t$. This
-        information can be accumulated at any needed time as well as on
-        different days. In order to fully define the equation given above, we
-        need to define the observation model $P(\v \mid z)$
+Applying the Markov assumption that the current observation is independent of
+previous observations given we know that a cell contains a parked vehicle
+gives
 
-        \begin{equation}
-        \label{eq:observation_model}
-            P(a^i | z_t) = \begin{cases} 0.45, & \mbox{if } \mbox{ before detection} \\ 0.9, & \mbox{if } \mbox{ cell stores detection} \\ \mbox{prior}, & \mbox{if } \mbox{ after detection} \end{cases}
-        \end{equation}
-        Furthermore, the observation model is defined along the rays, that span from the camera position to the defined $z_{\max}$ and along the defined for the camera field of view. Of course, we have an occupancy grid based world, so there has to be a way to compute the cells that fall into the field of view. In order to carry out this action, we first compute left and right further points. We find the cells that form the end frontier by using the Bresenham algorithm as defined by~\cite{bresenham1965}.
-        \begin{wrapfigure}{r}{0.4\textwidth}
-            \begin{center}
-                \includegraphics[width=0.35\textwidth]{pictures/testmap.png}
-            \end{center}
-            \vspace{-20pt}
-            \caption{An example of Bresenham based update from a single image with two detected cars.}
-            \vspace{-30pt}
-            \label{fig:maptest}
-        \end{wrapfigure}
+\begin{equation}
+P(\z \mid \v, \y) = P(\z \mid \v),
+\end{equation}
+\noindent
+and utilizing the fact that $P(\neg \v) = 1 - P(\v)$, we obtain
+\begin{eqnarray}
+\lefteqn{\frac{ P(\v \mid z_{1:t}) }{ 1 - P(\v \mid z_{1:t})} = } \nonumber \\
+&&\frac{ P( \v \mid \z)}{ 1 - P(\v \mid \z)}   \frac{ P(\v \mid \y)}{ 1 - P(\v \mid  \y)}   \frac{ 1 - P(\v)}{ P(\v)}.
+\end{eqnarray}
 
-        Then, for each cell we carry out the same algorithm from camera cell
-        to this query cell. Whenever we encounter a cell, where a car is
-        situated, the next cell is also updated as occupied, while all the
-        ones that come afterwards are not updated as ``not visible''. This can
-        be seen in a small example in Figure~\ref{fig:maptest}. This gives us
-        the means of formulating full occupancy grid that can store occupancy
-        information from different days. It is theoretically then possible to
-        move on to planning.
+\noindent
+This equation can be transformed into the following update formula:
+\begin{eqnarray}
+\label{eq:rec_update}
+\hspace{-6mm}\lefteqn{P(\v\mid z_{1:t})=} \nonumber \\
+&& \hspace{-10mm} \left[ 1 + \frac{1 - P(\v\mid \z)}{P(\v \mid \z)}
+\frac{1 - P(\v \mid \y)}{P(\v \mid \y)}   \frac{P(\v)}{1 - P(\v)}  \right]^{-1}
+\end{eqnarray}
+\noindent
 
-    % subsection occupancy_grids (end)
-    \subsection{Static State Binary Filter in Pre-defined Positions}\label{sub:static_state_binary_filter_in_pre_defined_positions}
+In order to gain efficiency, we furthermore use the log-odds \todo{add
+log odds} formulation of~\citet{occupancy_grids}, so that the
+operations in~\eqref{eq:rec_update} are realized via addition and
+subtractions in the log-odds space.
 
-        However, occupancy grids have their drawbacks. One of them, especially
-        for our setup, is the discretization error. Whenever there are
-        multiple detections of the same car from different angles it can
-        happen, that the detection is assigned to different cells of the
-        occupancy grids. This leads us to the problems of data association and
-        therefore difficulties in creating a meaningful accumulated map. This,
-        in its turn, leads to wrong decisions of occupancy and ruins or at
-        least makes it harder for a planner to carry out a correct decision.
-        For now we decided to use a pre-defined set of parking lots, that can
-        be set from on-ground data or from aerial images (such as Google
-        Maps). The rest of the theory stays untouched. We still make use of
-        the static state binary Bayes filter as defined
-        in~\eqref{eq:rec_update}. However, the observation model has changed
-        to to the absence of the occupancy grid. We now have different
-        distinct parking lots, that are represented by a point in the space
-        with its coordinates. When we get an observation of occupancy during
-        one full session of measurements, we pick the point to update by using
-        the closest neighbor from the number of available parking lots. The
-        chosen parking lot is updated in a similar way to the occupied case
-        of~\ref{eq:observation_model}. After the full session of observation
-        is carried out, the untouched cells are updated as free. Though this
-        approach does not provide us with a consistent map of the environment
-        we still capture the occupancy information of the correctly situated
-        in space parking lots, which allows us to form a graph that represents
-        the environment and move on to the next
-        part:~\nameref{sec:action_planning}.
+In this approach we do not explicitly model the parking lots, but they are
+described by groups of cells that were repeatedly observed to contain cars.
 
-    % subsection static_state_binary_filter_in_pre_defin (end)
+In order to fully define the equation given above, we need to define the
+observation model $P(\v \mid z)$
+
+\begin{equation}
+\label{eq:observation_model}
+P(a^i | z_t) = \begin{cases} 0.45, & \mbox{if } \mbox{ before detection} \\ 0.9, & \mbox{if } \mbox{ cell stores detection} \\ \mbox{prior}, & \mbox{if } \mbox{ after detection} \end{cases}
+\end{equation}
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{pictures/testmap.png}
+\end{center}
+\vspace{-10pt}
+\caption{An example of Bresenham based update from a single image with two detected cars.}
+\vspace{-10pt}
+\label{fig:maptest}
+\end{wrapfigure}
+
+Furthermore, we define the observation model along the rays, that span from
+the camera position to the defined $z_{\max}$ and along the defined for the
+camera field of view. In order to find all the cells of the occupancy grid map
+that fall into the field of view of the camera we compute left and right
+margin points. Following the work of~\citet{bresenham1965} we search for the
+cells that form the frontier of the camera's field of view that consists of
+the cells that lie on the line between the above-mentioned left and right
+margin points.
+
+For each cell $q$ we carry out the same algorithm from the camera cell $c$ to
+the query cell. Whenever we encounter a cell, where a car is situated, the
+next cell is also updated as occupied, while all the ones that come afterwards
+are not updated as ``not visible''. This can be seen in an example in
+Figure~\ref{fig:maptest}.
+
+% subsection occupancy_grids (end)
+\subsection{Static State Binary Filter in Pre-defined Positions}
+\label{sub:static_state_binary_filter_in_pre_defined_positions}
+
+However, occupancy grids have their drawbacks. One of them, especially for our
+setup, is the discretization error. Whenever there are multiple detections of
+the same car from different angles it can happen, that the detection is
+assigned to different cells of the occupancy grids. This leads to the problem
+of data association and therefore difficulties in creating a meaningful
+accumulated map.
+
+To avoid the discretization issues we make use of the pre-defined parking lot
+positions. These can be set from manual measurements on the ground or from
+aerial images. The rest of the theory stays untouched. For each parking lot we
+model the occupancy probability likewise with the occupancy grid maps approach
+via the static state binary Bayes filter as defined in~\eqref{eq:rec_update}.
+
+The occupancy information can be measured and accumulated at any needed time,
+for example on particular days of week.
+
+The observation model, however, differs significantly from the one used in the
+occupancy grip maps. Whenever we detect a parked car, we search for the
+closest parking lot and assign the detection to it. The parking lot occupancy
+is updated as occupied.
+
+Additionally, we consider the detection of the parked cars to be divided in
+sessions. For example, we consider a driving near every parking space in the
+parking to be one session. The parking lots that were not updated as occupied
+during the session are updated as free.
+
+We would like to stress, that this approach allows storing both spacial and
+occupancy information in one distinct structure.
+
+% subsection static_state_binary_filter_in_pre_defin (end)
 % section model (end)
+
+\begin{figure}[ht]%
+\centering
+\subfloat{\includegraphics[width=0.8\textwidth]{pictures/laser_fusion.pdf}} \\
+\subfloat{\includegraphics[width=0.8\textwidth]{pictures/occupancy_cars.pdf}} \\
+\subfloat{\includegraphics[width=0.8\textwidth]{pictures/parking_lots_detections.pdf}}
+\caption{Illustration of different mapping approaches.}
+\label{fig:different_mappings}
+\end{figure}
 
 \section{Action Planning} % (fold)
 \label{sec:action_planning}
 
-    In this section we formally define the action planning framework that
-    searches for an optimal path on the way to finding a free parking lot. It
-    depends on the application what an optimal solution to this problem is.
+In this section we formally define the action planning framework that searches
+for a path to a free parking lot. We want to find the optimal one, but it
+depends on the application what an optimal solution to this problem is. We
+therefore define what we consider optimal in this work.
 
-    There are typically parts of the parking, which are better in the sense of
-    their distance to a common destination. This also means that the
-    ``better'' parts of the parking lots are more likely to be occupied than
-    the other, which leads to a trade-off between driving straight to the
-    closest-to-goal, but likely occupied parking lot, and parking in a more
-    distant area, most likely free. It takes less time to drive a car than to
-    walk by foot, but it can take longer to find a free parking lot closer to
-    the goal than walking from a more distant one. Given the constraints
-    described above, the framework that we present focuses on finding the
-    solution that minimizes the expected time spent on finding a free parking
-    lot and walking from the found one to the goal.
+There are typically parts of the parking, which are better in the sense of
+their distance to a common destination. This also means that the ``better''
+parts of the parking lots are more likely to be occupied than the other, which
+leads to a trade-off between driving straight to the closest-to-goal, but
+likely occupied parking lot, and parking in a more distant area, most likely
+free. It usually takes less time to drive a car than to walk by foot, but it
+can take longer to find a free parking lot closer to the goal then walking
+from a more distant one. Given the constraints described above, the framework
+that we present focuses on finding the solution that minimizes the expected
+time spent on finding a free parking lot and walking from the found one to the
+goal.
 
-    As stated in the work of~\citet{tipaldiICRA11}, MDPs can be used when
-    there is a need to maximize the joint rewards instead of greedily going
-    for the best possible goal. We follow similar approach, defining rewards
-    and transition probabilities based on the environment that we have in our
-    problem.
+We formally describe the parking as a graph. The states are defined as the set
+of vertices of the graph $V$, each of which represents a point in space. The
+graph also has a set of edges $E$ --- a function $V \rightarrow V$, that
+corresponds to the actions that can be carried out from one state to another.
 
-    We define rewards, that depict the time spent for each transition from
-    state to state an agent can take. We use the Markov Decision Processes as
-    described in section~\ref{sec:markov_descision_processes} to find a path
-    that maximizes the reward. The resulting path does not go for the best
-    spot, but maximizes the probability of encountering a free parking lot,
-    while trying to keep the length of the search path as short as possible.
+In the grid based situation, the states are the grid cells and the edges are
+connecting the adjacent cells.
 
-    We define rewards and actions along with the probability of these actions
-    in order to fully define an MDP problem.
+In the case, where we explicitly map the parking lots --- they, along with
+their spacial information, form the vertices of the graph. In this case we
+define the edges so that they hold the spacial information of the parking.
 
-    We formally describe the parking as a graph. The states are defined as the
-    vertices of the graph $V$, each of which represents a point in space. The
-    graph also has edges $E$ --- a function $V \rightarrow V$, that correspond
-    to the actions that can be carried out from one state to another. In the
-    grid based situation, the states are the grids cells and the edges are
-    connecting the adjacent cells. In the case, where we explicitly map the
-    parking lots --- they, along with their spacial information, form the
-    vertices of the graph. In this case we define the edges so that they hold
-    the spacial information of the parking. In both cases all vertices are
-    connected to the goal state. The probability of the action that allows the
-    agent to follow such edges is defined further.
+In both cases all vertices are connected to the goal state. The probability of
+the action that allows the agent to follow such edges relies on the occupancy
+probability of the related parking lot and is formally defined later.
 
-    We define the set of all actions that can be carried out in any state. It
-    consists of five distinct actions: ``up'': $\uparrow$, ``down'':
-    $\downarrow$, ``left'': $\leftarrow$, ``right'': $\rightarrow$ and
-    ``park''. Formally:
+We also define the set of all actions that can be carried out in any state. It
+consists of five distinct actions: ``up'': $\uparrow$, ``down'': $\downarrow$,
+``left'': $\leftarrow$, ``right'': $\rightarrow$ and ``park''. Formally:
 
-    \begin{eqnarray}
-        A_{\mbox{move}} = \{ \uparrow, \downarrow, \leftarrow, \rightarrow \} \\
-        a_{\mbox{park}} = \mbox{``park''} \\
-        A = A_{\mbox{move}} \cup a_{\mbox{park}}
-    \end{eqnarray}
+\begin{eqnarray}
+A_{\mbox{move}} = \{ \uparrow, \downarrow, \leftarrow, \rightarrow \} \\
+a_{\mbox{park}} = \mbox{``park''} \\
+A = A_{\mbox{move}} \cup a_{\mbox{park}}
+\end{eqnarray}
 
-    We utilize the defined actions to specify the reward function $R(s, s',
-    a)$ and the transition function $P(s \mid s', a)$.
+As stated in the work of~\citet{tipaldiICRA11}, Markov decision processes
+(MDPs) provide a way to maximize joint rewards instead of greedily going for
+the best possible goal. We follow similar approach, defining rewards and
+transition probabilities based on the environment specific for our problem.
 
-    For four actions that describe driving around the parking, we consider the
-    probability of moving from any state to the next one (if possible) to be
-    equal to 1, while the probability of parking in a particular state is
-    equal to the occupancy probability of the state:
+Following the work of~\citet{bellman1957} we define the MDP by the initial
+state $S_0$, transition function $T(s \mid s', a)$ and a reward function $R(s,
+a, s')$.
 
-    \begin{eqnarray}
-        \forall (s, s') \in E, \forall a \in A_{\mbox{move}} : P(s \mid s', a) = 1 \\
-        \forall s \in V, (s,s_{\mbox{goal}}) \in E : P(s \mid s_{\mbox{goal}}, a_{\mbox{park}}) = P(\mbox{free})
-    \end{eqnarray}
+Here, $T(s \mid s', a)$ denotes the probability of reaching state
+$s'$ if and action $a$ is carried out in state $s$. The transitions in the
+model are assumed to be Markovian. That is, the probability of reaching $s'$
+from $s$ depends only on $s$ and not on the history of earlier states.
 
-    where $P(\mbox{free})$ is a probability of a parking lot to be free,
-    observed through a period of time. To be consistent, we set the remaining
-    probabilities to the values such that $\forall s, s' \in V, (s, s') \in E
-    : \sum_{s'}P(s \mid s', a) = 1$. This ensures that the outcome of each
-    action the agent can take is defined. This resolves to staying in the same
-    state when trying to carry out an unavailable or improbable action in any
-    state.
+For four actions that describe driving around the parking, we consider the
+probability of moving from any state to the next one (if possible) to be equal
+to 1, while the probability of parking in a particular state is equal to the
+occupancy probability of the state:
 
-    For example: it is clear, that staying in the left most corner of the
-    parking lot and carrying an action to go left, should result in staying in
-    the same spot and while carrying out an action of parking, with the
-    probability of $0.6$ has a $0.4$ chance to stay in the same place.
+\begin{eqnarray}
+\forall (s, s') \in E, \forall a \in A_{\mbox{move}} : P(s \mid s', a) = 1 \\
+\forall s \in V, (s,s_{\mbox{goal}}) \in E : P(s \mid s_{\mbox{goal}}, a_{\mbox{park}}) = P(\mbox{free})
+\end{eqnarray}
 
-    Along with the transition model we define the reward function $R(s,s',a)$.
-    The motivation behind the rewards is based on the time it takes the agent
-    to carry out an action. We assume, that the agent needs a constant time
-    for moving from one state $s$ to another $s'$. If he cannot carry out the
-    action and is forced to stay in the same position, he regardlessly loses
-    time. We therefore define a negative reward driving around the parking
-    that penalizes longer paths:
+where $P(\mbox{free})$ is a probability of a parking lot to be free, observed
+through a period of time. To be consistent, we set the remaining probabilities
+to the values that guarantee that $\forall s, s' \in V, (s, s') \in E :
+\sum_{s'}P(s \mid s', a) = 1$. This ensures that the outcome of each action
+the agent can take is defined. It resolves to staying in the same state when
+trying to carry out an unavailable or improbable action in any state.
 
-    \begin{equation}
-        \forall (s, s') \in E, \forall a \in A_{\mbox{move}}: R(s, s', a) = R(s, s, a) = \mbox{-const}
-    \end{equation}
+For example: it is clear, that staying in the left most corner of the parking
+lot and carrying an action to go left, should result in staying in the same
+spot and while carrying out an action of parking, with the probability of
+$0.6$ there should be a $0.4$ chance to stay in the same place.
 
-    We also define the rewards that the agent receives when he successfully
-    carries out parking actions. These rewards are likewise time based. They
-    form a decreasing linear function --- therefore the state closer to the
-    destination gets a bigger reward than the one that is situated further. We
-    define the reward to be $r_{\max} - r_s$, where $r_s = \sqrt{(s -
-    s_{\mbox{goal}}) {(s - s_{\mbox{goal}})}^T}$ is a distance between the
-    arbitrary state $s \in \mathbb{R}^2$ and $r_{\max} = \max_{s \in V}r_s$ is
-    the greatest of those distances. Formally:
+The function $R(s, a, s')$ likewise defines the reward for reaching state $s'$
+from state $s$ carrying out action $a$. $S_0$ denotes the state in which we
+initially put the agent.
 
-    \begin{equation}
-        \forall s \in V, (s,\mbox{goal}) \in E : R(s, s_{\mbox{goal}}, a_{\mbox{park}}) = r_{\max} - r_s
-    \end{equation}
+The motivation behind the rewards is based on the time it takes the agent to
+carry out an action. We assume, that the agent needs a constant time for
+moving from one state $s$ to another $s'$. If he cannot carry out the action
+and is forced to stay in the same position, he regardlessly loses time. We
+therefore define a negative reward for carrying out any action from
+$A_{\mbox{move}}$ that penalizes longer paths:
 
-    The proposed reward function guarantees, that the agents tries to find the
-    way find a trade-off between shorter driving and walking paths, weighted
-    by the occupancy probability of the parking lots.
+\begin{equation}
+\forall (s, s') \in E, \forall a \in A_{\mbox{move}}: R(s, s', a) = R(s, s, a) = \mbox{-const}
+\end{equation}
 
-    The solution to the MDP guarantees to find a solution to the given problem
-    that minimizes the expected time spent on searching for the free parking
-    lot and walking from the found one to the goal.
+We also define the rewards that the agent receives when he successfully
+carries out parking actions. These rewards are likewise time based. They form
+a decreasing linear function --- therefore the state closer to the destination
+gets a bigger reward than the one situated further. We define the reward to be
+$r_{\max} - r_s$, where $r_s = \sqrt{(s - s_{\mbox{goal}}) {(s -
+s_{\mbox{goal}})}^T}$ is a distance between the arbitrary state $s \in
+\mathbb{R}^2$ and $r_{\max} = \max_{s \in V}r_s$ is the greatest of those
+distances. Formally:
 
-    \todo{explicitly state about replanning}
+\begin{equation}
+\forall s \in V, (s,\mbox{goal}) \in E : R(s, s_{\mbox{goal}}, a_{\mbox{park}}) = r_{\max} - r_s
+\end{equation}
 
-    The agent carries out an optimal strategy up to the point when he needs to
-    carry out the parking decision. Let us imagine for a moment that the
-    parking lot at which the agent wants to park is occupied. From the point
-    of view of the MDPs the optimal decision would be to wait and try once
-    again, which is clearly a suboptimal decision. Therefore, we also utilize
-    the observations of the world.
+The proposed reward function guarantees, that the agents tries to find a
+trade-off between shorter driving and shorter walking paths, weighted by the
+occupancy probability of the parking lots.
 
-    Whenever we move past a parking lot, we check if it is occupied and update
-    the occupancy probability in the related state to 1 or 0 respectively.
-    This allows for carrying out a decision based on the better background.
+Transition function and reward function are necessary to define the utility
+function, which is a measure of how good the state is in the long run:
 
-    Because the graph is updated, we carry out the policy iteration algorithm
-    once more to define the new optimal actions for each state.
+\begin{equation}
+U^{\pi}(s) = E\left[\sum_{t=0}^{\infty} \gamma^t R(s_t) \mid \pi,s_0 = s \right]
+\end{equation}
 
-    We repeat this re-planning step until we find a free parking lot.
+We choose the optimal action in each state using the Maximum Utility
+Principle, that is, choose: the action that maximizes the expected utility of
+the subsequent state:
+
+\begin{equation}
+\label{lbl:optimal_policy}
+\pi^*(s) = \argmax_a \sum_{s'} T(s \mid s', a)U(s')
+\end{equation}
+
+Provided, that the utility of the state is the expected sum of discounted
+rewards from that point onwards, we define the utility via Bellman Equation:
+
+\begin{equation}
+\label{lbl:bellman_equation}
+U(s) = R(s) + \gamma \max_a \sum_{s'}T(s \mid s', a)U(s')
+\end{equation}
+
+To solve the MDP we make use if the policy iteration algorithm which we
+briefly outline here.
+
+The policy iteration algorithm alternates the following two steps, beginning
+from some initial policy $\pi_0$,
+
+\begin{itemize}
+    \item \emph{Policy evaluation:} given a policy $\pi_i$,
+    calculate $U_i = U^{\pi_i}$, the utility of each state if $\pi_i$, were to be
+    executed.
+    \item \emph{Policy improvement:} Calculate a new policy
+    $\pi_{i+l}$, using one-step look- ahead based on $U_i$ (as in
+    Equation~\ref{lbl:optimal_policy}).
+\end{itemize}
+
+The algorithm terminates when the policy improvement step yields no change in
+the utilities. The given method can be shown to converge in $O(n^3)$ where $n$
+is the number of vertices in the graph.
+
+This solution to the MDP guarantees to find a route that minimizes the
+expected time spent on searching for the free parking lot and walking from the
+found one to the goal.
+
+\todo{explicitly state about replanning}
+
+The agent carries out an optimal strategy to the point when he decides to
+park. Let us imagine for a moment that the parking lot at which the agent
+wants to park is occupied. From the point of view of the MDPs the optimal
+decision would be to wait and try once again, which is clearly a suboptimal
+decision. Therefore, we also utilize the observations of the world.
+
+Whenever we move past a parking lot, we check if it is occupied and update
+the occupancy probability in the related state to 1 or 0 respectively.
+This allows for carrying out a decision based on the better background.
+
+Because the graph is updated, we carry out the policy iteration algorithm
+once more to define the new optimal actions for each state.
+
+We repeat this re-planning step until we find a free parking lot.
 
 % section action_planning (end)
