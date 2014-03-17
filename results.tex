@@ -76,10 +76,10 @@ we cut false detections that appear in the first runs of training the
 classifier with a clipping tool~\cite{imageclipper} and add them to the
 negative training dataset.
 
-We use the trained classifier on the images from the camera mounter on the car
-or any other moving platform. During our experiments we use a Bumblebee
-stereo-camera (Figure~\ref{subfig:bumblebee}) pointed to the side of the
-Europa robot Obelix (Figure~\ref{subfig:obelix}).
+We use the trained classifier on the images from the camera mounted on the car
+or, possibly, any other moving platform. During our experiments we use a
+Bumblebee stereo-camera (Figure~\ref{subfig:bumblebee}) pointed to the side of
+the Europa robot Obelix (Figure~\ref{subfig:obelix}).
 
 \begin{figure}[t]%
 \centering
@@ -96,7 +96,8 @@ consider the car to be detected if it has been detected at least once in the
 sequence of images, featuring this particular car. With this in mind, the
 detection rate for our realization of the approach is approximately 95\%.
 
-The examples of detections can be seen in Figure~\ref{fig:detection_examples}.
+The examples of detected cars can be seen in
+Figure~\ref{fig:detection_examples}.
 
 \begin{figure}[th]
 \centering
@@ -154,6 +155,7 @@ The precision of car position modeling can be seen in
 Figure~\ref{fig:different_mappings}. The occupancy grid maps suffer from
 discretization errors. We have observed situations when the detections of the
 same car fall into different grid cells, causing erroneous map representation.
+
 Another problem with occupancy grid approach is the ad-hoc modeling of the car
 orientation. We argue, that using the observation model, as seen in
 Figure~\ref{fig:maptest}, yields the orientation of the detected car to be

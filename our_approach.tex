@@ -411,6 +411,15 @@ corresponds to the actions that can be carried out from one state to another.
 In the grid based situation, the states are the grid cells and the edges are
 connecting the adjacent cells.
 
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[width=\textwidth]{pictures/graph.pdf}
+    \end{center}
+    \caption{Graph based on the parking. The vertices correspond to the parking spaces. The edges between the vertices represent possibilities to reach one state from another. Every state is additionally connected to the goal state}
+    \vspace{-5mm}
+    \label{fig:graph}
+\end{figure}
+
 In the case, where we explicitly map the parking lots --- they, along with
 their spacial information, form the vertices of the graph. In this case we
 define the edges so that they hold the spacial information of the parking.

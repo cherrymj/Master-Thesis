@@ -1,27 +1,109 @@
 %!TEX root = Thesis.tex
 \chapter{Introduction} % (fold)
 \label{cha:introduction}
-    We all have been in a situation, when one was driving around a city, trying to find a free parking space. One can drive numerous circles around the center of the city with absolute uncertainty about where and when he can eventually find a free parking lot.
 
-    Nowadays there are more and more cars in the streets every day, the cities grow and more people use their car to get from place to place, therefore the time spent on the search for the free parking spot takes increasingly more time. \todo{back up? or relax the statement}
+We all have been in a situation, when one was driving around a city,
+trying to find a free parking space. One can drive numerous circles around
+the center of the city with absolute uncertainty about where and when he
+can eventually find a free parking lot.
 
-    There is a lot done nowadays to make it easier for people to park their cars --- most indoor and some outdoor parkings offer a number of free parking lots available at the moment. The modern maps usually contain the positions of all open parkings mapped with their GPS coordinates and can be easily found with an ordinary satellite navigation system \todo{check} that one can nowadays find in most cell phones. Even though these occupancy counters make it easier to find a spot, the areas that have no parkings with occupancy information estimate are still common.
+In Chapter 6 of his work --- ``The geography of transport systems'',
+\citet{rodrigue2013geography} argues, that parking in the city centers of
+modern big cities with population bigger than one million inhabitants is
+one of the most prevalent transport problems. He claims that ``cruising''
+in the search for a free curb parking space may account for more then 10\%
+of the local circulations as the drivers can spend up to 20 minutes
+looking for a parking spot.
 
-    Furthermore, it is not always convenient to go to a parking garage as sometimes they lie far from the wanted destination. It is sometimes a lot more suitable to leave a car in one of the on-street parkings.
+There are systems integrated into parking garages, that make help people
+to find a free parking space by offering the number of free parking lots
+available at the moment. The modern maps usually contain the positions of
+such parking garages mapped with their GPS coordinates. These allows these
+parking garages to be easily found with an ordinary GPS navigation device
+that one can nowadays find in most cell phones. Even though these
+occupancy counters make it easier to find a free parking spot, they only
+provide the current occupancy information and not its prediction.
 
-    There are, however, currently no solutions that provide any information on the positions of the parking lots in the streets and their availability \todo{San franzisco parkings}. Therefore, we are on our own with this problem. This results in having to spend valuable time on repeatedly driving along the same street in a desperate hope that someone has left and there is a parking spot available now. It is also usually the case that the on-street parkings are not precisely mapped and the navigators we use every day have no notion about them.
+Furthermore, it is not always convenient to go to a parking garage as
+sometimes they lie far from the wanted destination. In such cases it is a
+lot more convenient to leave the car in one of the curb parking spaces.
 
-    This problem is annoying for humans, but people are dealing with such uncertainty much better then the robotized systems.
+\citet{shoup2006cruising}, while addressing the problem of adjusting parking
+prices in order to reduce time spent on the search for a free parking space,
+found that it took between 3.5 and 14 min to find a curb space, and that
+between 8 and 74 percent of the traffic was cruising for parking.
 
-    Recently autonomous vehicles have become a topic of great interest.
-    In the latest years, auto companies and software companies as well as the universities all over the world have focused on developing their own autonomous vehicles. These vehicles can already impressively well navigate in the cities (\cite{stanley_auto_car,perceprion_drivec_car,lima13}) and are able to take people to arbitrary point even in hard to analyze urban environments. These cars are becoming safer, they learn how to adopt behavioral knowledge from the traffic (\cite{behaviour_learning,spinello10:multiclass}), are more efficient in the means of fuel consumption and a are lot more predictable, causing therefore less traffic jams. We believe, that with time people will spend less time driving by themselves and will rely more on robotized autos.
+This results in having to spend time and fuel on repeatedly driving along the
+same route in a desperate hope that someone has left and there is a parking
+spot available now. There is significant amount of uncertainty in this task.
+And uncertainty is the thing that may lead to frustration.
 
-    When it comes to parking, these vehicles can find out what a parking space is and are able to park there (\cite{auto_cars_burgard,auto_parking09,auto_park2_11}). Despite being able to park in an autonomous fashion, they are yet unable to know where to search for a free one by themselves and as a consequence where to search for a good one.
+\citet{rodrigue2013geography} evaluates the parking difficulty by asking the
+parkers to express their parking impressions. His results indicate that the
+amount of parking information parkers had before their trips was directly
+related to their parking search time, which in turn, influenced their
+perceptions of parking difficulty.
 
-    We want to address precisely this issue. We present an approach that provides a system for predicting the occupancy in any area as well as an algorithm for on-ground mapping of the parking lots with such additional information. Not only we are able to estimate this information but we also present a way to plan the route in such way that it eliminates uncertainty in finding the free parking place and guarantees to find an optimal parking lot, in the means of the overall time spent for the search, parking and walking to the end destination.
+Dealing with such uncertainty is annoying for humans. Yet, people deal with
+such uncertainty much better then the robotized systems. In order to carry out
+the parking task in an autonomous fashion there needs to be more information
+provided. There must be a deterministic algorithm, that has a decision what an
+optimal action is in any moment in time. For this algorithm to function there
+has to be enough information on spacial representation of the parking spaces
+as well as a model, that accounts for the occupancy information.
 
-    \section{Contribution of this thesis} % (fold)
-    \label{sec:contribution_of_this_thesis}
-        We have build a system that combines perception, mapping and planning for solving the problem of finding a free parking spot. The system combines HOG-based visual detection of the parked cars with mapping with occupancy grid maps and an MDP-based planner.
-    % section contribution_of_this_thesis (end)
+To the extent of our knowledge, there is, only a few solutions that provide
+information on the positions and occupancy of the curb parking spaces.
+
+One one the best known examples is the ``Parking on demand'' system
+by~\citet{sfo,sfo2}. They present a system of parking meters that adapt the
+price of curb parking spaces with relation to current occupancy in the area.
+Along with intelligent parking meters they also present a smartphone
+application that provides live information on the occupancy and pricing of
+distinct parking spaces.
+
+Even though this system proves to save time and money for the people that use
+it, we still see a lack of automatism in it. In order for this system to be
+used in an autonomous fashion one has to introduce a planner that considers
+not only spacial information but also occupancy and pricing.
+
+Another down side of this system is its dependence on the fixed positions of
+the parking meters. This implies, that in order to use the presented system we
+first need to install the parking meters for every curb parking space. This
+can be an effort, time and money consuming task.
+
+We argue, that there has to be a system to be able to map the paring spaces,
+estimate their occupancy information and search for one in an optimal and
+fully autonomous way.
+
+Recently autonomous vehicles have become a topic of great interest. In the
+latest years, auto companies and software companies as well as the
+universities all over the world have focused on developing their own
+autonomous vehicles. These vehicles can already impressively well navigate in
+the cities~\cite{stanley_auto_car,perceprion_drivec_car,lima13} and are able
+to take people to an arbitrary point even in difficult urban environments. We
+believe, that these cars are to become safer, more efficient in the means of
+fuel consumption and more predictable than an average human driver. They can
+already learn how to adopt behavioral knowledge from the
+traffic~\cite{behaviour_learning,spinello10:multiclass}. Following the recent
+success of the Google self driving car~\cite{markoff2010google} and the fact
+that it is now officially allowed to use self-driving autos on public roads in
+California, Nevada and Florida, US, we predict that with time people will
+spend less time driving by themselves and will rely more on robotized autos.
+
+When it comes to parking, these vehicles can find out what a parking space is
+and are able to park
+there~\cite{auto_cars_burgard,auto_parking09,auto_park2_11}. Despite being
+able to park in an autonomous fashion, they are yet unable to know where to
+search for a free one by themselves and as a consequence where to search for a
+good one.
+
+We address precisely this issue. We present an approach that provides a system
+for mapping the parking spaces while predicting their occupancy via
+integrating information from multiple observations. Not only we are able to
+estimate this information but we also present a way to plan the route in such
+way that it eliminates uncertainty in finding the free parking place and
+guarantees to minimize the time spent for cruising while searching for a free
+parking space and walking from the found one to the destination.
+
 % chapter introduction (end)
