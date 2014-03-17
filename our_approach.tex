@@ -25,11 +25,11 @@ interconnected. Later in the chapter we show each of the sub-parts in detail.
 
 \begin{itemize}
 
-\item \emph{Perception:} We visually detect cars in the images from the camera and find out how far from the image plane are they situated by fusing the detections with the depth data, received either from the stereo camera setup or from the laser range finder (Section~\ref{sec:perception}).
+\item \emph{Perception:} We visually detect cars in the images from the camera and find out how far from the image plane are they situated by fusing the detections with the depth data, received either from the stereo camera or from the laser range finder (Section~\ref{sec:perception}).
 
 \item \emph{Mapping:} The positions of the detected cars are fused into one global representation of the world observed by the agent. This representation also contains occupancy information, perceived through multiple runs (Section~\ref{sec:model}).
 
-\item \emph{Planning:} In the modeled environment we search for actions that minimize the time spent on searching for a parking space and walking from it to the goal (Section~\ref{sec:planning}).
+\item \emph{Planning:} In the modeled environment we search for actions that minimize the time spent on searching for a parking space and walking from it to the goal (Section~\ref{sec:action_planning}).
 
 \end{itemize}
 
@@ -130,16 +130,6 @@ the linear SVM the decision boundary is linear.
 SVM is a well known and arguably the most popular algorithm in binary
 clustering, therefore many implementations are readily available. In this work
 we make extensive use of libSVM library by~\citet{libSVM2011}.
-
-\begin{wrapfigure}{I}{0.3\textwidth}
-\begin{center}
-\includegraphics[width=0.8\textwidth]{pictures/bumblebee.jpg}
-\end{center}
-\vspace{-20pt}
-\caption{Point Grey Bumblebee2 stereo camera.}\
-\vspace{-10pt}
-\label{fig:bumblebee}
-\end{wrapfigure}
 
 Based on the trained classifier, we carry out the detection in a cascade
 fashion via the sliding window approach. For each sliding window content we
@@ -249,7 +239,7 @@ The first approach that we consider utilizes the grid maps. Grid maps
 partition the space into a grid of rectangular cells. Each grid contains
 information about the corresponding area in the environment. We make use of
 one particular realization of grid maps --- the \emph{occupancy grid maps} as
-presented by \citet{occupancy_grids}. Occupancy grid maps assume that each
+presented by~\citet{occupancy_grids}. Occupancy grid maps assume that each
 grid cell is either occupied by an obstacle or free. In our case, each cell
 stores the probability that the particular cell is occupied by a car.
 
@@ -393,15 +383,6 @@ occupancy information in one distinct structure.
 % subsection static_state_binary_filter_in_pre_defin (end)
 % section model (end)
 
-\begin{figure}[ht]%
-\centering
-\subfloat{\includegraphics[width=0.8\textwidth]{pictures/laser_fusion.pdf}} \\
-\subfloat{\includegraphics[width=0.8\textwidth]{pictures/occupancy_cars.pdf}} \\
-\subfloat{\includegraphics[width=0.8\textwidth]{pictures/parking_lots_detections.pdf}}
-\caption{Illustration of different mapping approaches.}
-\label{fig:different_mappings}
-\end{figure}
-
 \section{Action Planning} % (fold)
 \label{sec:action_planning}
 
@@ -540,7 +521,7 @@ rewards from that point onwards, we define the utility via Bellman Equation:
 U(s) = R(s) + \gamma \max_a \sum_{s'}T(s \mid s', a)U(s')
 \end{equation}
 
-To solve the MDP we make use if the policy iteration algorithm which we
+To solve the MDP we make use of the policy iteration algorithm which we
 briefly outline here.
 
 The policy iteration algorithm alternates the following two steps, beginning
