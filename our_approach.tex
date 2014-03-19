@@ -8,7 +8,7 @@
 \newcommand{\z}{z_{t}}
 \newcommand{\y}{z_{1:t-1}}
 
-\chapter{Our Approach}
+\chapter{In-vehicle parking space occupancy estimation and guidance system}
 \label{cha:our_approach}
 
 \section{Overview} % (fold)
@@ -197,26 +197,26 @@ EUROPA robot Obelix which has a laser with an opening angle of $270^\circ$
 mounted approximately on the human knee level. This setup proves to be more
 robust in terms of finding the exact relative position of the detected car.
 
-The laser mounted on the robot provides a sufficient opening angle in order to
-cover all the space related to the image from the camera. We search for the
-beams, that span through the area covered by the image. The camera is mounted
-on the same $Z$ axis with the laser. This yields the choice of the laser
-beams, that contain depth values associated with the car:
+The laser mounted on the robot provides a sufficient opening angle to cover
+the field of view of the camera. We search for the beams, that span through
+the area covered by the image. The camera is mounted on the same vertical axis
+with the laser. This yields the choice of the laser beams, that contain depth
+values associated with the car:
 
 \begin{equation}
-Z = \{ \mbox{beam}_n | \forall n : \beta_{l} < \alpha_{\mbox{camera}} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
+Z = \{ \mbox{beam}_n | \forall n : \beta_{l} < \alpha_{camera} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
 \end{equation}
 
-where $\alpha_{camera}$ is the angle of the camera with respect to the
-direction of the laser, $\beta_{l}$ and $\beta_{r}$ are the angles of left and
+Here, $\alpha_{camera}$ is the angle at which the camera points as perceived
+in the laser frame, $\beta_{l}$ and $\beta_{r}$ are the angles of left and
 right margins of the detection bounding box in the camera frame, $\alpha_{n}$
 is the angle of the $n$-th beam in the laser frame. $\alpha_{0}$ is the angle
-of the first beam in the laser frame. In the setup we use, this angle is equal
-to $-\frac{3\pi}{4}$.
+of the first beam in the laser frame. In the setup we use, $\alpha_{0} =
+-3\pi/4$ and $\alpha_{camera} = -\pi/2$.
 
-The endpoints of the beams in $Z$ provide us with consistent $3D$ information.
-In order to account for possible occlusions or measurement errors we take the
-median of these values.
+The endpoints of the beams in $Z$ provide us with consistent depth
+information. In order to account for possible occlusions or measurement errors
+we take the median of these values.
 
 % sub-subsection laser_range_finder (end)
 % subsection depth_information (end)
@@ -322,15 +322,16 @@ observation model $P(\v \mid z)$
 P(a^i | z_t) = \begin{cases} 0.45, & \mbox{if } \mbox{ before detection} \\ 0.9, & \mbox{if } \mbox{ cell stores detection} \\ \mbox{prior}, & \mbox{if } \mbox{ after detection} \end{cases}
 \end{equation}
 
-\begin{wrapfigure}{r}{0.3\textwidth}
+\begin{wrapfigure}{r}{0.25\textwidth}
 \begin{center}
 \includegraphics[width=0.8\textwidth]{pictures/testmap.png}
 \end{center}
 \vspace{-10pt}
-\caption{An example of Bresenham based update from a single image with two detected cars.}
+\caption{Bresenham based occupancy grid update from a single image with two detected cars.}
 \vspace{-10pt}
 \label{fig:maptest}
 \end{wrapfigure}
+
 
 Furthermore, we define the observation model along the rays, that span from
 the camera position to the defined $z_{\max}$ and along the defined for the
@@ -415,7 +416,7 @@ connecting the adjacent cells.
     \begin{center}
         \includegraphics[width=\textwidth]{pictures/graph.pdf}
     \end{center}
-    \caption{Graph based on the parking. The vertices correspond to the parking spaces. The edges between the vertices represent possibilities to reach one state from another. Every state is additionally connected to the goal state}
+    \caption{Graph based on the parking lot. The vertices correspond to the parking spaces. The edges between the vertices represent possibilities to reach one state from another. Every state is additionally connected to the goal state.}
     \vspace{-5mm}
     \label{fig:graph}
 \end{figure}
@@ -428,82 +429,108 @@ In both cases all vertices are connected to the goal state. The probability of
 the action that allows the agent to follow such edges relies on the occupancy
 probability of the related parking lot and is formally defined later.
 
-We also define the set of all actions that can be carried out in any state. It
-consists of five distinct actions: ``up'': $\uparrow$, ``down'': $\downarrow$,
-``left'': $\leftarrow$, ``right'': $\rightarrow$ and ``park''. Formally:
-
+We also define the set of all actions $A$ that can be carried out in any
+state. It consists of five distinct actions: ``up'': $\uparrow$, ``down'':
+$\downarrow$, ``left'': $\leftarrow$, ``right'': $\rightarrow$ and ``park''.
+Formally:
 \begin{eqnarray}
 A_{\mbox{move}} = \{ \uparrow, \downarrow, \leftarrow, \rightarrow \} \\
 a_{\mbox{park}} = \mbox{``park''} \\
 A = A_{\mbox{move}} \cup a_{\mbox{park}}
+\label{eq:actions}
 \end{eqnarray}
 
-As stated in the work of~\citet{tipaldiICRA11}, Markov decision processes
+As presented in the work of~\citet{tipaldiICRA11}, Markov decision processes
 (MDPs) provide a way to maximize joint rewards instead of greedily going for
 the best possible goal. We follow similar approach, defining rewards and
 transition probabilities based on the environment specific for our problem.
 
 Following the work of~\citet{bellman1957} we define the MDP by the initial
 state $S_0$, transition function $T(s \mid s', a)$ and a reward function $R(s,
-a, s')$.
+s', a)$.
 
 Here, $T(s \mid s', a)$ denotes the probability of reaching state
-$s'$ if and action $a$ is carried out in state $s$. The transitions in the
-model are assumed to be Markovian. That is, the probability of reaching $s'$
-from $s$ depends only on $s$ and not on the history of earlier states.
+$s$ if and action $a$ is carried out in state $s'$. The transitions in the
+model are assumed to be Markovian. That is, the probability of reaching $s$
+from $s'$ depends only on $s'$ and not on the history of earlier states.
 
 For four actions that describe driving around the parking, we consider the
 probability of moving from any state to the next one (if possible) to be equal
 to 1, while the probability of parking in a particular state is equal to the
 occupancy probability of the state:
-
 \begin{eqnarray}
 \forall (s, s') \in E, \forall a \in A_{\mbox{move}} : P(s \mid s', a) = 1 \\
 \forall s \in V, (s,s_{\mbox{goal}}) \in E : P(s \mid s_{\mbox{goal}}, a_{\mbox{park}}) = P(\mbox{free})
 \end{eqnarray}
-
 where $P(\mbox{free})$ is a probability of a parking lot to be free, observed
 through a period of time. To be consistent, we set the remaining probabilities
-to the values that guarantee that $\forall s, s' \in V, (s, s') \in E :
-\sum_{s'}P(s \mid s', a) = 1$. This ensures that the outcome of each action
-the agent can take is defined. It resolves to staying in the same state when
-trying to carry out an unavailable or improbable action in any state.
+to the values that guarantee that $\forall s, s' \in V, (s, s') \in E, \forall
+a \in A: \sum_{s}P(s \mid s', a) = 1$. This ensures that in each state the
+outcome of each action the agent can take is defined. It resolves to staying
+in the same state when trying to carry out an unavailable or improbable action.
 
 For example: it is clear, that staying in the left most corner of the parking
 lot and carrying an action to go left, should result in staying in the same
 spot and while carrying out an action of parking, with the probability of
 $0.6$ there should be a $0.4$ chance to stay in the same place.
 
-The function $R(s, a, s')$ likewise defines the reward for reaching state $s'$
-from state $s$ carrying out action $a$. $S_0$ denotes the state in which we
+The function $R(s, s', a)$, likewise, defines the reward for reaching state $s$
+from state $s'$ carrying out action $a$. $S_0$ denotes the state in which we
 initially put the agent.
 
 The motivation behind the rewards is based on the time it takes the agent to
-carry out an action. We assume, that the agent needs a constant time for
-moving from one state $s$ to another $s'$. If he cannot carry out the action
-and is forced to stay in the same position, he regardlessly loses time. We
-therefore define a negative reward for carrying out any action from
-$A_{\mbox{move}}$ that penalizes longer paths:
+carry out an action. We assume, that the agent needs time for driving from one
+state $s$ to another $s'$. If he cannot carry out the action and is forced to
+stay in the same position, he regardlessly loses time.
+
+The time $T$ it takes the agent to drive from any arbitrary state $s$ to an
+adjacent one $s'$ depends on the distance between these states and on the
+agent's driving speed $v_{drive}$ and can be defined as:
 
 \begin{equation}
-\forall (s, s') \in E, \forall a \in A_{\mbox{move}}: R(s, s', a) = R(s, s, a) = \mbox{-const}
+\label{eq:time_to_drive}
+\forall s,s' \in V, (s, s') \in E: T_{drive}^{s,s'}
+= \frac{\sqrt{(s - s') {(s - s')}^T}}{v_{drive}}
 \end{equation}
+
+The cost $R(s, s', a)$ of moving from state $s'$ to state $s$ carrying out
+action $a$ grows with the time $T_{drive}^{s,s'}$ the agent needs to cover the path. We therefore
+define a negative reward for each action in $A_{move}$ between any two
+adjacent states as follows:
+
+\begin{equation}
+\forall s,s' \in V, \forall (s, s') \in E, \forall a \in A_{move}: R(s, s', a) = -T_{drive}^{s,s'}
+\end{equation}
+
+In addition to these costs we penalize staying in one place. This cost can
+also be seen as the cost of failure as in our system the agent stays in the
+same state only if he fails to carry out an optimal action. We define this
+cost to be equal to a constant provided beforehand. To show the impact of this
+cost let us consider an example. The agent stays in an arbitrary state and
+thinks that the best decision in this state is to park. However, when he
+observes the parking space --- it is occupied which results in the agent
+staying in the same place and as a result, getting the negative reward. Given
+the fact, that all rewards in our system are time based this cost virtually
+results in losing a pre-defined amount of time.
 
 We also define the rewards that the agent receives when he successfully
 carries out parking actions. These rewards are likewise time based. They form
-a decreasing linear function --- therefore the state closer to the destination
-gets a bigger reward than the one situated further. We define the reward to be
-$r_{\max} - r_s$, where $r_s = \sqrt{(s - s_{\mbox{goal}}) {(s -
-s_{\mbox{goal}})}^T}$ is a distance between the arbitrary state $s \in
-\mathbb{R}^2$ and $r_{\max} = \max_{s \in V}r_s$ is the greatest of those
-distances. Formally:
+a decreasing linear function in order to guarantee that the state closer to
+the destination gets a bigger reward than the one situated further. We define
+the reward to be $r_{\max} - r_s$, where $r_s = T_{walk}^{s,s_{goal}}$ is the
+time that the agent needs to walk from an arbitrary state $s \in \mathbb{R}^2$
+to the goal, $r_{\max} = \max_{s \in V}r_s$ is the greatest of those
+distances. We define $T_{walk}^{s,s_{goal}}$ similarly to
+\eqref{eq:time_to_drive}: $T_{walk}^{s,s_{goal}} = \frac{\sqrt{(s - s_{goal})
+{(s - s_{goal})}^T}}{v_{walk}}$, where $v_{walk}$ is the agent's walking
+speed. Formally:
 
 \begin{equation}
-\forall s \in V, (s,\mbox{goal}) \in E : R(s, s_{\mbox{goal}}, a_{\mbox{park}}) = r_{\max} - r_s
+\forall s \in V, (s, s_{goal}) \in E : R(s, s_{goal}, a_{park}) = r_{\max} - r_s
 \end{equation}
 
-The proposed reward function guarantees, that the agents tries to find a
-trade-off between shorter driving and shorter walking paths, weighted by the
+The proposed reward function guarantees, that the agent tries to find a trade-
+off between shorter driving and shorter walking paths, weighted by the
 occupancy probability of the parking lots.
 
 Transition function and reward function are necessary to define the utility
@@ -541,17 +568,17 @@ from some initial policy $\pi_0$,
     calculate $U_i = U^{\pi_i}$, the utility of each state if $\pi_i$, were to be
     executed.
     \item \emph{Policy improvement:} Calculate a new policy
-    $\pi_{i+l}$, using one-step look- ahead based on $U_i$ (as in
-    Equation~\ref{lbl:optimal_policy}).
+    $\pi_{i+l}$, using one-step look-ahead based on $U_i$ (as in~\eqref{lbl:optimal_policy}).
 \end{itemize}
 
 The algorithm terminates when the policy improvement step yields no change in
 the utilities. The given method can be shown to converge in $O(n^3)$ where $n$
 is the number of vertices in the graph.
 
-This solution to the MDP guarantees to find a route that minimizes the
-expected time spent on searching for the free parking lot and walking from the
-found one to the goal.
+This solution to the MDP guarantees to find a route that maximizes the rewards
+while searching for the free parking lot and walking from the found one to the
+goal. Given the nature of the reward function this approach can be seen as
+minimizing the time loss.
 
 \todo{explicitly state about replanning}
 

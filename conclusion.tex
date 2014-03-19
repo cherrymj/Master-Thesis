@@ -2,19 +2,60 @@
 
 \chapter{Conclusion and Further Work} % (fold)
 \label{cha:conclusion_and_further_work}
-    We have build a system that integrate perception, mapping and planning for solving a task of efficiently finding a free on-street parking lot.
 
-    The algorithm presented in this work relies on visual detection of the cars in the streets. As no reliable fast car detector was found we have written one, which is going to be made open-source in the near future.
+    We have built a system that integrates perception, mapping and planning
+    for solving a task of efficient search for a free on-street parking lot.
 
-    Throughout the course of the work we have experimented with different methods for combining metric information with visual detections such as depth from stereo cameras or lasers. Currently the laser range scanners have proven to provide a better result, however it is of great interest to build a system that would provide the same level of detail using purely visual information.
+    The algorithm we present in this work relies on visual detection of the
+    cars in the streets. As no reliable fast car detector was found we have
+    written one, which is going to be made open-source in the near future.
 
-    It is important to have a reliable depth estimate only in case of having a good estimate of the position in the world. We use SLAM (\cite{stachniss11isrr,kuemmerle11auro,kretzschmar10ki}) for this purpose.
+    Throughout the course of the work we experiment with different methods for
+    combining metric information with visual detections such as utilizing
+    depth from a stereo camera or a laser range finder. Currently the laser
+    range scanner s proven to provide a better result, however it is of great
+    interest to build a system that would provide the same level of detail
+    adopting purely visual information.
 
-    Not only we have experimented with perception, but also with mapping. We have implemented the the occupancy grids based approach, which however suffers from the discretization errors as well as from ad-hoc estimation of the position (including orientation) of the detected cars in the occupancy grid. Eventually we stick to the system where we provide our system with additional knowledge about where the parking lots are situated. This information has to be obtained only once for a new environment.
+    It is important to have a reliable depth estimate and of the same
+    importance is having likewise a good estimate of the position in the
+    world. We use SLAM
+    (\cite{stachniss11isrr,kuemmerle11auro,kretzschmar10ki}) for estimating a
+    precise position of the agent in the world.
 
-    This system then provides a good estimate of the occupancy information that is received via multiple observations of the same spot on different days or simply in different times. It may be subject for future work to estimate the occupancy information for particular day of week or particular time of a working day, etc. The occupancy information is basically a probability of a parking lot to be free when observed.
+    Not only we experiment with perception, but also with mapping. We
+    implement the occupancy grids based approach, which, however, suffers from
+    the discretization errors as well as from ad-hoc estimation of the
+    position (including orientation) of the detected cars in the occupancy
+    grid. Eventually we promote the system where we provide our system with
+    additional knowledge about where the parking lots are situated. This
+    information has to be obtained only once for a new environment.
 
-    This occupancy information along with the position of the parking lots in the world allows for a planner to be introduced. This planner, unlike greedy A* and alike searches not for the best parking lot in the means of position or occupancy, but takes into account the trade-off between these two quantities, minimizing the expected time it takes us to park a car and get to the final goal by foot. It is still possible to experience problems finding the best parking lot, but our approach eliminates the high uncertainty of this process and provides an opportunity to carry out the parking process in a fully-autonomous fashion, while guaranteeing to find the best action in the means of expected time needed for the whole process.
+    This system then provides a good estimate of the occupancy information
+    that we estimate via multiple observations of the same spot on different
+    days or simply in different times. It may be a subject for future work to
+    estimate the occupancy information for particular day of week or
+    particular time of a working day, etc. The occupancy information is
+    basically a probability of a parking lot to be free when observed.
 
-    There is however place for future work. To see a fully integrated and easily accessible system we will further focus on making the detection of the parked car position purely based on visual data (via improving stereo-camera depth acquisition). The other vector of interest is improving the approach for mapping in order to leave pre-defined parking lots' positions behind and to be able to efficiently map any given environment without any prior knowledge about it.
+    This occupancy information along with the position of the parking lots in
+    the world allows us to introduce a planner. This planner, unlike greedy A*
+    and alike, searches not for the best parking lot in the means of position
+    or occupancy, but takes into account the trade-off between these two
+    quantities, minimizing the expected time required by an agent to park a
+    car and get to the final goal by foot. It is still possible to experience
+    difficulties finding the best parking lot, but our approach eliminates the
+    high uncertainty of this process and provides an opportunity to carry out
+    the parking process in a fully-autonomous fashion, while guaranteeing to
+    find the best action in the means of expected time needed for the whole
+    process.
+
+    There is however place for future work. To see a fully integrated and
+    easily accessible system we will further focus on detecting the parked car
+    position purely based on visual data (via improving stereo-camera depth
+    acquisition). The other vector of interest is improving the approach for
+    mapping in order to leave pre-defined parking lots' positions behind and
+    to be able to efficiently map any given environment without any prior
+    knowledge about it.
+
 % chapter conclusion_and_further_work (end)

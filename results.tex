@@ -3,27 +3,18 @@
 \chapter{Experimental Results}
 \label{cha:experimental_results}
 
-We make extensive use of three components: visual car detection,
-parking lot modeling and planning.
+Through the course of this work, we make extensive use three core components:
+visual car detection, parking lot modeling and planning. In this section we
+present the experimental evaluation of each of these parts.
 
 \section{Visual Car Detection}
 \label{sec:visual_car_detection}
 
-We start this section by describing the dataset that we utilize to train the
-car detector. A training dataset plays a crucial part in any detection
-algorithm. In order to train the visual car detector we assemble a training
-dataset that consists of a number of positive (containing cars) and negative
-(images not containing cars) examples.
-
-For the reason that the car's view depends on the angle of view, we assemble
-positive training data for different angles of the cars. We prepare training
-samples for four different views of the cars --- front, back and both left and
-right sides.
-
-The sides of the car are invariant under the mirror transformation. Front and
-back of the car, though different to human point of view, seem to be similar
-in the HOG visualization. Therefore, the corresponding datasets can be
-combined into one.
+We start the visual detection section by describing the dataset that we
+utilize to train the car detector. A training dataset plays a crucial part in
+any detection algorithm. In order to train the visual car detector we assemble
+a training dataset that consists of a number of positive (containing cars) and
+negative (images not containing cars) examples.
 
 \begin{figure}[b]%
 \centering
@@ -53,12 +44,23 @@ combined into one.
 \label{fig:pos_neg_examples}
 \end{figure}
 
+For the reason that the car's view depends on the angle of view, we assemble
+positive training data for different angles of the cars. We prepare training
+samples for four distinct views of the cars --- front, back and both left and
+right sides.
+
+The sides of the car are invariant under the mirror transformation. This
+allows to use the same image for training a classifier for each side which
+simplifies the training data generation. Front and back of the car, though
+different to human point of view, seem to be similar in the HOG visualization.
+Therefore, the corresponding datasets can be combined into one.
+
 These datasets contain respectively images of sizes $128 \times 128$ pixels
 for front/rear car view and $128 \times 64$ pixels for side view. We utilize
 682 positive images that contain cars for training the front/rear detector. In
-addition to these positive examples we also convene 7972 negative images. The
-examples of the positive and negative training datasets are presented in
-Figure~\ref{fig:pos_neg_examples}.
+addition to these positive examples we also convene 7972 negative images. Some
+examples from the front/rear positive and negative training datasets are
+presented in Figure~\ref{fig:pos_neg_examples}.
 
 The positive examples contain exclusively views of the cars. Each positive
 example shows one and only one car. The car occupies the full area of the
@@ -66,8 +68,10 @@ image. The photos of the cars depict them centered and seen from the same
 angle of view. This is crucial for training a meaningful classifier.
 
 The positive dataset is assembled from different sources: INRIA Car Dataset
-by~\citet{inriadata}, Motorway Car Dataset by~\citet{TMEMotorwayDataset} and
-various car images found in a public domain via Google.
+by~\citet{inriadata}, Motorway Car Dataset by~\citet{TMEMotorwayDataset}, UIUC
+Image Database for Car Detection by~\citet{agarwal2002uiuc}, KITTI car dataset
+by~\citet{Geiger2013IJRR} and various car images found in a public domain via
+a web searching engine.
 
 In order to create the negative set we randomly sample different sized patches
 of the given aspect-ratio ($128 \times 128$ and $128 \times 64$ respectively)
@@ -76,10 +80,11 @@ we cut false detections that appear in the first runs of training the
 classifier with a clipping tool~\cite{imageclipper} and add them to the
 negative training dataset.
 
-We use the trained classifier on the images from the camera mounted on the car
-or, possibly, any other moving platform. During our experiments we use a
-Bumblebee stereo-camera (Figure~\ref{subfig:bumblebee}) pointed to the side of
-the Europa robot Obelix (Figure~\ref{subfig:obelix}).
+We use the trained classifier on the images from the camera mounted inside of
+the car facing sidewards or, possibly, onto any other moving platform. During
+our experiments we use a Bumblebee stereo-camera
+(Figure~\ref{subfig:bumblebee}) pointed to the side of the Europa robot Obelix
+(Figure~\ref{subfig:obelix}).
 
 \begin{figure}[t]%
 \centering
@@ -99,14 +104,36 @@ detection rate for our realization of the approach is approximately 95\%.
 The examples of detected cars can be seen in
 Figure~\ref{fig:detection_examples}.
 
-\begin{figure}[th]
+\begin{figure}[t]
 \centering
 \begin{tabular}{cc}
-\subfloat[]{\includegraphics[width=2.5cm]{pictures/bumblebee.jpg}\label{subfig:bumblebee}}\vspace{4mm} \\
+\subfloat[]{\includegraphics[width=3cm]{pictures/bumblebee.jpg}\label{subfig:bumblebee}}\vspace{4mm} \\
 \subfloat[]{\includegraphics[width=2cm]{pictures/lms_2_0.jpg}\label{subfig:laser}} &
-\multirow{-12}[2.5]{*}{\subfloat[]{\includegraphics[width=4cm]{pictures/obelix.pdf}\label{subfig:obelix}}} \\
+\multirow{-12}[3]{*}{\subfloat[]{\includegraphics[width=4cm]{pictures/obelix.pdf}\label{subfig:obelix}}} \\
 \end{tabular}
 \caption{A Bumblebee stereo camera \subref{subfig:bumblebee} and a laser range finder \subref{subfig:laser} mounted on the Obelix robot on the same vertical axis \subref{subfig:obelix}.}
+\end{figure}
+
+
+\begin{figure}[p]%
+\centering
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_1.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_2.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_3.jpg}}\\
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_4.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_5.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_6.jpg}}\\
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_7.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_8.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_9.jpg}}\\
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_10.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_11.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_12.jpg}}\\
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_1.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_2.jpg}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_3.jpg}}\\
+\caption{Examples of detections of different cars under different light conditions.}
+\label{fig:detection_examples}
 \end{figure}
 
 % section visual_car_detection (end)
@@ -116,51 +143,77 @@ Figure~\ref{fig:detection_examples}.
 
 \begin{figure}[p]%
 \centering
-\subfloat{\includegraphics[width=0.7\textwidth]{pictures/google_map.pdf}} \\
-\subfloat{\includegraphics[width=0.7\textwidth]{pictures/laser_fusion.pdf}} \\
-\subfloat{\includegraphics[width=0.7\textwidth]{pictures/occupancy_cars.pdf}} \\
-\subfloat{\includegraphics[width=0.7\textwidth]{pictures/parking_lots_detections.pdf}}
-\caption{Illustration of different mapping approaches.}
+\subfloat[Aerial view.]{\includegraphics[width=0.6\textwidth]{pictures/google_map.pdf}\label{subfig:aerial}} \\
+\subfloat[Car detections over the map built with the laser-based SLAM procedure.]{\includegraphics[width=0.6\textwidth]{pictures/laser_fusion.pdf}\label{subfig:slam_detections}} \\
+\subfloat[Occupancy grid map acquired as described in Section~\ref{sub:occupancy_grids}.]{\includegraphics[width=0.6\textwidth]{pictures/occupancy_cars.pdf}\label{subfig:occ_maps_detections}} \\
+\subfloat[Cars positions mapped to pre-defined parking lot positions.]{\includegraphics[width=0.6\textwidth]{pictures/parking_lots_detections.pdf}\label{subfig:pre_defined}}
+\caption{Representations of the campus parking lot at the university of Freiburg. \\ Images \subref{subfig:slam_detections}, \subref{subfig:occ_maps_detections},~\subref{subfig:pre_defined}  represent the same occupancy state of the parking lot.}
 \label{fig:different_mappings}
 \end{figure}
 
-We present occupancy data aggregated to the occupancy grids as well as into
-the pre-defined parking lot positions. The illustration of differences in the
-maps representations can be seen in Figure~\ref{fig:different_mappings}.
-
 The occupancy data is based on the 2D data obtained either from the stereo
-cameras (Figure~\ref{fig:depth_from_disparity}) or from laser range finder,
-mounted on the robot (Figure~\ref{subfig:laser}). As can be seen in the
-figure, the stereo camera is mounted on the same z-axis as the laser range
-finder. We search for the endpoints that represent the cars as described in
-the section \nameref{sec:perception} of chapter \nameref{cha:our_approach}.
+cameras (Figure~\ref{subfig:bumblebee}) or from laser range finder, mounted on
+the robot (Figure~\ref{subfig:laser}). As can be seen in the figure, the
+stereo camera is mounted on the same z-axis with the laser range finder. We
+search for the endpoints that represent the cars as described in the section
+\nameref{sec:perception} of chapter \nameref{cha:our_approach}.
 
 Figure~\ref{fig:depth_from_disparity} shows that the depth information
-computed from the disparity information between two stereo images lacks
-precision and overall is noisy. Not only this noise is caused by the method of
-depth estimation and errors in point association, but it also suffers from the
-windows present in almost any car. The windows are transparent which results
-in wrong depth measurements falling into the detected region of interest.
+computed from the disparity image between two stereo images lacks precision
+and has a significant amount of noise. Not only this noise is caused by the
+method of depth estimation and errors in point association, but it also
+suffers from the windows present in almost any car. The windows are
+transparent which results in wrong depth measurements present in the detected
+regions of interest.
 
-As the result of this, we use the laser range finder based depth measurements.
-Laser is precise in measuring the distance. Because of its mounting position
-on the human knee level, it also does not suffer from the partial transparency
-of the cars because the lasers never encounter the cars' windows.
+To avoid the noisiness, we use the depth measurements from a laser range
+finder. Each laser measurement has high precision in measuring the distance.
+Because of its mounting position on the human knee level, it also does not
+suffer from the partial transparency of the cars as individual laser beams
+never encounter the cars' windows.
 
-Figure~\ref{fig:different_mappings} shows car detections as red dots. We
-produce these detections fusing the laser range finder measurements with the
-visual detections as described in Chapter~\ref{cha:our_approach}.
+We present occupancy data aggregated to the occupancy grids as well as into
+pre-defined parking lot positions. The illustration of differences in the maps
+representations can be seen in Figure~\ref{fig:different_mappings}. The figure
+shows car detected  cars positions as red dots. We produce these detections
+fusing the laser range finder measurements with the visual detections as
+described in Chapter~\ref{ssub:laser_range_finder}.
 
-The precision of car position modeling can be seen in
-Figure~\ref{fig:different_mappings}. The occupancy grid maps suffer from
-discretization errors. We have observed situations when the detections of the
-same car fall into different grid cells, causing erroneous map representation.
+There are two distinct ways in which we model the parking lots: occupancy grid
+maps and pre-defined parking lots positions.
 
-Another problem with occupancy grid approach is the ad-hoc modeling of the car
-orientation. We argue, that using the observation model, as seen in
-Figure~\ref{fig:maptest}, yields the orientation of the detected car to be
-influenced by the angle from which it is observed. This is the second source
-of the errors in the map representation via occupancy grid maps.
+As can be seen from the Figure~\ref{subfig:occ_maps_detections} the occupancy
+grid based representation lacks precision. The main problem are the
+discretization errors. It is a common situation when the detections on
+different sides of the same car fall into different grid cells, causing
+erroneous map representation. Another problem of the occupancy grid based
+approach is an imperfect approximation of the car orientation. We argue, that
+using the observation model, as seen in Figure~\ref{fig:maptest}, yields the
+orientation of the detected car to be influenced by the angle from which it is
+observed.
+
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{pictures/parking_lots.png}
+    \end{center}
+    \caption{Occupancy probability accumulated during a sequence of observations shown in color. The greener the parking lot is --- the bigger the probability for it to be free.}
+    \label{fig:occupancy_accumulated}
+\end{figure}
+
+Because of these issues, we mostly utilize the pre-defined positions of the
+parking lots for occupancy estimation. An example of the occupancy information
+from the data gathered during one run is presented in
+Figure~\ref{subfig:pre_defined}. The exact positions of the parking lots and
+deterministic association of detections to them allows us to quantify the
+mapping precision. For this system we measure the detection rate as a relation
+of the number of correctly labeled parking lots to the total number of parking
+lots. This results in: $\frac{\mbox{correct}}{\mbox{correct} + \mbox{wrong}}
+\approx 92\% $ of all parking lots to labeled correctly respectively as
+occupied or free. The biggest source of error is failing to detect the cars or
+assigning them to the wrong parking lot. The first problem comes from the
+visual visual detection part, that, of course, propagates the error. The
+second one is usually due to abnormal sizes of the cars or improper position
+in the parking lot.
 
 % section parking_lots_modeling (end)
 
@@ -168,45 +221,79 @@ of the errors in the map representation via occupancy grid maps.
 \section{Planning}
 \label{sec:planning_results}
 
-As can be seen in the previous section, the question of how to use the
-occupancy grids in order to build a planner on top of the occupancy
-information in them is still open. We thus currently focus on a planner based
-upon the pre-defined parking lots positions. However, the planner itself is
-generic, which allows to use it in any situation alike. For now we can
-manipulate the constant time for taking the next action. It can be seen, that
-if this value is set to a very big value, the optimal action for each state is
-to park right there just to keep the overall reward positive. If we on the
-contrary set this constant to 0, the optimal decision will be to move around
-the parking lot until we have found the best (closest to the goal) parking lot
-and then try to park there.
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{pictures/graph_observations.pdf}
+\end{center}
+\caption{A visual representation of the parking lot graph useful for planner visualization. The edges are defined similarly to~\ref{fig:graph}. Each state contains prediction and observation information. This can be seen as combining occupancy information in Figure~\ref{subfig:pre_defined} with Figure~\ref{fig:occupancy_accumulated}.}
+\label{fig:graph_accumulated_illustration}
+\end{figure}
 
-The most optimal result is achieved if the cost of moving between the parking
-lots by car is the distance between them, divided by the speed of the car.
-This makes the algorithms consider a trade-off between shorter routes while
-searching for a place and better parking lots, situated closer to the goal,
-weighted by the occupancy probability. The next example shows the behavior of
-the agent under different current occupancy.
+\begin{figure}[b]%
+\centering
+\subfloat[Drive up.]{\includegraphics[width=0.15\textwidth]{pictures/action_up.pdf}}\hspace{2mm}
+\subfloat[Drive right.]{\includegraphics[width=0.15\textwidth]{pictures/action_right.pdf}}\hspace{2mm}
+\subfloat[Drive down.]{\includegraphics[width=0.15\textwidth]{pictures/action_down.pdf}}\hspace{2mm}
+\subfloat[Drive left.]{\includegraphics[width=0.15\textwidth]{pictures/action_left.pdf}}\hspace{2mm}
+\subfloat[Try to park.]{\includegraphics[width=0.15\textwidth]{pictures/action_park.pdf}}
+\caption{Visualization of the actions considered optimal by a policy on the graph.}
+\label{fig:actions}
+\end{figure}
+
+In this section we present the evaluation of the work of the MDP based
+planner, that searches for a free parking space. As a testing environment we
+use the parking lot at the campus of the university of Freiburg.
+
+We make use of the occupancy information gathered from integrating the
+measurements of the parking lots' occupancy (see
+Figure~\ref{subfig:pre_defined}) as observed during a period of 21 days. In
+order to be able to show the results of the planner we introduce a number of
+visualizations. We visualize every parking space as a state in which the agent
+can perform an action to park as presented in
+Figure~\ref{fig:graph_accumulated_illustration}, where each state shows both
+--- the prediction of the occupancy probability as an outer circle and the
+actual free or occupied state as the inner one. This representation is useful
+to see in a glance what the state of the parking was on the specific date,
+while being able to analyze the reasoning behind the agent's actions. However,
+only the information shown as an outer circle --- the occupancy prediction is
+available to the robot on the planning step. The occupancy prediction is only
+then updated to the real occupancy status, when the parking lot is observed by
+the agent as he drives by. The actions, that the agent is able to carry out,
+as presented in~\eqref{eq:actions} are visualized in the way shown in
+Figure~\ref{fig:actions}.
+
+As described in Section~\ref{sec:action_planning} there are three core
+parameters that influence the performance of the planner: $v_{walk}$,
+$v_{drive}$ and the failure cost. In this section we present the differences
+in the behavior of the agent with respect to different values of these
+parameters. All the experiments share the same actual positions of the parked
+cars for the ease of comparison.
+
+For these parameters we consider a number of sets of their values.
+In figure \todo{do this} we present the difference in the approach picked by the agent
+
+\begin{figure}[tbh]
+    \begin{center}
+    \subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_states.pdf}}\hspace{2mm}
+    \subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_path_1.pdf}}\hspace{2mm}
+    \end{center}
+    \caption{An optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 10$ km/h and the failure cost of 10 seconds.}
+    \label{fig:w_4_d_10_w_10_log_12_12}
+\end{figure}
+
+\begin{figure}[tbh]
+    \begin{center}
+    \subfloat[Initial parking lot state.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_states.pdf}}\hspace{2mm}
+    \subfloat[$1_{st}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_1.pdf}}\\
+    \subfloat[$3_{rd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_3.pdf}}\hspace{2mm}
+    \subfloat[$6_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_6.pdf}}\\
+    \subfloat[$18_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_18.pdf}}\hspace{2mm}
+    \subfloat[$58_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_58.pdf}}
+    \end{center}
+    \caption{An optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 15$ km/h and the failure cost of 1 seconds.}
+    \label{fig:w_4_d_15_w_1_artificial}
+\end{figure}
 
 % section planning_results (end)
 % chapter experimental_results (end)
 
-\begin{figure}[p]%
-\centering
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_1.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_2.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_3.jpg}}\\
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_4.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_5.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_6.jpg}}\\
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_7.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_8.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_9.jpg}}\\
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_10.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_11.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/det_12.jpg}}\\
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/undet_1.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/undet_2.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.31\textwidth]{pictures/undet_3.jpg}}\\
-\caption{Examples of detections of different cars under different light conditions.}
-\label{fig:detection_examples}
-\end{figure}
