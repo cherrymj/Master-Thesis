@@ -131,7 +131,7 @@ Figure~\ref{fig:detection_examples}.
 \subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_12.jpg}}\\
 \subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_1.jpg}}\hspace{2mm}
 \subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_2.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_3.jpg}}\\
+\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_14.jpg}}\\
 \caption{Examples of detections of different cars under different light conditions.}
 \label{fig:detection_examples}
 \end{figure}
@@ -262,38 +262,100 @@ the agent as he drives by. The actions, that the agent is able to carry out,
 as presented in~\eqref{eq:actions} are visualized in the way shown in
 Figure~\ref{fig:actions}.
 
-As described in Section~\ref{sec:action_planning} there are three core
-parameters that influence the performance of the planner: $v_{walk}$,
-$v_{drive}$ and the failure cost. In this section we present the differences
-in the behavior of the agent with respect to different values of these
-parameters. All the experiments share the same actual positions of the parked
-cars for the ease of comparison.
+As described in Section~\ref{sec:action_planning} there are 3 core parameters
+that influence the performance of the planner: $v_{walk}$, $v_{drive}$ and the
+failure cost. In this section we present the differences in the behavior of
+the agent with respect to different values of these parameters. All the
+experiments share the same actual positions of the parked cars for the ease of
+comparison.
 
-For these parameters we consider a number of sets of their values.
-In figure \todo{do this} we present the difference in the approach picked by the agent
+For these parameters we consider a number of sets of their values. We further
+present the differences in the approach picked by the agent depending on the
+different sets of the parameters.
 
-\begin{figure}[tbh]
-    \begin{center}
-    \subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_states.pdf}}\hspace{2mm}
-    \subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_path_1.pdf}}\hspace{2mm}
-    \end{center}
-    \caption{An optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 10$ km/h and the failure cost of 10 seconds.}
-    \label{fig:w_4_d_10_w_10_log_12_12}
+\begin{figure}[tb]
+\begin{center}
+\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_states.pdf}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_path_1.pdf}}\hspace{2mm}
+\end{center}
+\caption{An optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 10$ km/h and the failure cost of 10 seconds.}
+\label{fig:w_4_d_10_w_10_log_12_12}
 \end{figure}
 
-\begin{figure}[tbh]
-    \begin{center}
-    \subfloat[Initial parking lot state.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_states.pdf}}\hspace{2mm}
-    \subfloat[$1_{st}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_1.pdf}}\\
-    \subfloat[$3_{rd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_3.pdf}}\hspace{2mm}
-    \subfloat[$6_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_6.pdf}}\\
-    \subfloat[$18_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_18.pdf}}\hspace{2mm}
-    \subfloat[$58_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_15_wait_1_data_artificial_path_58.pdf}}
-    \end{center}
-    \caption{An optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 15$ km/h and the failure cost of 1 seconds.}
-    \label{fig:w_4_d_15_w_1_artificial}
+\begin{figure}[t]
+\begin{center}
+\vspace{-5mm}
+\subfloat[Initial parking lot state.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_states.pdf}}\hspace{2mm}
+\subfloat[$1_{st}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_1.pdf}}\\\vspace{-5mm}
+\subfloat[$2_{rd}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_2.pdf}}\hspace{2mm}
+\subfloat[$3_{th}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_3.pdf}}\\\vspace{-5mm}
+\end{center}
+\caption{An optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 10$ km/h and the failure cost of 90 seconds carried out on an artificial dataset.}
+\label{fig:w_4_d_10_w_90_artificial}
 \end{figure}
 
+Figure~\ref{fig:w_4_d_10_w_10_log_12_12} shows the path considered optimal by
+the agent, given the driving speed of 10 km/h and walking speed of 4 km/h.
+Additionally, a failure cost of 10 seconds ensures, that the agent considers
+that it loses 10 seconds for every unsuccessful parking action. This results
+in the strategy that finds a trade-off between the distance from the parking
+lots to the goal and their occupancy. The figure shows that the agent decides
+for a state that combines close proximity to the goal state with locally high
+probability of being free.
+
+\begin{figure}[t]
+\begin{center}
+\subfloat[Optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 10$ km/h and the failure cost of 90 seconds tested on the real data.]{\includegraphics[width=0.40\textwidth]{pictures/walk_2_drive_15_wait_90_data_log_12_12_2013_path_1.pdf}\label{subfig:long_wait_real}}\hspace{6mm}
+\subfloat[Optimal strategy for $v_{walk} = 10$ km/h, $v_{drive} = 10$ km/h and the failure cost of 90 seconds tested on the real data.]{\includegraphics[width=0.40\textwidth]{pictures/walk_10_drive_10_wait_90_data_log_12_12_2013_path_1.pdf}\label{subfig:fast_walk}}
+\end{center}
+\caption{}
+\label{fig:long_wait_fast_walk}
+\end{figure}
+
+Looking at Figure~\ref{fig:w_4_d_10_w_10_artificial} that shows the
+performance of the search with the same core parameters on the artificial
+dataset we see, that in a rare case of extremely high abnormal occupancy in
+the area, the agent is too confident that the parking action would succeed and
+it results in extremely long paths and numerous re-planning steps. The agent
+tends to pick the places, situated closer to the goal. To deal with this issue
+we set the failure cost to a high value, which results in penalizing the
+choice of the parking lots in which the agent is likely to fail the parking
+action. Setting the failure cost to 90 seconds results in a much more
+conservative behavior as presented in
+Figure~\ref{fig:w_4_d_10_w_90_artificial}.
+
+Such conservative strategy also proves to be efficient in the real world
+scenarios as can be seen in Figure~\ref{subfig:long_wait_real}, showing only a
+rare need for re-planning. However, this strategy keeps the agent from making
+overly optimistic decisions and he hardly ever observes the most occupied
+parts of the parking lot.
+
+Another interesting example that is worth mentioning is the test where human
+speed is set to a high value. In the Figure~\ref{subfig:fast_walk} we observe,
+that the agent makes the decision that the most practical strategy is to park
+in the closest to the starting state parking space and walk to the goal from
+there. This is a result of setting $v_{walk}$ to be equal to $v_{drive}$. It
+may be explained as follows: if the walking speed is equal to the driving
+speed it makes no sense driving around the parking lot when it is possible to
+walk straight to the goal.
+
+Overall, the system shows predictable and understandable to humans performance
+while operating on time based constraints as well as integrating the occupancy
+information.
+
+
+\begin{figure}[tbh]
+\begin{center}
+\subfloat[Initial parking lot state.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_states.pdf}}\hspace{2mm}
+\subfloat[$1_{st}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_1.pdf}}\\
+\subfloat[$3_{rd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_3.pdf}}\hspace{2mm}
+\subfloat[$4_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_4.pdf}}\\
+\subfloat[$16_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_16.pdf}}\hspace{2mm}
+\subfloat[$22_{nd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_22.pdf}}
+\end{center}
+\caption{An optimal strategy for $v_{walk} = 4$ km/h, $v_{drive} = 10$ km/h and the failure cost of 10 seconds carried out on an artificial dataset.}
+\label{fig:w_4_d_10_w_10_artificial}
+\end{figure}
 % section planning_results (end)
 % chapter experimental_results (end)
 
