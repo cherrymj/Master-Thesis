@@ -315,38 +315,50 @@ In this approach we do not explicitly model the parking lots, but they are
 described by groups of cells that were repeatedly observed to contain cars.
 
 In order to fully define the equation given above, we need to define the
-observation model $P(\v \mid z)$
+observation model $P(\v \mid z_t)$.
+
+\begin{figure}[t]%
+\centering
+\subfloat[Bresenham based occupancy grid update from a single image with two detected cars.]{\includegraphics[width=0.3\textwidth]{pictures/testmap.png}\label{fig:maptest}}\hspace{2mm}
+\subfloat[Observation model $P(a^i | z_t)$]{\includegraphics[width=0.65\textwidth]{pictures/observe_model.pdf}\label{fig:observation_model}}
+\caption{}
+\end{figure}
+
+As presented in Figure~\ref{fig:observation_model}, we define the observation
+model along the rays, that span from the camera position to the defined
+$d_{\max}$ and along the defined for the camera field of view. In order to
+find all the cells of the occupancy grid map that fall into the field of view
+of the camera we compute left and right margin points. Following the work
+of~\citet{bresenham1965} we search for the cells that form the frontier of the
+camera's field of view that consists of the cells that lie on the line between
+the above-mentioned left and right margin points. The margin points are shown
+with red circles in Figure~\ref{fig:maptest}.
+
+For each cell $q$ we carry out the same algorithm from the camera cell $c$ to
+the query cell $c_i$. Whenever we encounter a cell containing a car, the next
+cells within the size of the car are also updated as occupied. All the ones
+that come afterwards are not updated as ``not visible''. These can be seen in
+an example in Figure~\ref{fig:maptest} as gray ``tails'' behind the car
+detections.
+
+We formally define the observation model $P(\v \mid z_t)$ as follows:
 
 \begin{equation}
 \label{eq:observation_model}
-P(a^i | z_t) = \begin{cases} 0.45, & \mbox{if } \mbox{ before detection} \\ 0.9, & \mbox{if } \mbox{ cell stores detection} \\ \mbox{prior}, & \mbox{if } \mbox{ after detection} \end{cases}
+P(a^i \mid z_t) = \begin{cases} P_{\mathrm{free}}, & \mbox{if } d(c_i) < d(\mathrm{detection}) \\ P_{\mathrm{occupied}}, & \mbox{if } d(\mathrm{detection}) < d(c_i) < d(\mathrm{detection}) + s_{\mathrm{car}} \\ P_{\mathrm{prior}}, & \mbox{if } d(c_i) > d(\mathrm{detection}) + s_{\mathrm{car}} \end{cases}
 \end{equation}
 
-\begin{wrapfigure}{r}{0.25\textwidth}
-\begin{center}
-\includegraphics[width=0.8\textwidth]{pictures/testmap.png}
-\end{center}
-\vspace{-10pt}
-\caption{Bresenham based occupancy grid update from a single image with two detected cars.}
-\vspace{-10pt}
-\label{fig:maptest}
-\end{wrapfigure}
+where, $d(detection)$ is the distance to the detection point, $d(c_i)$ is the
+distance to the $i_th$ cell, $s_{car}$ is the length of the car. We consider
+all distances to be measured along the ray from the Bresenham algorithm.
 
+Considering the current setup of the sensor that generates only few
+detections, overwhelmed by a number of observations detecting cells as free,
+we argue for setting $P{\mathrm{prior}}$ to 0.5, as we have no prior knowledge on the
+occupancy of each cell, $P_{\mathrm{free}}$ to 0.45 to introduce only a slight update
+when observing an unoccupied cell and $P_{\mathrm{occupied}}$ to 0.95 which emulates a
+high certainty when detecting an occupied cell.
 
-Furthermore, we define the observation model along the rays, that span from
-the camera position to the defined $z_{\max}$ and along the defined for the
-camera field of view. In order to find all the cells of the occupancy grid map
-that fall into the field of view of the camera we compute left and right
-margin points. Following the work of~\citet{bresenham1965} we search for the
-cells that form the frontier of the camera's field of view that consists of
-the cells that lie on the line between the above-mentioned left and right
-margin points.
-
-For each cell $q$ we carry out the same algorithm from the camera cell $c$ to
-the query cell. Whenever we encounter a cell, where a car is situated, the
-next cell is also updated as occupied, while all the ones that come afterwards
-are not updated as ``not visible''. This can be seen in an example in
-Figure~\ref{fig:maptest}.
 
 % subsection occupancy_grids (end)
 \subsection{Static State Binary Filter in Pre-defined Positions}
@@ -378,7 +390,7 @@ sessions. For example, we consider a driving near every parking space in the
 parking to be one session. The parking lots that were not updated as occupied
 during the session are updated as free.
 
-We would like to stress, that this approach allows storing both spacial and
+We explicitly stress, that this approach allows storing both spacial and
 occupancy information in one distinct structure.
 
 % subsection static_state_binary_filter_in_pre_defin (end)
@@ -434,9 +446,9 @@ state. It consists of five distinct actions: ``up'': $\uparrow$, ``down'':
 $\downarrow$, ``left'': $\leftarrow$, ``right'': $\rightarrow$ and ``park''.
 Formally:
 \begin{eqnarray}
-A_{\mbox{move}} = \{ \uparrow, \downarrow, \leftarrow, \rightarrow \} \\
-a_{\mbox{park}} = \mbox{``park''} \\
-A = A_{\mbox{move}} \cup a_{\mbox{park}}
+A_{\mathrm{move}} = \{ \uparrow, \downarrow, \leftarrow, \rightarrow \} \\
+a_{\mathrm{park}} = \mbox{``park''} \\
+A = A_{\mathrm{move}} \cup a_{\mathrm{park}}
 \label{eq:actions}
 \end{eqnarray}
 
@@ -459,10 +471,10 @@ probability of moving from any state to the next one (if possible) to be equal
 to 1, while the probability of parking in a particular state is equal to the
 occupancy probability of the state:
 \begin{eqnarray}
-\forall (s, s') \in E, \forall a \in A_{\mbox{move}} : P(s \mid s', a) = 1 \\
-\forall s \in V, (s,s_{\mbox{goal}}) \in E : P(s \mid s_{\mbox{goal}}, a_{\mbox{park}}) = P(\mbox{free})
+\forall (s, s') \in E, \forall a \in A_{\mathrm{move}} : P(s \mid s', a) = 1 \\
+\forall s \in V, (s,s_{\mathrm{goal}}) \in E : P(s \mid s_{\mathrm{goal}}, a_{\mathrm{park}}) = P(\mathrm{free})
 \end{eqnarray}
-where $P(\mbox{free})$ is a probability of a parking lot to be free, observed
+where $P(\mathrm{free})$ is a probability of a parking lot to be free, observed
 through a period of time. To be consistent, we set the remaining probabilities
 to the values that guarantee that $\forall s, s' \in V, (s, s') \in E, \forall
 a \in A: \sum_{s}P(s \mid s', a) = 1$. This ensures that in each state the
@@ -485,21 +497,21 @@ stay in the same position, he regardlessly loses time.
 
 The time $T$ it takes the agent to drive from any arbitrary state $s$ to an
 adjacent one $s'$ depends on the distance between these states and on the
-agent's driving speed $v_{drive}$ and can be defined as:
+agent's driving speed $v_{\mathrm{drive}}$ and can be defined as:
 
 \begin{equation}
 \label{eq:time_to_drive}
-\forall s,s' \in V, (s, s') \in E: T_{drive}^{s,s'}
-= \frac{\sqrt{(s - s') {(s - s')}^T}}{v_{drive}}
+\forall s,s' \in V, (s, s') \in E: T_{\mathrm{drive}}^{s,s'}
+= \frac{\sqrt{(s - s') {(s - s')}^T}}{v_{\mathrm{drive}}}
 \end{equation}
 
 The cost $R(s, s', a)$ of moving from state $s'$ to state $s$ carrying out
-action $a$ grows with the time $T_{drive}^{s,s'}$ the agent needs to cover the path. We therefore
-define a negative reward for each action in $A_{move}$ between any two
+action $a$ grows with the time $T_{\mathrm{drive}}^{s,s'}$ the agent needs to cover the path. We therefore
+define a negative reward for each action in $A_{\mathrm{move}}$ between any two
 adjacent states as follows:
 
 \begin{equation}
-\forall s,s' \in V, \forall (s, s') \in E, \forall a \in A_{move}: R(s, s', a) = -T_{drive}^{s,s'}
+\forall s,s' \in V, \forall (s, s') \in E, \forall a \in A_{\mathrm{move}}: R(s, s', a) = -T_{\mathrm{drive}}^{s,s'}
 \end{equation}
 
 In addition to these costs we penalize staying in one place. This cost can
@@ -517,16 +529,16 @@ We also define the rewards that the agent receives when he successfully
 carries out parking actions. These rewards are likewise time based. They form
 a decreasing linear function in order to guarantee that the state closer to
 the destination gets a bigger reward than the one situated further. We define
-the reward to be $r_{\max} - r_s$, where $r_s = T_{walk}^{s,s_{goal}}$ is the
+the reward to be $r_{\max} - r_s$, where $r_s = T_{\mathrm{walk}}^{s,s_{\mathrm{goal}}}$ is the
 time that the agent needs to walk from an arbitrary state $s \in \mathbb{R}^2$
 to the goal, $r_{\max} = \max_{s \in V}r_s$ is the greatest of those
-distances. We define $T_{walk}^{s,s_{goal}}$ similarly to
-\eqref{eq:time_to_drive}: $T_{walk}^{s,s_{goal}} = \frac{\sqrt{(s - s_{goal})
-{(s - s_{goal})}^T}}{v_{walk}}$, where $v_{walk}$ is the agent's walking
+distances. We define $T_{\mathrm{walk}}^{s,s_{\mathrm{goal}}}$ similarly to
+\eqref{eq:time_to_drive}: $T_{\mathrm{walk}}^{s,s_{\mathrm{goal}}} = \frac{\sqrt{(s - s_{\mathrm{goal}})
+{(s - s_{\mathrm{goal}})}^T}}{v_{\mathrm{walk}}}$, where $v_{\mathrm{walk}}$ is the agent's walking
 speed. Formally:
 
 \begin{equation}
-\forall s \in V, (s, s_{goal}) \in E : R(s, s_{goal}, a_{park}) = r_{\max} - r_s
+\forall s \in V, (s, s_{\mathrm{goal}}) \in E : R(s, s_{\mathrm{goal}}, a_{\mathrm{park}}) = r_{\max} - r_s
 \end{equation}
 
 The proposed reward function guarantees, that the agent tries to find a trade-
