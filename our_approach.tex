@@ -106,17 +106,17 @@ histograms for the side view.
 
 \begin{figure}[t]%
 \centering
-\subfloat{\includegraphics[width=0.6\textwidth]{pictures/detections.pdf}}
-\subfloat{\includegraphics[width=0.4\textwidth]{pictures/svm.pdf}}
-\caption{Illustration of HOG-based detection and clustering with SVM.}
+\subfloat[]{\includegraphics[width=0.6\textwidth]{pictures/detections.pdf}\label{subfig:hog_detector}}
+\subfloat[]{\includegraphics[width=0.4\textwidth]{pictures/svm.pdf}\label{subfig:svm_illustration}}
+\caption{Illustration of HOG detection window~\subref{subfig:hog_detector} and clustering the corresponding multi-dimensional points via fitting a hyperplane  using SVM~\subref{subfig:svm_illustration}.}
 \label{fig:det_to_svm}
 \end{figure}
 
 We form a vector of all the 9 bin values contained in each of 256 or 128
-histograms contained in the detection window. This results in the vectors of
+histograms that describe the detection window. This results in the vectors of
 sizes respectively 2304 and 1152 values for front/rear and side view detection
-windows. We view this vector as a point in the space of similar dimensionality
-and seek for a hyperplane to divide these points into positive and negative
+windows. We view this vector as a point in the space of same dimensionality
+and seek for a hyperplane to classify these points into positive and negative
 ones with the use of the support vector machines. This is illustrated in
 Figure~\ref{fig:det_to_svm}.
 
@@ -143,11 +143,11 @@ we make extensive use of libSVM library by~\citet{libSVM2011}.
 Based on the trained classifier, we carry out the detection in a cascade
 fashion via the sliding window approach. For each sliding window content we
 create a HOG descriptor which we test against the pre-trained SVM classifier
-to find out on which side of the decision boundary it is. If the current HOG
-belongs to the side where the SVM has assigned the cars then the current
-sliding window is a region of interest and contains a car. We store each
-detection as a rectangle by storing the pixel positions of the corners of the
-detection window around the car.
+to find out to which side of the decision boundary it is classified. If the
+current HOG belongs to the side where the SVM has assigned the cars from the
+training dataset then the current sliding window is a region of interest and
+contains a car. We store each detection as a rectangle by saving the pixel
+positions of the corners of the detection window around the car.
 
 % subsection svm_classifier (end)
 
@@ -163,7 +163,7 @@ image from left and right images taken from the video stream. Knowing the
 internal camera parameters we reconstruct the relative position of each pixel
 of the disparity image.
 
-The distance along the camera $Z$ axis: $Z = \frac{fB}{d}$, where $f$ is the
+The distance along the camera $z$ axis: $Z = \frac{fB}{d}$, where $f$ is the
 focal length of the camera, $B$ is the baseline and $d$ is the disparity.
 Given $Z$, we focus on finding $X$ and $Y$ coordinates from the projection
 equations:
@@ -174,29 +174,30 @@ X = \frac{uZ}{f}
 Y = \frac{vZ}{f}
 \end{equation}
 
-where $u$ and $v$ are the pixel location in the $2D$ image and $X, Y, Z$ is
-the $3D$ position that corresponds to the pixel $(u,v)$ in the camera frame.
+where $u$ and $v$ are the pixel position in the $2D$ image and $X, Y, Z$ are
+the $3D$ coordinates that correspond to the pixel $(u,v)$ in the camera frame.
 $3D$ position that corresponds to every pixel in the image allows us to
-combine this information with visual detections.
+combine depth information with visual detections.
 
 Considering, that each detection is stored in the form of a region of interest
 in the image coordinates, we are able to accumulate the depth of all pixels
 that fall into it to estimate the joint depth of the detected car.
 
-To find the distance to the car, that is contained in this particular region
-of interest we consider taking the median of all depth values that fall into
-the given region of interest. These depth values contain high variance. The
-first reason for this is that they originate on the surface of the car and the
-variance represents the difference in the distance between different parts of
-the car. The second reason comes from the method in which these depth values
-were acquired. The depth map from the stereo camera setup proves to be noisy
-in the urban environments with homogeneous regions like the sides or the hood
-of the car. Moreover parts of the environment are seen through the windows of
-the car, adding additional noise to measurements.
+To find the distance to the car, we consider taking the median of all depth
+values that fall into the corresponding region of interest. These depth values
+contain high variance. The first reason for this is that they originate on the
+surface of the car and the variance represents the difference in the distance
+between different parts of the car. The second reason comes from the method in
+which these depth values were acquired. The depth map from the stereo camera
+setup proves to be noisy in the urban environments with homogeneous regions
+like the sides or the hood of the car. Moreover parts of the environment are
+seen through the windows of the car, adding additional noise to measurements.
+An example can be found in Figure~\ref{fig:depth_from_disparity}.
 
-This high variance of the input data results in somewhat unreliable results.
-We further describe the method that uses the laser range finder for the same
-task of finding the relative position of the detected car to the camera.
+This high variance of the input data results in the high uncertainty of the
+precision in results' measurements. We further describe the method that uses
+the laser range finder for the same task of finding the relative position of
+the detected car to the camera.
 
 % sub-subsection stereo_camera (end)
 \subsubsection{Laser Range Finder}\label{ssub:laser_range_finder}
@@ -213,15 +214,15 @@ with the laser. This yields the choice of the laser beams, that contain depth
 values associated with the car:
 
 \begin{equation}
-Z = \{ \mbox{beam}_n | \forall n : \beta_{l} < \alpha_{camera} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
+Z = \{ \mathrm{beam}_n | \forall n : \beta_{l} < \alpha_{\mathrm{camera}} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
 \end{equation}
 
-Here, $\alpha_{camera}$ is the angle at which the camera points as perceived
+Here, $\alpha_\mathrm{camera}$ is the angle at which the camera points as perceived
 in the laser frame, $\beta_{l}$ and $\beta_{r}$ are the angles of left and
 right margins of the detection bounding box in the camera frame, $\alpha_{n}$
 is the angle of the $n$-th beam in the laser frame. $\alpha_{0}$ is the angle
 of the first beam in the laser frame. In the setup we use, $\alpha_{0} =
--3\pi/4$ and $\alpha_{camera} = -\pi/2$.
+-3\pi/4$ and $\alpha_\mathrm{camera} = -\pi/2$.
 
 The endpoints of the beams in $Z$ provide us with consistent depth
 information. In order to account for possible occlusions or measurement errors
@@ -321,14 +322,15 @@ operations in~\eqref{eq:rec_update} are realized via addition and
 subtractions in the log-odds space.
 
 In this approach we do not explicitly model the parking lots, but they are
-described by groups of cells that were repeatedly observed to contain cars.
+described by groups of cells in spacial proximity, that were repeatedly
+observed to contain cars.
 
 In order to fully define the equation given above, we need to define the
 observation model $P(\v \mid z_t)$.
 
 \begin{figure}[t]%
 \centering
-\subfloat[Bresenham based occupancy grid update from a single image with two detected cars.]{\includegraphics[width=0.3\textwidth]{pictures/testmap.png}\label{fig:maptest}}\hspace{2mm}
+\subfloat[Occupancy grid update of the camera field of view between the margin points marked with red circles containing two detected cars.]{\includegraphics[width=0.3\textwidth]{pictures/testmap.png}\label{fig:maptest}}\hspace{2mm}
 \subfloat[Observation model $P(a^i | z_t)$]{\includegraphics[width=0.65\textwidth]{pictures/observe_model.pdf}\label{fig:observation_model}}
 \caption{}
 \end{figure}
@@ -343,12 +345,12 @@ camera's field of view that consists of the cells that lie on the line between
 the above-mentioned left and right margin points. The margin points are shown
 with red circles in Figure~\ref{fig:maptest}.
 
-For each cell $q$ we carry out the same algorithm from the camera cell $c$ to
-the query cell $c_i$. Whenever we encounter a cell containing a car, the next
-cells within the size of the car are also updated as occupied. All the ones
-that come afterwards are not updated as ``not visible''. These can be seen in
-an example in Figure~\ref{fig:maptest} as gray ``tails'' behind the car
-detections.
+We carry out the same Bresenham algorithm from the camera cell $c$ to each
+query cell $c_i$ in the frontier. Whenever we encounter a cell containing a
+car, the next cells within the size of the car are also updated as occupied.
+All the ones that come afterwards are not updated as ``not visible''. These
+can be seen in an example in Figure~\ref{fig:maptest} as gray ``tails'' behind
+the car detections.
 
 We formally define the observation model $P(\v \mid z_t)$ as follows:
 
@@ -358,15 +360,16 @@ P(a^i \mid z_t) = \begin{cases} P_{\mathrm{free}}, & \mbox{if } d(c_i) < d(\math
 \end{equation}
 
 where, $d(detection)$ is the distance to the detection point, $d(c_i)$ is the
-distance to the $i_th$ cell, $s_{car}$ is the length of the car. We consider
+distance to the $i_\mathrm{th}$ cell, $s_\mathrm{car}$ is the length of the car. We consider
 all distances to be measured along the ray from the Bresenham algorithm.
 
 Considering the current setup of the sensor that generates only few
 detections, overwhelmed by a number of observations detecting cells as free,
-we argue for setting $P{\mathrm{prior}}$ to 0.5, as we have no prior knowledge on the
-occupancy of each cell, $P_{\mathrm{free}}$ to 0.45 to introduce only a slight update
-when observing an unoccupied cell and $P_{\mathrm{occupied}}$ to 0.95 which emulates a
-high certainty when detecting an occupied cell.
+we argue for setting $P_{\mathrm{prior}}$ to 0.5, as we have no prior
+knowledge on the occupancy of each cell, $P_{\mathrm{free}}$ to 0.45 to
+introduce only a slight update when observing an unoccupied cell and
+$P_{\mathrm{occupied}}$ to 0.95 which emulates a high certainty when detecting
+an occupied cell.
 
 
 % subsection occupancy_grids (end)
@@ -383,11 +386,8 @@ accumulated map.
 To avoid the discretization issues we make use of the pre-defined parking lot
 positions. These can be set from manual measurements on the ground or from
 aerial images. The rest of the theory stays untouched. For each parking lot we
-model the occupancy probability likewise with the occupancy grid maps approach
+model the occupancy probability likewise to the occupancy grid maps approach
 via the static state binary Bayes filter as defined in~\eqref{eq:rec_update}.
-
-The occupancy information can be measured and accumulated at any needed time,
-for example on particular days of week.
 
 The observation model, however, differs significantly from the one used in the
 occupancy grip maps. Whenever we detect a parked car, we search for the
@@ -395,12 +395,13 @@ closest parking lot and assign the detection to it. The parking lot occupancy
 is updated as occupied.
 
 Additionally, we consider the detection of the parked cars to be divided in
-sessions. For example, we consider a driving near every parking space in the
-parking to be one session. The parking lots that were not updated as occupied
-during the session are updated as free.
+sessions. For example, we consider driving near every parking space in the
+whole parking area to be one session. The parking lots that were not updated
+as occupied during the session are updated as free.
 
-We explicitly stress, that this approach allows storing both spacial and
-occupancy information in one distinct structure.
+We explicitly stress, that this approach, while needing a pre-processing step
+of mapping the parking lots, allows storing both spacial and occupancy
+information in one distinct structure.
 
 % subsection static_state_binary_filter_in_pre_defin (end)
 % section model (end)
@@ -411,15 +412,15 @@ occupancy information in one distinct structure.
 In this section we formally define the action planning framework that searches
 for a path to a free parking lot. We want to find the optimal one, but it
 depends on the application what an optimal solution to this problem is. We
-therefore define what we consider optimal in this work.
+therefore explicitly define what we consider optimal in this work.
 
-There are typically parts of the parking, which are better in the sense of
-their distance to a common destination. This also means that the ``better''
+There are typically parts of the parking area, which are better in the sense
+of their distance to a common destination. This also means that the ``better''
 parts of the parking lots are more likely to be occupied than the other, which
 leads to a trade-off between driving straight to the closest-to-goal, but
 likely occupied parking lot, and parking in a more distant area, most likely
 free. It usually takes less time to drive a car than to walk by foot, but it
-can take longer to find a free parking lot closer to the goal then walking
+can take longer to find a free parking lot closer to the goal than walking
 from a more distant one. Given the constraints described above, the framework
 that we present focuses on finding the solution that minimizes the expected
 time spent on finding a free parking lot and walking from the found one to the
@@ -444,7 +445,8 @@ connecting the adjacent cells.
 
 In the case, where we explicitly map the parking lots --- they, along with
 their spacial information, form the vertices of the graph. In this case we
-define the edges so that they hold the spacial information of the parking.
+define the edges so that they hold the spacial information about the
+connectivity and distances between the parking lots.
 
 In both cases all vertices are connected to the goal state. The probability of
 the action that allows the agent to follow such edges relies on the occupancy
