@@ -15,21 +15,28 @@
 \label{sec:overview}
 
 In this chapter we describe in detail the three main components of our system:
-visual car detection, creation of the map of parking spaces capable to store
+visual car detection, creation of the map of parking lots capable to store
 their occupancy information and a planner able to find a free parking lot in
-the minimum expected time. We also present the way of combining these parts
-into one system.
+the minimum expected time.
 
-We start by a coarse outline of the way these different parts are
-interconnected. Later in the chapter we show each of the sub-parts in detail.
+We start by a coarse outline of these different sections and show each of
+these sub-parts in detail later in the chapter.
 
 \begin{itemize}
 
-\item \emph{Perception:} We visually detect cars in the images from the camera and find out how far from the image plane are they situated by fusing the detections with the depth data, received either from the stereo camera or from the laser range finder (Section~\ref{sec:perception}).
+\item \emph{Perception:}  We visually detect cars in the images taken from the
+camera and estimate how far from the image plane are they situated by fusing
+the detections with the depth data, received either from the stereo camera or
+from the laser range finder (Section~\ref{sec:perception}).
 
-\item \emph{Mapping:} The positions of the detected cars are fused into one global representation of the world observed by the agent. This representation also contains occupancy information, perceived through multiple runs (Section~\ref{sec:model}).
+\item \emph{Mapping:}  The positions of the detected cars are fused into one
+global representation of the world observed by the agent. This representation
+also contains occupancy information, perceived through multiple runs
+(Section~\ref{sec:model}).
 
-\item \emph{Planning:} In the modeled environment we search for actions that minimize the time spent on searching for a parking space and walking from it to the goal (Section~\ref{sec:action_planning}).
+\item \emph{Planning:}  In the modeled environment we search for actions that
+minimize the expected time spent on searching for a parking space and walking
+from it to the goal (Section~\ref{sec:action_planning}).
 
 \end{itemize}
 
@@ -44,8 +51,8 @@ approaches, utilizing different visual features: Haar features, local binary
 patterns (LBPs) and histograms of oriented gradients (HOGs). We further
 provide a short comparison of these with relation to our problem.
 
-The work of~\citet{violajones2001}, introduces the Haar feature based object
-detection. It provides good detection rates when applied to face detection.
+\citet{violajones2001} introduce the Haar feature based object detection.
+Their approach provides good detection rates when applied to face detection.
 The main drawback of the proposed method for our setup is that it suffers from
 the changes in the shape of the object, rotations, occlusions and from the
 illumination changes. For the task of car detection it is important to allow
@@ -57,10 +64,12 @@ variations, we may also observe them in different lighting conditions.
 Utilizing the local binary patterns (LBPs) as presented by~\citet{lbp2010}
 addresses the illumination issues and overall boosts the detection rates and
 performance. It is, however, similarly to Haar features, vulnerable to
-rotation and shape changes. Moreover, to the extent of our knowledge, LBP-
-based methods are slow on the training stage, which is, while not being a big
-problem, still is an important argument, especially on implementation stage.
-\todo{not sure about this part}
+rotation and shape changes.
+
+Moreover, to the extent of our knowledge, LBP-based methods are slow on the
+training stage. Despite, not being a crucial measure of an algorithm
+performance, the training time is still an important argument, as it
+influences the usability of the method, especially on implementation stage.
 
 Considering the above, we apply the HOG-based detector following the work
 of~\citet{dalal2005}. It relies on the gradient-based features and is
@@ -76,19 +85,19 @@ invariance to local geometric and photometric transformations:
 translations or rotations make little difference if they are much smaller
 than the local spatial or orientation bin size.
 
-Following the work of~\citet{dalal2005}, we make use of the histograms of
-oriented gradients placed in a dense grid on the query images. For each $8
-\times 8$ pixel block in the image a histogram is formed by assigning the
-gradient orientations to 9 bins, that cover the angle of $180^{\circ}$. One
-HOG descriptor consists of several such histograms.
+Following~\citet{dalal2005}, we make use of the histograms of oriented
+gradients placed in a dense grid on the query images. For each $8 \times 8$
+pixel block in the image we form a histogram by assigning the gradient
+orientations to 9 bins, that cover the angle of $180^{\circ}$. One HOG
+descriptor consists of several such histograms.
 
-To detect the front and read sides of the cars, we set the size of the hog
+To detect the front and rear sides of the cars, we set the size of the hog
 descriptor window to $128 \times 128$ pixels. The idea behind this decision is
 based on generally square-like shape of the cars, when seen from front or
-rear. Therefore, the square drawn around the car will contain higher
-percentage of useful information in comparison to a rectangle. To detect the
-side of the car, the descriptor window should be changed to $128 \times 64$
-pixels following the same logic.
+rear. Therefore, the square drawn around the car contains higher percentage of
+useful information in comparison to a rectangle. To detect the side of the
+car, the descriptor window should be changed to $128 \times 64$ pixels
+following the same logic.
 
 These window sizes yield the number of the histograms that fit inside each
 window which is the number of $8 \times 8$ pixel blocks contained in the
@@ -103,13 +112,13 @@ histograms for the side view.
 \label{fig:det_to_svm}
 \end{figure}
 
-We form a vector from all the 9 bin values from each of 256 or 128 histograms
-contained in the detection window. This results in the vectors of sizes
-respectively 2304 and 1152 values for front/rear and side view detection
-windows. We view this vector as a point in the space of similar
-dimensionality. We further search for a hyperplane to divide these points into
-positive and negative ones with the use of the support vector machines. This
-is illustrated in Figure~\ref{fig:det_to_svm}
+We form a vector of all the 9 bin values contained in each of 256 or 128
+histograms contained in the detection window. This results in the vectors of
+sizes respectively 2304 and 1152 values for front/rear and side view detection
+windows. We view this vector as a point in the space of similar dimensionality
+and seek for a hyperplane to divide these points into positive and negative
+ones with the use of the support vector machines. This is illustrated in
+Figure~\ref{fig:det_to_svm}.
 
 % subsection hog_classifier (end)
 

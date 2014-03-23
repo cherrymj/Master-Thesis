@@ -627,13 +627,9 @@
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 111.0,
+		"height": 216.0,
 		"selected_items":
 		[
-			[
-				"remove",
-				"Package Control: Remove Package"
-			],
 			[
 				"push",
 				"Git: Push"
@@ -645,6 +641,14 @@
 			[
 				"add",
 				"Git: Add..."
+			],
+			[
+				"sta",
+				"Git: Status"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
 			],
 			[
 				"status",
@@ -745,10 +749,6 @@
 			[
 				"pus	",
 				"Git: Push"
-			],
-			[
-				"sta",
-				"Git: Status"
 			],
 			[
 				"spac",
