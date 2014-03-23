@@ -10,12 +10,12 @@ can eventually find a free parking lot.
 In Chapter 6 of the work --- ``The geography of transport systems'',
 \citet{rodrigue2013geography} argues, that parking in the city center of a
 modern big city with population bigger than one million inhabitants is one of
-the most prevalent transport problems. He claims that ``cruising'' in the
-search for a free curb parking space may account for more then 10\% of the
-local circulations as the drivers can spend up to 20 minutes looking for a
-parking spot.
+the most prevalent transport problems. He claims that cruising in the search
+for a free curb parking space may account for more than 10\% of the local
+circulations as the drivers can spend up to 20 minutes looking for a parking
+spot.
 
-Modern garages often feature systems, that help people to find a free parking
+Modern garages often feature systems, that help people find a free parking
 space by offering a counter, that shows the number of free parking spaces
 available at the moment. On-line maps usually contain the positions of such
 parking garages mapped with their GPS coordinates. This allows for these
@@ -46,17 +46,17 @@ related to their parking search time, which in turn, influenced their
 perceptions of parking difficulty.
 
 Dealing with such uncertainty is annoying for humans. Yet, people deal with it
-much better then the robotized systems. In order to carry out the parking task
-in an autonomous fashion there needs to be more information provided. There
-must be a deterministic algorithm, that has a decision what an optimal action
-is in any moment in time. For this algorithm to function there has to be
-enough information on spacial representation of the parking spaces as well as
-a model, that accounts for the occupancy information.
+much better then robotized systems. In order to carry out the parking task in
+an autonomous fashion there needs to be more information provided. There must
+be a deterministic algorithm, that has a decision what an optimal action is in
+any moment in time. For this algorithm to function there has to be enough
+information on spacial representation of the parking spaces as well as a
+model, that accounts for the occupancy information.
 
 To the extent of our knowledge, there is only a few solutions that provide
 information on the positions and occupancy of the curb parking spaces.
 
-One one the best known examples is the ``Parking on demand'' system
+One of the best known examples is the ``Parking on demand'' system
 by~\citet{sfo,sfo2}. They present a system of parking meters that adapt the
 price of curb parking spaces with relation to current occupancy in the area.
 Along with intelligent parking meters they also present a smartphone
@@ -64,9 +64,9 @@ application that provides live information on the occupancy and pricing of
 distinct parking spaces.
 
 Even though this system proves to save time and money for the people that use
-it, we still see a lack of automatism in it. In order for this system to be
-used in an autonomous fashion one has to introduce a planner that considers
-not only spacial information but also occupancy and pricing.
+it, we still see a lack of autonomy in it. In order for this system to be used
+in an autonomous fashion one has to introduce a planner that considers not
+only spacial information but also occupancy and pricing.
 
 Another down side of this system is its dependence on the fixed positions of
 the parking meters. This implies, that in order to use the presented system we
@@ -77,17 +77,17 @@ We argue, that there has to be a system that will be able to map the parking
 spaces, estimate their occupancy information and search for one in an optimal
 and fully autonomous way.
 
-Autonomous vehicles are becoming a topic of a great interest. In the latest
-years, automotive and software companies as well as the universities all over
-the world have been focusing on developing their own autonomous vehicles.
-These vehicles can already impressively well navigate in the
+Autonomous vehicles are becoming a topic of a great interest. In recent years,
+automotive and software companies as well as the universities all over the
+world have been focusing on developing their own autonomous vehicles. These
+vehicles can already impressively well navigate in the
 cities~\cite{stanley_auto_car,perceprion_drivec_car,lima13,daimler} and are
 able to take people to an arbitrary destination even in difficult urban
 environments. They also can learn how to adopt behavioral knowledge from the
 traffic~\cite{behaviour_learning,spinello10:multiclass}. We believe, that
 these cars are to become safer, more efficient in the means of fuel
 consumption and more predictable than the human drivers. Following the recent
-success of the Google self driving car~\cite{markoff2010google} and the fact
+success of the Google self-driving car~\cite{markoff2010google} and the fact
 that it is now officially allowed to use self-driving autos on public roads in
 California, Nevada and Florida, USA, we predict that in the upcoming years,
 people will spend less time driving by themselves and will rely more on
@@ -102,7 +102,7 @@ search for a good one.
 
 We address precisely this issue. We present an approach that provides a system
 for mapping the parking spaces by estimating their occupancy probability via
-integrating information from multiple observations. Not only we are able to
+integrating information from multiple observations. Not only are we able to
 estimate this information but we also present a way to plan the route in such
 way that it eliminates uncertainty in finding the free parking place and
 guarantees to minimize the time spent on cruising while searching for a free
