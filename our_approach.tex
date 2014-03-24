@@ -531,18 +531,17 @@ We choose the reward function in such way that it guarantees a close relation
 between the optimal MDP solution and minimizing the expected time the agent
 needs in order to find a free parking lot.
 
-Let route $R$ be an arbitrary path to the destination of interest that the
-agent needs to travel to. It is effectively described as a set of edges of the
-graph the agent traverses on his way to the goal. Given the transition model
-presented above, we argue, that an edge of the graph can be seen as two states
-$s_1, s_2$ from $V$ along with an action $a \in A$ such that $T(s_2 \mid s_1,
-a) > 0$. We therefore formally define the route as a set of edges with actions
-that force the agent to traverse them. The agent starts in the initial state
-$s_\mathrm{start}$ and travels to the goal state $s_\mathrm{goal}$. The route
-is then:
+Let route $R$ be an arbitrary path to the target destination that the agent
+needs to travel to. It is effectively described as a sequence of moves the
+agent makes on his way to the goal. Given the transition model presented
+above, we argue, that every move the agent makes can be described by two
+states $s_1, s_2$ from $V$ along with an action $a \in A$ that brings the
+agent from state $s_1$ to state $s_2$, that is: such that $T(s_2 \mid s_1, a)
+> 0$. The agent starts in the initial state $s_\mathrm{start}$ and travels to
+the goal state $s_\mathrm{goal}$. The route is then a sequence:
 
 \begin{equation}
-R = \bigcup_{i=\mathrm{start}}^{\mathrm{goal}} \{(s_i, s_{i+1}), a \} \mid (s_i, s_{i+1}) \in E, \exists a: T(s_{i+1} \mid s_i, a) > 0
+R = \{(s_i, s_{i+1}), a \}_{i=\mathrm{start}}^{\mathrm{goal}} \mid (s_i, s_{i+1}) \in E, \exists a: T(s_{i+1} \mid s_i, a) > 0
 \end{equation}
 
 This yields the expected time of the route to be defined as:
@@ -601,16 +600,16 @@ $A_{\mathrm{move}}$ between any two adjacent states as follows:
 \forall s,s' \in V, \forall (s, s') \in E, \forall a \in A_{\mathrm{move}}: \hspace{2mm} R(s, s', a) = -t_{\mathrm{drive}}^{s,s'}
 \end{equation}
 
-In addition to these costs we penalize staying in one place. This cost can
-also be seen as the cost of failure. In our system the agent stays in the same
-state only if he fails to carry out an optimal action. We define this cost to
-be equal to a constant provided beforehand. To show the impact of this cost
-let us consider an example. The agent stays in an arbitrary state and thinks
-that the best decision in this state is to park. However, when he observes the
-parking space --- it is occupied which results in the agent staying in the
-same place and as a result, getting the negative reward. Given the fact, that
-all rewards in our system are time based this cost virtually results in losing
-a pre-defined amount of time.
+In addition to these costs we penalize staying in one place. In our system the
+agent stays in the same state only if he fails to carry out an optimal action.
+We define this cost in such way, that the agent looses a constant amount of
+time $\Delta t$ if he fails to carry out any action $a \in A_\mathrm{move}$.
+However, the cost for failing to carry out the action to park is different.
+This cost can be used to control the agent's behavioral model. The higher the
+cost of the failure is, the less aggressive the agent's behavior will be. As a
+result the agent tries to avoid carrying out the parking action in a parking
+lot with a high occupancy probability. We present the impact of this cost in
+the experimental section.
 
 We also define the rewards that the agent receives when he successfully
 carries out parking actions. These rewards are likewise time based. They form
@@ -642,8 +641,8 @@ and~\eqref{eq:park_reward}. It guarantees, that the agent tries to find a
 trade-off between shorter driving and shorter walking paths, weighted by the
 occupancy probability of the parking lots.
 
-The key building block of the MDPs is  the utility function, which is a
-measure of how good the state is in the long run:
+The key building block of the MDPs is the utility function, which is a measure
+of how good the state is in the long run:
 
 \begin{equation}
 \label{eq:non_discount_utility}
@@ -683,16 +682,14 @@ expected time spent on finding a free parking lot, we set $\gamma$ to a value
 close to 1. This, however, results in longer planning times. To deal with this
 issue, we utilize the Policy Iteration algorithm that terminates when there is
 no update to the policy, omitting estimating exact utility values of all
-states.
-
-Policy Iteration algorithm is an iterative algorithm. It alternates the
-following two steps, beginning from some initial policy $\pi_0$,
+states. Policy Iteration algorithm is an iterative algorithm. It alternates
+the following two steps, beginning with some initial policy $\pi_0$,
 
 \begin{itemize}
     \item \emph{Policy evaluation:} given a policy $\pi_i$,
     calculate $U_i = U^{\pi_i}$, the utility of each state if $\pi_i$, were to be
     executed.
-    \item \emph{Policy improvement:} Calculate a new MEU policy $\pi_{i+1}$, using one-step look-ahead based on
+    \item \emph{Policy improvement:} Calculate a new Maximum Expected Utility (MEU) policy $\pi_{i+1}$, using one-step look-ahead based on
     $U_i$ (as in~\eqref{lbl:optimal_policy}).
 \end{itemize}
 
@@ -706,15 +703,13 @@ U(s) = R(s) + \gamma \sum_{s'}T(s \mid s', a)U(s')
 In order to carry out the \emph{policy improvement} step, we choose the
 optimal action using the principle of Maximum Expected Utility (MEU) in each
 state, that is, choose: the action that maximizes the expected utility of the
-subsequent state:
+subsequent state. The optimal policy $\pi^*(s)$ can be therefore seen as the one that maximizes
+the expected utility if followed:
 
 \begin{equation}
 \label{lbl:optimal_policy}
 \pi^*(s) = \argmax_a \sum_{s'} T(s \mid s', a)U(s')
 \end{equation}
-
-The optimal policy $\pi^*(s)$ can be therefore seen as the one that maximizes
-the expected utility if followed.
 
 The algorithm terminates when the policy improvement step yields no change in
 the utilities. The given method can be shown to converge in $O(n^3)$ where $n$

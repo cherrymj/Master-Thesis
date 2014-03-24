@@ -4,7 +4,7 @@
 \label{cha:experimental_results}
 
 Through the course of this work, we make extensive use three core components:
-visual car detection, parking lot modeling and planning. In this section we
+visual car detection, parking lot modeling and planning. In this section, we
 present the experimental evaluation of each of these parts.
 
 \section{Visual Car Detection}
@@ -166,11 +166,11 @@ suffers from the windows present in almost any car. The windows are
 transparent which results in wrong depth measurements present in the detected
 regions of interest.
 
-To avoid the noisiness, we use the depth measurements from a laser range
-finder. Each laser measurement has high precision in measuring the distance.
-Because of its mounting position on the human knee level, it also does not
-suffer from the partial transparency of the cars as individual laser beams
-never encounter the cars' windows.
+To avoid the high noise from the stereo camera, we use the depth measurements
+from a laser range finder. Each laser measurement has high precision in
+measuring the distance. Because of its mounting position on the human knee
+level, it also does not suffer from the partial transparency of the cars as
+individual laser beams never encounter the cars' windows.
 
 We present occupancy data aggregated to the occupancy grids as well as into
 pre-defined parking lot positions. The illustration of differences in the maps
@@ -242,7 +242,7 @@ position in the parking lot.
 
 In this section we present the evaluation of the work of the MDP based
 planner, that searches for a free parking space. As a testing environment we
-use the parking lot at the campus of the university of Freiburg.
+use the parking lot at the campus of the University of Freiburg.
 
 We make use of the occupancy information gathered from integrating the
 measurements of the parking lots' occupancy (see
@@ -262,6 +262,15 @@ the agent as he drives by. The actions, that the agent is able to carry out,
 as presented in~\eqref{eq:actions} are visualized in the way shown in
 Figure~\ref{fig:actions}.
 
+\begin{figure}[tb]
+\begin{center}
+\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_states.pdf}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_path_1.pdf}}\hspace{2mm}
+\end{center}
+\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 10 seconds. Each state is presented by an inner and an outer circles. The inner circle depicts the real occupancy status on the day the experiment was held. The outer one presents the occupancy estimate based on the data accumulated from multiple runs. Both circle's colors vary from red for occupied parking lots to green for free ones.}
+\label{fig:w_4_d_10_w_10_log_12_12}
+\end{figure}
+
 As described in Section~\ref{sec:action_planning} there are 3 core parameters
 that influence the performance of the planner: $v_{\mathrm{walk}}$, $v_{\mathrm{drive}}$ and the
 failure cost. In this section we present the differences in the behavior of
@@ -273,22 +282,13 @@ For these parameters we consider a number of sets of their values. We further
 present the differences in the approach picked by the agent depending on the
 different sets of the parameters.
 
-\begin{figure}[tb]
-\begin{center}
-\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_states.pdf}}\hspace{2mm}
-\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_path_1.pdf}}\hspace{2mm}
-\end{center}
-\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 10 seconds.}
-\label{fig:w_4_d_10_w_10_log_12_12}
-\end{figure}
-
 \begin{figure}[t]
 \begin{center}
 \vspace{-5mm}
 \subfloat[Initial parking lot state.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_states.pdf}}\hspace{2mm}
-\subfloat[$1_{st}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_1.pdf}}\\\vspace{-5mm}
-\subfloat[$2_{rd}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_2.pdf}}\hspace{2mm}
-\subfloat[$3_{th}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_3.pdf}}\\\vspace{-5mm}
+\subfloat[$1^{st}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_1.pdf}}\\\vspace{-5mm}
+\subfloat[$2^{nd}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_2.pdf}}\hspace{2mm}
+\subfloat[$3^{rd}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_3.pdf}}\\\vspace{-5mm}
 \end{center}
 \caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 90 seconds carried out on an artificial dataset.}
 \label{fig:w_4_d_10_w_90_artificial}
@@ -339,19 +339,15 @@ may be explained as follows: if the walking speed is equal to the driving
 speed it makes no sense driving around the parking lot when it is possible to
 walk straight to the goal.
 
-Overall, the system shows predictable and understandable to humans performance
-while operating on time based constraints as well as integrating the occupancy
-information.
-
 
 \begin{figure}[tbh]
 \begin{center}
 \subfloat[Initial parking lot state.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_states.pdf}}\hspace{2mm}
-\subfloat[$1_{st}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_1.pdf}}\\
-\subfloat[$3_{rd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_3.pdf}}\hspace{2mm}
-\subfloat[$4_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_4.pdf}}\\
-\subfloat[$16_{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_16.pdf}}\hspace{2mm}
-\subfloat[$22_{nd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_22.pdf}}
+\subfloat[$1^{st}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_1.pdf}}\\
+\subfloat[$3^{rd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_3.pdf}}\hspace{2mm}
+\subfloat[$4^{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_4.pdf}}\\
+\subfloat[$16^{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_16.pdf}}\hspace{2mm}
+\subfloat[$22^{nd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_22.pdf}}
 \end{center}
 \caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 10 seconds carried out on an artificial dataset.}
 \label{fig:w_4_d_10_w_10_artificial}
