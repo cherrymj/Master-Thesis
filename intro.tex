@@ -2,31 +2,33 @@
 \chapter{Introduction} % (fold)
 \label{cha:introduction}
 
-We all have been in a situation, when one was driving around a city,
-trying to find a free parking space. One can drive numerous circles around
-the center of the city with absolute uncertainty about where and when he
-can eventually find a free parking lot.
+We all have been in a situation, in which we were driving around in a city,
+trying to find a free parking space. We all know how daunting can it be to
+drive numerous circles around the center of the city with a high uncertainty
+about where and when we eventually find a free parking lot. With this problem
+we are not alone.
 
-In Chapter 6 of the work --- ``The geography of transport systems'',
-\citet{rodrigue2013geography} argues, that parking in the city center of a
-modern big city with population bigger than one million inhabitants is one of
-the most prevalent transport problems. He claims that cruising in the search
-for a free curb parking space may account for more than 10\% of the local
-circulations as the drivers can spend up to 20 minutes looking for a parking
-spot.
+\citet{rodrigue2013geography} argue in their work ``The geography of transport
+systems'', that parking in the center of a modern big city with a population
+bigger than one million inhabitants is one of the most prevalent transport
+problems. They claim that cruising in the search for a free curb parking space
+may account for more than 10\% of the local circulations as the drivers can
+spend up to 20 minutes looking for a parking spot.
 
-Modern garages often feature systems, that help people find a free parking
-space by offering a counter, that shows the number of free parking spaces
-available at the moment. On-line maps usually contain the positions of such
-parking garages mapped with their GPS coordinates. This allows for these
-parking garages to be easily found, making use of an ordinary GPS navigation
-device that one can nowadays find in most cell phones. Even though these
-occupancy counters make it easier to find a free parking spot, they only
-provide the current occupancy information and not its prediction.
+Several aids for supporting drivers in finding parking spaces have been
+developed in the past. For example, modern garages often feature systems that
+help people find a free parking space by offering a counter, that shows the
+number of free parking spaces available at the moment. On-line maps usually
+contain the positions of such parking garages mapped with their GPS
+coordinates. This allows for these parking garages to be easily found, making
+use of an ordinary SatNav device or with basically any smartphone. Even though
+these occupancy counters make it easier to find a free parking spot, they only
+provide the current occupancy information and not its prediction and are only
+available for a small number of parking slots.
 
 Furthermore, it is not always convenient to drive to a parking garage as
-sometimes they lie far from the wanted destination. In such cases it is a lot
-more convenient to leave the car in one of the curb parking spaces.
+sometimes they lie far from the destination of the driver. In such cases it is
+a lot more convenient to leave the car in one of the curb parking spaces.
 
 \citet{shoup2006cruising}, while addressing the problem of adjusting parking
 prices in order to reduce time spent on the search for a free parking space,
@@ -107,5 +109,31 @@ estimate this information but we also present a way to plan the route in such
 way that it eliminates uncertainty in finding the free parking place and
 guarantees to minimize the time spent on cruising while searching for a free
 parking space and walking from the found one to the destination.
+
+\section{The Contribution of This Thesis} % (fold)
+\label{sec:the_contribution_of_this_thesis}
+
+    The task of this thesis was to develop a proof of concept system for
+    supporting drivers in finding free parking space. The system should
+    perceive cars in the environment, model parking places, and suggest
+    trajectories towards parking lots.
+
+    As result of this task, we designed such a system. Our approach requires
+    only on-board sensing on a vehicle to perceive the environment. So far, we
+    used a camera and laser range finder to observe the scene and to detect
+    cars from the perceptual input. This has was solved by a supervised
+    learning approach using a support vector machine and Histograms of
+    Gradients  as features. The detecting are then fused into a model of the
+    environment that allows to build up a representation of the scene
+    estimating how often a parking space is free or occupied.  Based on this
+    representation, we define a Markov Decision Process that allows us to
+    generate the optimal path, given the current knowledge, to find a parking
+    lot and at the same time park as close to the desired target location as
+    possible. The novelty of this thesis is a proof of concept of an
+    integrated system, that only relies in on-board perception, models the
+    parking situation and generates optimal trajectories for finding a parking
+    spaces and reaching the target location as fast as possible.
+
+% section the_contribution_of_this_thesis (end)
 
 % chapter introduction (end)

@@ -2,31 +2,35 @@
 \chapter{Related Work}
 \label{cha:related_works}
 
-The problem of finding free parking lots receives more attention with the
-continuous growth of the cities and their population. As far as we have found
-out, we can divide the works in the field in two main categories depending on
-the sensor setup. The detection of the parking lots is either carried out via
-the usage of static-mounted cameras or the on-vehicle sensor systems. We will
-further focus more on each of these options.
+The problem of finding free parking lots receives more and more attention with
+the continuous growth of the cities and their population and different
+approaches have been proposed to support drivers. We can divide the works in
+the field in two main categories depending on the sensor setup. The detection
+of the parking lots is either carried out via the usage of static-mounted
+cameras or the on-vehicle sensor systems. We will further focus more on each
+of these options.
 
 \section{Detection with Static Monocular Cameras} % (fold)
 \label{sec:detection_with_monocular_cameras}
 
-To the best of our knowledge, the main purpose of such systems is to simplify
-the sensor setup for occupancy detection in the modern parking garages. These
-works differ in the features utilized for car detection as well as in methods
-of clustering these features.
+The main purpose of such systems is to simplify the sensor setup for occupancy
+detection in the modern parking garages. Usually the parking lots' occupancy
+status is inferred from sensors, placed below or above every parking lot. It
+therefore comes in handy to replace all these individual sensors with one
+camera, that observes all parking slots at once. The occupancy status of each
+parking slot is then inferred from the visual information. These works differ
+in the features utilized for car detection as well as in methods of clustering
+these features.
 
 \citet{qizhang06} present an unsupervised system to monitor the occupied
-parking lots. The authors were using a stationary monocular camera to detect
-parked vehicles. In their work, car detection is solely based on color. The
-authors use the support vector machines (SVM) to cluster the features to
-distinguish between occupied and free parking lots. They pre-process the
-ground truth images of the parking lots and search for color differences
-between the measurements and the ground truth measured for an empty parking
-lot.
+parking lots. The authors use a stationary monocular camera to detect parked
+vehicles. In their work, car detection is solely based on color. The authors
+use the support vector machines (SVM) to cluster the features to distinguish
+between occupied and free parking lots. They pre-process the ground truth
+images of the parking lots and search for color differences between the
+measurements and the ground truth measured for an empty parking lot.
 
-\citet{nicolastrue} shows a similar approach. Alike with the previous papers
+\citet{nicolastrue} proposes a similar approach. Alike with the previous papers
 he presents an unsupervised system for parking lots detection. The author
 utilizes a static overhead camera. He uses human-labeled parking lots'
 positions to define the spacial arrangement of the parking lots. The author
@@ -128,18 +132,12 @@ markings. They utilize a tree structure performing a bottom-up and a top-down
 approach in order to classify parking lots as such and leave out false
 detections.
 
+In this thesis, we present an in-vehicle detection system that is capable of
+detecting parked cars, modeling their spacial position as well as occupancy
+information inferred from multiple observations. For this task we utilize the
+in-vehicle sensor setup, consisting of a stereo camera and, optionally, a
+laser range finder. We estimate the occupancy probability for each parking lot
+in a global map and present a planner capable of finding a route to a free
+parking lot considering spacial and occupancy constraints.
+
 % section in_vehicle_detection (end)
-
-\section{Contribution of This Thesis} % (fold)
-\label{sec:the_contribution_of_this_thesis}
-
-In this thesis, following the works in \nameref{sec:in_vehicle_detection}, we
-present a system that is capable of detecting parked cars, modeling their
-spacial position as well as occupancy information inferred from multiple
-observations. For this task we utilize the in-vehicle sensor setup, consisting
-of a stereo camera and, optionally, a laser range finder. We estimate the
-occupancy probability for each parking lot in a global map and present a
-planner capable of finding a route to a free parking lot considering spacial
-and occupancy constraints.
-
-% section the_contribution_of_this_thesis (end)

@@ -14,25 +14,27 @@
 \section{Overview} % (fold)
 \label{sec:overview}
 
-In this chapter we describe in detail the three main components of our system:
-visual car detection, creation of the map of parking lots capable to store
-their occupancy information and a planner able to find a free parking lot in
-the minimum expected time.
+In this chapter, we describe in detail the three main components of our proof
+of concept system prototyped for in-vehicle sensor setup: visual car
+detection, creation of the map of parking lots capable to store their
+occupancy information and a planner able to find a free parking lot in the
+minimum expected time. We also present the way of integrating these parts into
+a single consistent framework.
 
-We start by a coarse outline of these different sections and show each of
+We start by a coarse outline of these different sections and present each of
 these sub-parts in detail later in the chapter.
 
 \begin{itemize}
 
 \item \emph{Perception:}  We visually detect cars in the images taken from the
-camera and estimate how far from the image plane are they situated by fusing
-the detections with the depth data, received either from the stereo camera or
-from the laser range finder (Section~\ref{sec:perception}).
+stereo camera and estimate how far from the image plane are they situated by
+fusing the detections with the depth data, received either from the stereo
+disparity or from the laser range finder (Section~\ref{sec:perception}).
 
-\item \emph{Mapping:}  The positions of the detected cars are fused into one
-global representation of the world observed by the agent. This representation
-also contains occupancy information, perceived through multiple runs
-(Section~\ref{sec:model}).
+\item \emph{Parking Lots Modeling:}  The positions of the detected cars are
+fused into one global representation of the world observed by the agent. This
+representation also contains occupancy information, perceived through multiple
+runs (Section~\ref{sec:model}).
 
 \item \emph{Planning:}  In the modeled environment we search for actions that
 minimize the expected time spent on searching for a parking space and walking
@@ -46,9 +48,9 @@ from it to the goal (Section~\ref{sec:action_planning}).
 \label{sec:perception}
 
 We start by motivating the choice of the visual detection framework. There is
-a number of object detection methods to choose from. We focus on three
-approaches, utilizing different visual features: Haar features, local binary
-patterns (LBPs) and histograms of oriented gradients (HOGs).
+a number of object detection methods to choose from. We investigate three
+different approaches, utilizing different visual features: Haar features,
+local binary patterns (LBPs) and histograms of oriented gradients (HOGs).
 
 \citet{violajones2001} introduce the Haar feature based object detection.
 Their approach provides the detection rate of up to 95\% when applied to face
@@ -70,33 +72,58 @@ training stage. Despite, not being a crucial measure of an algorithm
 performance, the training time is still an important argument, as it
 influences the usability of the method, especially on implementation stage.
 
-Considering the above, we apply the HOG-based detector following the work
+Throughout the development of this thesis, we tried all these and finally
+decided to apply the HOG-based detector following the work
 of~\citet{dalal2005}. It relies on the gradient-based features and is
 therefore invariant to illumination and brightness changes. Additionally, the
 presented method stays robust to slight changes in rotation and shape.
 
 \subsection{HOG Detector}\label{sub:hog_detector}
 
-The HOG representation has several advantages. It captures edge or
-gradient structure that is very characteristic of local shape, and it does
-so in a local representation with an easily controllable degree of
-invariance to local geometric and photometric transformations:
-translations or rotations make little difference if they are much smaller
-than the local spatial or orientation bin size.
+The HOG representation has several relevant properties for the problem under
+consideration. It captures edge or gradient structure that is very
+characteristic of local shape, and it does so in a local representation with
+an easily controllable degree of invariance to local geometric and photometric
+transformations: translations or rotations make little difference if they are
+much smaller than the local spatial or orientation bin size.
+
+\begin{figure}[th]
+\centering
+\subfloat[]{\includegraphics[width=0.27\textwidth]{pictures/gradients.pdf}\label{subfig:gradient}} \hspace{3mm}
+\subfloat[]{\includegraphics[width=0.27\textwidth]{pictures/hog.pdf}\label{subfig:hog}} \hspace{3mm}
+\subfloat[]{\includegraphics[width=0.4\textwidth]{pictures/hog_dist.pdf}\label{subfig:histogram}}
+\caption{This figures shows gradient orientations for every pixel of the detection window \subref{subfig:gradient}, the corresponding histogram \subref{subfig:histogram} and its visualization \subref{subfig:hog}. The directions of the arrows in \subref{subfig:histogram} represent the angle covered by each bin, the lengths of arrows correspond to the magnitude of the gradients that fall into the corresponding bin. In this example, for better visualization, the histogram consists of 5 values, covering the range of $180^\circ$, meaning that each bin covers the angle of $36^\circ$, whereas the experiments in this thesis, use the histograms consisting of 9 bins.}
+\label{fig:hog_simple}
+\end{figure}
 
 Following~\citet{dalal2005}, we make use of the histograms of oriented
-gradients placed in a dense grid on the query images. For each $8 \times 8$
-pixel block in the image we form a histogram by assigning the gradient
-orientations to 9 distinct bins, that cover the angle of $180^{\circ}$. One
-HOG descriptor consists of several such histograms.
+gradients placed in a dense grid on the query images. The descriptor is
+created by computing the gradient magnitude and orientation in each pixel of
+the detection window and storing the orientations in a histogram. For each $8
+\times 8$ pixel block in the image we form a histogram by assigning the
+gradient orientations to distinct histogram bins, that cover all possible
+orientation angles of the gradient. We do not take into account the direction
+of the gradient vector, focusing only on its orientation. This allows for the
+histogram bins to cover an angle of $180^{\circ}$ instead of $360^{\circ}$ to
+ensure storing all possible orientations. A visualization of an example
+histogram can be seen in Figure~\ref{fig:hog_simple}.
+
+\begin{figure}[b]
+ \centering
+\subfloat[]{\includegraphics[width=0.31\textwidth]{pictures/original.jpg}\label{subfig:original}} \hspace{3mm}
+\subfloat[]{\includegraphics[width=0.31\textwidth]{pictures/glyph.jpg}\label{subfig:glyph}} \hspace{3mm}
+\subfloat[]{\includegraphics[width=0.31\textwidth]{pictures/ihog.jpg}\label{subfig:ihog}}
+\caption{This figure shows a car image \subref{subfig:original}, a visual representation of the histogram values \subref{subfig:glyph} and a HOG inversion image from HOGles \cite{vondrick2013hoggles} \subref{subfig:ihog}.}
+\label{fig:hog_car}
+\end{figure}
 
 To detect the front and rear sides of the cars, we set the size of the hog
 descriptor window to $128 \times 128$ pixels. The idea behind this decision is
 based on generally square-like shape of the cars, when seen from front or
-rear. Therefore, the square drawn around the car contains higher percentage of
-useful information in comparison to a rectangle. To detect the side of the
-car, the descriptor window should be changed to $128 \times 64$ pixels
-following the same logic.
+rear. A square drawn around the car contains higher percentage of useful
+information in comparison to a rectangle. To detect the side of the car, the
+descriptor window is changed to $128 \times 64$ pixels following the same
+logic.
 
 These window sizes yield the number of the histograms that fit inside each
 window which is the number of $8 \times 8$ pixel blocks contained in the
@@ -107,17 +134,18 @@ histograms for the side view.
 \centering
 \subfloat[]{\includegraphics[width=0.6\textwidth]{pictures/detections.pdf}\label{subfig:hog_detector}}
 \subfloat[]{\includegraphics[width=0.4\textwidth]{pictures/svm.pdf}\label{subfig:svm_illustration}}
-\caption{Illustration of HOG detection window~\subref{subfig:hog_detector} and clustering the corresponding multi-dimensional points via fitting a hyperplane  using SVM~\subref{subfig:svm_illustration}.}
+\caption{Illustration of HOG detection window~\subref{subfig:hog_detector} and clustering the corresponding multi-dimensional points via fitting a hyperplane using SVM~\subref{subfig:svm_illustration} which yields the maximal distance between the datasets.}
 \label{fig:det_to_svm}
 \end{figure}
 
-We form a vector of all the 9 bin values contained in each of 256 or 128
-histograms that describe the detection window. This results in the vectors of
-sizes respectively 2304 and 1152 values for front/rear and side view detection
-windows. We view this vector as a point in the space of same dimensionality
-and seek for a hyperplane to classify these points into positive and negative
-ones with the use of the support vector machines. This is illustrated in
-Figure~\ref{fig:det_to_svm}.
+We form a vector from all histogram values contained in each of 256 or 128
+histograms that describe the detection window. Following~\citet{dalal2005}, we
+consider that each histogram consists of 9 distinct bins. This results in the
+vectors of sizes respectively 2304 and 1152 values for front/rear and side
+view detection windows. We view this vector as a point in the space of same
+dimensionality and seek for a hyperplane to classify these points into
+positive and negative ones with the use of the support vector machines. This
+is illustrated in Figure~\ref{fig:det_to_svm}.
 
 % subsection hog_classifier (end)
 
@@ -139,20 +167,31 @@ SVM is a well-known and arguably the most popular algorithm in binary
 clustering, therefore many implementations are readily available. In this work
 we make extensive use of libSVM library by~\citet{libSVM2011}.
 
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{pictures/cascades.png}
+    \end{center}
+    \caption{Each part of this figure illustrates a cut from the query image, sub-sampled with the corresponding scaling factor.}
+    \label{fig:cascades}
+\end{figure}
+
 Based on the trained classifier, we carry out the detection in a cascade
-fashion via the sliding window approach. For each sliding window content we
-create a HOG descriptor which we test against the pre-trained SVM classifier
-to find out to which side of the decision boundary it is classified. If the
-current HOG belongs to the side where the SVM has assigned the cars from the
-training dataset then the current sliding window is a region of interest and
-contains a car. We store each detection as a rectangle by saving the pixel
-positions of the corners of the detection window around the car.
+fashion via the sliding window approach. That is: for every image we generate
+a cascade which is effectively a set of images, sub-sampled with different
+scaling factors. For every image in a cascade we slide a detection window of
+the pre-defined size over the image. Every sliding window content yields a HOG
+descriptor which we test against the pre-trained SVM classifier to find out to
+which side of the decision boundary it is classified. If the current HOG
+belongs to the side where the SVM has assigned the cars from the training
+dataset then the current sliding window is a region of interest and contains a
+car. We store each detection as a rectangle by saving the pixel positions of
+the corners of the detection window around the car.
 
 % subsection svm_classifier (end)
 
 \subsection{Depth Information}\label{sub:depth_information}
 
-In this section we describe in details how the depth information is acquired
+In this section, we describe in details how the depth information is acquired
 and combined with the visual detections described in the previous sections.
 
 \subsubsection{Stereo Camera}\label{ssub:stereo_camera}
@@ -213,7 +252,7 @@ with the laser. This yields the choice of the laser beams, that contain depth
 values associated with the car:
 
 \begin{equation}
-Z = \{ \mathrm{beam}_n | \forall n : \beta_{l} < \alpha_{\mathrm{camera}} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
+Z = \{ \mathrm{beam}_n \mid \forall n : \beta_{l} < \alpha_{\mathrm{camera}} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
 \end{equation}
 
 Here, $\alpha_\mathrm{camera}$ is the angle at which the camera points as perceived
@@ -231,13 +270,13 @@ we take the median of these values.
 % subsection depth_information (end)
 % section perception (end)
 
-\section{Model} % (fold)
+\section{Representation for Modeling Parking Lots} % (fold)
 \label{sec:model}
 
 The methods mentioned above provide the cars positions relative to the camera.
 Integrating this information with GPS measurements or SLAM-based pose
 estimates, we calculate the positions of the detected cars in the world frame.
-In this sections we present two approaches for storing these detections. We
+In this section we present two approaches for storing these detections. We
 also describe the approach to modeling the positions of the parking lots and
 their occupancy probability.
 
@@ -301,19 +340,16 @@ P(\z \mid \v, \y) = P(\z \mid \v),
 \noindent
 and utilizing the fact that $P(\neg \v) = 1 - P(\v)$, we obtain
 \begin{eqnarray}
-\lefteqn{\frac{ P(\v \mid z_{1:t}) }{ 1 - P(\v \mid z_{1:t})} = } \nonumber \\
-&&\frac{ P( \v \mid \z)}{ 1 - P(\v \mid \z)}   \frac{ P(\v \mid \y)}{ 1 - P(\v \mid  \y)}   \frac{ 1 - P(\v)}{ P(\v)}.
+\frac{ P(\v \mid z_{1:t}) }{ 1 - P(\v \mid z_{1:t})} = \frac{ P( \v \mid \z)}{ 1 - P(\v \mid \z)}   \frac{ P(\v \mid \y)}{ 1 - P(\v \mid  \y)}   \frac{ 1 - P(\v)}{ P(\v)}.
 \end{eqnarray}
 
-\noindent
-This equation can be transformed into the following update formula:
+\noindent This equation can be transformed into the following update formula:
 \begin{eqnarray}
 \label{eq:rec_update}
-\hspace{-6mm}\lefteqn{P(\v\mid z_{1:t})=} \nonumber \\
-&& \hspace{-10mm} \left[ 1 + \frac{1 - P(\v\mid \z)}{P(\v \mid \z)}
-\frac{1 - P(\v \mid \y)}{P(\v \mid \y)}   \frac{P(\v)}{1 - P(\v)}  \right]^{-1}
+P(\v\mid z_{1:t})= \left[ 1 + \frac{1 -
+P(\v\mid \z)}{P(\v \mid \z)} \frac{1 - P(\v \mid \y)}{P(\v \mid \y)}
+\frac{P(\v)}{1 - P(\v)}  \right]^{-1}
 \end{eqnarray}
-\noindent
 
 In this approach we do not explicitly model the parking lots, but they are
 described by groups of cells in spacial proximity, that were repeatedly
@@ -372,7 +408,7 @@ an occupied cell.
 
 However, occupancy grids have their drawbacks. One of them, especially for our
 setup, is the discretization error. Whenever there are multiple detections of
-the same car from different angles it can happen, that the detection is
+the same car from different view points it can happen, that the detection is
 assigned to different cells of the occupancy grids. This leads to the problem
 of data association and therefore difficulties in creating a meaningful
 accumulated map.
@@ -394,7 +430,7 @@ whole parking area to be one session. The parking lots that were not updated
 as occupied during the session are updated as free.
 
 We explicitly stress, that this approach, while needing a pre-processing step
-of mapping the parking lots, allows storing both spacial and occupancy
+of mapping the parking lots, allows for storing both spacial and occupancy
 information in one distinct structure.
 
 % subsection static_state_binary_filter_in_pre_defin (end)
@@ -408,43 +444,43 @@ for a path to a free parking lot. It, however, depends on the application what
 an optimal solution to this problem is. We therefore explicitly define the
 criterium of optimality that we consider throughout this work.
 
-There are typically parts of the parking area, which are better in the sense
-of their distance to a common destination. This also means that the ``better''
-parts of the parking lots are more likely to be occupied than the other, which
-leads to a trade-off between driving straight to the closest-to-goal, but
-likely occupied parking lot, and parking in a more distant area, most likely
-free. It usually takes less time to drive a car than to walk by foot, but it
-can take longer to find a free parking lot closer to the goal than walking
-from a more distant one. Given the constraints described above, the framework
-that we present focuses on finding the solution that minimizes the expected
-time spent on finding a free parking lot and walking from the found one to the
-goal.
+There are typically sub-areas of the parking area, which are better in the
+sense of their distance to a common destination. This also means that the
+``better'' areas of the parking lots are more likely to be occupied than the
+other. An illustration of such situation can be seen in
+Figure~\ref{subfig:aerial}. The right part of the parking lot is significantly
+more densely occupied than the left one. The relation between the position of
+the parking lots and their occupancy leads to a trade-off between driving
+straight to the closest-to-goal, but likely occupied parking lot, and parking
+in a more distant area, most likely free. It usually takes less time to drive
+a car than to walk by foot, but it can take longer to find a free parking lot
+closer to the goal than walking from a more distant one. Given the constraints
+described above, the framework that we present focuses on finding the solution
+that minimizes the expected time spent on finding a free parking lot and
+walking from the found one to the goal.
 
 We formally describe the parking as a graph. The states are defined as the set
 of vertices $V$, each of which represents a point in $\mathbb{R}^2$. The graph
 also has a set of edges $E$ --- a function $V \rightarrow V$, that corresponds
 to the actions that can be carried out from one state to another.
 
-In the grid based situation, the states are the grid cells and the edges are
-connecting the adjacent cells.
-
 \begin{figure}[t]
     \begin{center}
         \includegraphics[width=\textwidth]{pictures/graph.pdf}
     \end{center}
-    \caption{Graph based on the parking lot. The vertices correspond to the parking spaces. The edges between the vertices represent possibilities to reach one state from another. Every state is additionally connected to the goal state.}
+    \caption{Graphs based on the parking area. The first graph representation defines different states for positions where the car can drive and the ones where it can only park.
+    The second graph is a simplification of the one in the middle. The vertices in it correspond to the parking spaces. The edges between the vertices represent possibilities to reach one state from another, while the actual route is not represented explicitly. The correspondent spacial information is instead stored in the edges. Every state is additionally connected to the goal state.}
     \vspace{-5mm}
     \label{fig:graph}
 \end{figure}
 
-In the case, where we explicitly map the parking lots --- they, along with
+In the case where we explicitly map the parking lots --- they, along with
 their spacial information, form the vertices of the graph. In this case we
 define the edges so that they hold the spacial information about the
-connectivity and distances between the parking lots.
-
-In both cases all vertices are connected to the goal state. The probability of
-the action that allows the agent to follow such edges relies on the occupancy
-probability of the related parking lot and is formally defined later.
+connectivity and distances between the parking lots. All vertices are
+connected to the goal state. The probability of the action that allows the
+agent to follow such edges relies on the occupancy probability of the related
+parking lot and is formally defined later.
 
 We also define the set of all actions $A$ that can be carried out in any
 state. It consists of five distinct actions: ``up'': $\uparrow$, ``down'':
@@ -475,13 +511,13 @@ probability of parking in a particular state is equal to the occupancy
 probability of the state:
 
 \begin{eqnarray}
-\forall (s, s') \in E, \forall a \in A_{\mathrm{move}} : \hspace{3mm} P(s \mid s', a) = 1 \\
-\forall s \in V, (s,s_{\mathrm{goal}}) \in E : \hspace{3mm} P(s \mid s_{\mathrm{goal}}, a_{\mathrm{park}}) = P(\mathrm{free})
+\forall (s, s') \in E, \forall a \in A_{\mathrm{move}} : \hspace{3mm} T(s \mid s', a) = 1 \\
+\forall s \in V, (s,s_{\mathrm{goal}}) \in E : \hspace{3mm} T(s \mid s_{\mathrm{goal}}, a_{\mathrm{park}}) = P(\mathrm{free})
 \end{eqnarray}
 
 where $P(\mathrm{free})$ is a probability of a parking lot to be free. To be
 consistent, we set the remaining probabilities to the values that guarantee
-that $\forall s, s' \in V, (s, s') \in E, \forall a \in A: \sum_{s}P(s \mid
+that $\forall s, s' \in V, (s, s') \in E, \forall a \in A: \sum_{s}T(s \mid
 s', a) = 1$. This ensures that in each state the outcome of each action the
 agent can take is defined. It resolves to staying in the same state when
 trying to carry out an unavailable or improbable action.
@@ -500,10 +536,10 @@ agent needs to travel to. It is effectively described as a set of edges of the
 graph the agent traverses on his way to the goal. Given the transition model
 presented above, we argue, that an edge of the graph can be seen as two states
 $s_1, s_2$ from $V$ along with an action $a \in A$ such that $T(s_2 \mid s_1,
-a) > 0$. We therefore formally define the route as a set of edges along with
-actions that force the agent to traverse them. The agent starts in the initial
-state $s_\mathrm{start}$ and travels to the goal state $s_\mathrm{goal}$. The
-route is then:
+a) > 0$. We therefore formally define the route as a set of edges with actions
+that force the agent to traverse them. The agent starts in the initial state
+$s_\mathrm{start}$ and travels to the goal state $s_\mathrm{goal}$. The route
+is then:
 
 \begin{equation}
 R = \bigcup_{i=\mathrm{start}}^{\mathrm{goal}} \{(s_i, s_{i+1}), a \} \mid (s_i, s_{i+1}) \in E, \exists a: T(s_{i+1} \mid s_i, a) > 0
@@ -566,15 +602,15 @@ $A_{\mathrm{move}}$ between any two adjacent states as follows:
 \end{equation}
 
 In addition to these costs we penalize staying in one place. This cost can
-also be seen as the cost of failure as in our system the agent stays in the
-same state only if he fails to carry out an optimal action. We define this
-cost to be equal to a constant provided beforehand. To show the impact of this
-cost let us consider an example. The agent stays in an arbitrary state and
-thinks that the best decision in this state is to park. However, when he
-observes the parking space --- it is occupied which results in the agent
-staying in the same place and as a result, getting the negative reward. Given
-the fact, that all rewards in our system are time based this cost virtually
-results in losing a pre-defined amount of time.
+also be seen as the cost of failure. In our system the agent stays in the same
+state only if he fails to carry out an optimal action. We define this cost to
+be equal to a constant provided beforehand. To show the impact of this cost
+let us consider an example. The agent stays in an arbitrary state and thinks
+that the best decision in this state is to park. However, when he observes the
+parking space --- it is occupied which results in the agent staying in the
+same place and as a result, getting the negative reward. Given the fact, that
+all rewards in our system are time based this cost virtually results in losing
+a pre-defined amount of time.
 
 We also define the rewards that the agent receives when he successfully
 carries out parking actions. These rewards are likewise time based. They form
@@ -598,9 +634,8 @@ t_{\mathrm{walk}}^{s,s_{\mathrm{goal}}} = \frac{\sqrt{(s -
 s_{\mathrm{goal}}) {(s - s_{\mathrm{goal}})}^T}}{v_{\mathrm{walk}}}
 \end{equation}
 
-The presented reward function $r_{\max} - r_s$ can be viewed to model the win
-in time between parking in the worst parking lot and the one represented by
-state $s$.
+The presented reward function $r_{\max} - r_s$ models the win in time between
+parking in the worst parking lot and the one represented by state $s$.
 
 The general reward function is fully defined by~\eqref{eq:drive_reward}
 and~\eqref{eq:park_reward}. It guarantees, that the agent tries to find a
