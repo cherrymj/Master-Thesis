@@ -8,7 +8,7 @@
 \newcommand{\z}{z_{t}}
 \newcommand{\y}{z_{1:t-1}}
 
-\chapter{In-vehicle parking space occupancy estimation and guidance system}
+\chapter{In-vehicle Parking Space Occupancy Estimation and Guidance System}
 \label{cha:our_approach}
 
 \section{Overview} % (fold)
@@ -26,17 +26,17 @@ these sub-parts in detail later in the chapter.
 
 \begin{itemize}
 
-\item \emph{Perception:}  We visually detect cars in the images taken from the
+\item \emph{Visual Car Detection:}  We visually detect cars in the images taken from the
 stereo camera and estimate how far from the image plane are they situated by
 fusing the detections with the depth data, received either from the stereo
 disparity or from the laser range finder (Section~\ref{sec:perception}).
 
-\item \emph{Parking Lots Modeling:}  The positions of the detected cars are
+\item \emph{Parking Lot Modeling:}  The positions of the detected cars are
 fused into one global representation of the world observed by the agent. This
 representation also contains occupancy information, perceived through multiple
 runs (Section~\ref{sec:model}).
 
-\item \emph{Planning:}  In the modeled environment we search for actions that
+\item \emph{Action Planning:}  In the modeled environment we search for actions that
 minimize the expected time spent on searching for a parking space and walking
 from it to the goal (Section~\ref{sec:action_planning}).
 
@@ -44,7 +44,7 @@ from it to the goal (Section~\ref{sec:action_planning}).
 
 % section overview (end)
 
-\section{Perception} % (fold)
+\section{Visual Car Detection} % (fold)
 \label{sec:perception}
 
 We start by motivating the choice of the visual detection framework. There is
@@ -270,7 +270,7 @@ we take the median of these values.
 % subsection depth_information (end)
 % section perception (end)
 
-\section{Representation for Modeling Parking Lots} % (fold)
+\section{Parking Lot Modeling} % (fold)
 \label{sec:model}
 
 The methods mentioned above provide the cars positions relative to the camera.
@@ -360,7 +360,7 @@ observation model $P(\v \mid z_t)$.
 
 \begin{figure}[t]%
 \centering
-\subfloat[Occupancy grid update of the camera field of view between the margin points marked with red circles containing two detected cars.]{\includegraphics[width=0.3\textwidth]{pictures/testmap.png}\label{fig:maptest}}\hspace{5mm}
+\subfloat[Occupancy grid update of the camera field of view between the margin points marked with red circles containing two detected cars seen in black.]{\includegraphics[width=0.30\textwidth]{pictures/testmap.png}\label{fig:maptest}}\hspace{5mm}
 \subfloat[Observation model $P(a^i | z_t)$, updating the cells before the detection with $P_\mathrm{free}$ probability, the ones that contain a car with $P_\mathrm{occupied}$ and leaving the ones, covered by the detection untouched.]{\includegraphics[width=0.65\textwidth]{pictures/observe_model.pdf}\label{fig:observation_model}}
 \caption{}
 \end{figure}
@@ -434,6 +434,43 @@ of mapping the parking lots, allows for storing both spacial and occupancy
 information in one distinct structure.
 
 % subsection static_state_binary_filter_in_pre_defin (end)
+
+\subsection{Occupancy Inference} % (fold)
+\label{sub:occupancy_inference}
+
+We assume the parking lots to be observed in sessions taking place at
+different times. We also assume the world to be static during each session
+that is: the changes in the world occur only from session to session.
+
+To estimate the occupancy probability we count the times a state has been
+observed as occupied and free. Let state $s$ be observed in a sequence of
+measurements carried out in times $t_0 \ldots t_n$. After each observation the
+parking lot contains the occupancy probability inferred from the current
+measurement session. We compute the prediction of the state's occupancy by
+counting the times the states was seen as occupied ($N_\mathrm{occupied}$) and
+free ($N_\mathrm{free}$) through the course of all measurement sessions at
+times $t_0 \ldots t_n$. Therefore, for each state $s$:
+
+\begin{equation}
+    N_\mathrm{occupied}^s = \sum_{k=0}^n i_k^s
+\end{equation}
+
+where $i_k^s$ is an indicator function:
+
+\begin{equation}
+i_k^s = \begin{cases}
+1, & \mbox{if } p_k^s > P_\mathrm{prior} \\
+0, & \mbox{if } p_k^s \leq P_\mathrm{prior}
+\end{cases}
+\end{equation}
+
+Here, $p_k^s$ is the occupancy probability of state $s$ at time $t_k$. We compute the occupancy probability prediction $P(x = \mathrm{occupied})$ for an arbitrary state $s$ as:
+\begin{equation}
+P(x_s = \mathrm{occupied}) = \frac{N_\mathrm{occupied}^s}{N_\mathrm{occupied}^s + N_\mathrm{free}^s}
+\end{equation}
+
+% subsubsection occupancy_inference (end)
+
 % section model (end)
 
 \section{Action Planning} % (fold)
@@ -452,17 +489,21 @@ Figure~\ref{subfig:aerial}. The right part of the parking lot is significantly
 more densely occupied than the left one. The relation between the position of
 the parking lots and their occupancy leads to a trade-off between driving
 straight to the closest-to-goal, but likely occupied parking lot, and parking
-in a more distant area, most likely free. It usually takes less time to drive
-a car than to walk by foot, but it can take longer to find a free parking lot
-closer to the goal than walking from a more distant one. Given the constraints
-described above, the framework that we present focuses on finding the solution
-that minimizes the expected time spent on finding a free parking lot and
-walking from the found one to the goal.
+in a more distant area, most likely free.
+
+It usually takes less time to drive a car than to walk by foot, but it can
+take longer to find a free parking lot closer to the goal than walking from a
+more distant one. Given the constraints described above, the framework that we
+present focuses on finding the solution that minimizes the expected time spent
+on finding a free parking lot and walking from the found one to the goal.
+
+\subsection{Parking Area as a Graph} % (fold)
+\label{sub:parking_area_as_a_graph_}
 
 We formally describe the parking as a graph. The states are defined as the set
-of vertices $V$, each of which represents a point in $\mathbb{R}^2$. The graph
-also has a set of edges $E$ --- a function $V \rightarrow V$, that corresponds
-to the actions that can be carried out from one state to another.
+of vertices $V$, each of which represents a point in $\mathbb{R}^2$. The set
+of edges $E$ is then a function $V \rightarrow V$, that corresponds to the
+actions that can be carried out from one state to another.
 
 \begin{figure}[t]
     \begin{center}
@@ -479,13 +520,34 @@ their spacial information, form the vertices of the graph. In this case we
 define the edges so that they hold the spacial information about the
 connectivity and distances between the parking lots. All vertices are
 connected to the goal state. The probability of the action that allows the
-agent to follow such edges relies on the occupancy probability of the related
-parking lot and is formally defined later.
+agent to follow the edges to the goal depends on the occupancy probability of
+the related parking lot and is formally defined later.
 
-We also define the set of all actions $A$ that can be carried out in any
-state. It consists of five distinct actions: ``up'': $\uparrow$, ``down'':
-$\downarrow$, ``left'': $\leftarrow$, ``right'': $\rightarrow$ and ``park''.
-Formally:
+% subsection parking_area_as_a_graph_ (end)
+
+\subsection{MDP Definition} % (fold)
+\label{sub:mdp_definition}
+
+\citet{tipaldiICRA11} show, that Markov decision processes (MDPs) provide a
+way to maximize joint rewards instead of greedily going for the best possible
+goal. We follow similar approach, defining rewards and transition
+probabilities based on the environment specific to our problem.
+
+Following~\citet{bellman1957}, we define the MDP by the initial state
+$s_\mathrm{start}$, transition function $T(s \mid s', a)$ and a reward
+function $R(s, s', a)$. Here, $T(s \mid s', a)$ denotes the probability of
+reaching state $s$ if action $a$ is carried out in state $s'$. The transitions
+in the model are assumed to be Markovian. That is, the probability of reaching
+$s$ from $s'$ depends only on $s'$ and not on the history of earlier states.
+
+\subsubsection{Actions} % (fold)
+\label{sub:actions}
+
+In order to define the transition and reward functions we define the set of
+actions $A$ that the agent can perform in the vertices of the graph. It
+consists of five distinct actions: ``up'': $\uparrow$, ``down'': $\downarrow$,
+``left'': $\leftarrow$, ``right'': $\rightarrow$ and ``park''. Formally:
+
 \begin{eqnarray}
 A_{\mathrm{move}} = \{ \uparrow, \downarrow, \leftarrow, \rightarrow \} \\
 a_{\mathrm{park}} = \mbox{``park''} \\
@@ -493,17 +555,11 @@ A = A_{\mathrm{move}} \cup a_{\mathrm{park}}
 \label{eq:actions}
 \end{eqnarray}
 
-\citet{tipaldiICRA11} show, that Markov decision processes (MDPs) provide a
-way to maximize joint rewards instead of greedily going for the best possible
-goal. We follow similar approach, defining rewards and transition
-probabilities based on the environment specific to our problem.
+% subsection actions (end)
 
-Following~\citet{bellman1957}, we define the MDP by the initial state $s_0$,
-transition function $T(s \mid s', a)$ and a reward function $R(s, s', a)$.
-Here, $T(s \mid s', a)$ denotes the probability of reaching state $s$ if
-action $a$ is carried out in state $s'$. The transitions in the model are
-assumed to be Markovian. That is, the probability of reaching $s$ from $s'$
-depends only on $s'$ and not on the history of earlier states.
+
+\subsubsection{Transition Function} % (fold)
+\label{ssub:transition_function}
 
 For four actions from $A_\mathrm{move}$, we consider the probability of moving
 from any state to the next one (if possible) to be equal to 1, while the
@@ -524,16 +580,19 @@ trying to carry out an unavailable or improbable action.
 
 For example: it is clear, that staying in the left most corner of the parking
 lot and carrying an action to go left, should result in staying in the same
-spot and while carrying out an action of parking, with the probability of
-$0.6$ there should be a $0.4$ chance to stay in the same place.
+spot.
+
+% subsubsection transition_function (end)
+\subsubsection{Expected Time Minimization to Rewards Maximization} % (fold)
+\label{ssub:expected_time_to_rewards}
 
 We choose the reward function in such way that it guarantees a close relation
 between the optimal MDP solution and minimizing the expected time the agent
 needs in order to find a free parking lot.
 
-Let route $R$ be an arbitrary path to the target destination that the agent
-needs to travel to. It is effectively described as a sequence of moves the
-agent makes on his way to the goal. Given the transition model presented
+Let route $R$ be an arbitrary path to the target location to which the agent
+needs to travel to. The route is effectively described as a sequence of moves
+the agent makes on his way to the goal. Given the transition model presented
 above, we argue, that every move the agent makes can be described by two
 states $s_1, s_2$ from $V$ along with an action $a \in A$ that brings the
 agent from state $s_1$ to state $s_2$, that is: such that $T(s_2 \mid s_1, a)
@@ -568,21 +627,18 @@ consider a dual problem of finding a route that maximizes the expected reward:
     R^* = \argmax_R E(r_R)
 \end{equation}
 
-This is a problem that the MDPs are able to solve. We further show the reward
+This is a problem that the MDPs are able to solve. We present the reward
 function as a dual representation of agent's travel time and argue on the
 differences and similarities between the optimal path provided by MDPs and
-$R^*$ as defined in~\eqref{eq:optimal_route}.
-
-The function $R(s, s', a)$, defines the reward for reaching state $s$ from
-state $s'$ carrying out action $a$.
+$R^*$ as defined in~\eqref{eq:optimal_route}. The function $R(s, s', a)$,
+defines the reward for reaching state $s$ from state $s'$ carrying out action
+$a$.
 
 We assume, that the agent needs time for driving from one state $s$ to another
-$s'$. If he cannot carry out the action and is forced to stay in the same
-position, he regardlessly loses time.
-
-The time $t^{s, s'}_\mathrm{drive}$ it takes the agent to drive from any arbitrary state $s$ to an
-adjacent one $s'$ depends on the distance between these states and on the
-agent's driving speed $v_{\mathrm{drive}}$ and can be defined as:
+$s'$. The time $t^{s, s'}_\mathrm{drive}$ it takes the agent to drive from any
+arbitrary state $s$ to an adjacent one $s'$ depends on the distance between
+these states and on the agent's driving speed $v_{\mathrm{drive}}$ and can be
+defined as:
 
 \begin{equation}
 \label{eq:time_to_drive}
@@ -592,24 +648,36 @@ agent's driving speed $v_{\mathrm{drive}}$ and can be defined as:
 
 The cost $R(s, s', a)$ of moving from state $s'$ to state $s$ carrying out
 action $a$ grows with the time $t_{\mathrm{drive}}^{s,s'}$ the agent needs to
-cover the path. We therefore define a negative reward for each action in
-$A_{\mathrm{move}}$ between any two adjacent states as follows:
+cover the path, that is: the longer it takes for an agent to take an action,
+the bigger cost he has to pay for it. We therefore define a negative reward
+for each action in $A_{\mathrm{move}}$ between any two adjacent states as
+follows:
 
 \begin{equation}
 \label{eq:drive_reward}
 \forall s,s' \in V, \forall (s, s') \in E, \forall a \in A_{\mathrm{move}}: \hspace{2mm} R(s, s', a) = -t_{\mathrm{drive}}^{s,s'}
 \end{equation}
 
-In addition to these costs we penalize staying in one place. In our system the
-agent stays in the same state only if he fails to carry out an optimal action.
-We define this cost in such way, that the agent looses a constant amount of
-time $\Delta t$ if he fails to carry out any action $a \in A_\mathrm{move}$.
-However, the cost for failing to carry out the action to park is different.
-This cost can be used to control the agent's behavioral model. The higher the
-cost of the failure is, the less aggressive the agent's behavior will be. As a
-result the agent tries to avoid carrying out the parking action in a parking
-lot with a high occupancy probability. We present the impact of this cost in
-the experimental section.
+% subsubsection expected_time_to_rewards (end)
+\subsubsection{Failure Costs} % (fold)
+\label{ssub:failure_costs}
+
+In addition to these costs, we also penalize staying in one place. In our
+system the agent stays in the same state only if he fails to carry out an
+optimal action. We define this cost in such way, that the agent looses a
+constant amount of time $\Delta t$ if he fails to carry out any action $a \in
+A_\mathrm{move}$. However, the cost for failing to carry out the action to
+park is different. This cost can be used to control the agent's behavioral
+model. The higher the cost of the failure is, the less aggressive the agent's
+behavior will be. Setting the failure cost to a high value results in the
+agent's behavior that avoids carrying out the parking action in a parking lot
+with a high occupancy probability. We present examples of the impact of this
+cost in the experimental section.
+
+% subsubsection failure_costs (end)
+
+\subsubsection{Success Rewards} % (fold)
+\label{ssub:success_rewards}
 
 We also define the rewards that the agent receives when he successfully
 carries out parking actions. These rewards are likewise time based. They form
@@ -625,8 +693,9 @@ is the greatest of those times. Formally:
 \forall s \in V, (s, s_{\mathrm{goal}}) \in E : R(s, s_{\mathrm{goal}}, a_{\mathrm{park}}) = r_{\max} - r_s
 \end{equation}
 
-To define $r_s$, we define $t_{\mathrm{walk}}^{s,s_{\mathrm{goal}}}$ similarly
-to \eqref{eq:time_to_drive}. It depends on the distance between the states $s$ and $s_\mathrm{goal}$ as well as on the walking speed of the agent:
+To express $r_s$, we define $t_{\mathrm{walk}}^{s,s_{\mathrm{goal}}}$
+similarly to \eqref{eq:time_to_drive}. It depends on the distance between the
+states $s$ and $s_\mathrm{goal}$ as well as on the walking speed of the agent:
 
 \begin{equation}
 t_{\mathrm{walk}}^{s,s_{\mathrm{goal}}} = \frac{\sqrt{(s -
@@ -635,6 +704,11 @@ s_{\mathrm{goal}}) {(s - s_{\mathrm{goal}})}^T}}{v_{\mathrm{walk}}}
 
 The presented reward function $r_{\max} - r_s$ models the win in time between
 parking in the worst parking lot and the one represented by state $s$.
+
+% subsubsection success_rewards (end)
+% subsection mdp_definition (end)
+\subsection{Solution to the MDP} % (fold)
+\label{sub:solution_to_the_mdp}
 
 The general reward function is fully defined by~\eqref{eq:drive_reward}
 and~\eqref{eq:park_reward}. It guarantees, that the agent tries to find a
@@ -646,13 +720,13 @@ of how good the state is in the long run:
 
 \begin{equation}
 \label{eq:non_discount_utility}
-U^{\pi}(s) = E\left[\sum_{t=0}^{\infty} R(s_t) \mid \pi,s_0 = s \right]
+U^{\pi}(s) = E\left[\sum_{t=0}^{\infty} R(s_t) \mathrel{}\middle|\mathrel{} \pi,s_0 = s \right]
 \end{equation}
 
-Given the definition of the utility function we define the policy as an
-expected sum of the rewards obtained, where the expectation is taken over all
-possible state sequences that could occur, given that the policy is executed.
-The optimal policy $\pi^*$ then satisfies:
+Given the utility function we define the policy as an expected sum of the
+rewards obtained, where the expectation is taken over all possible state
+sequences that could occur, given that the policy is executed. The optimal
+policy $\pi^*$ then satisfies:
 
 \begin{equation}
 \label{eq:optimal_policy}
@@ -680,10 +754,10 @@ policy in the way, that we present further in this section. In order to
 minimize the deviation of the MDP solution from the one that minimizes the
 expected time spent on finding a free parking lot, we set $\gamma$ to a value
 close to 1. This, however, results in longer planning times. To deal with this
-issue, we utilize the Policy Iteration algorithm that terminates when there is
-no update to the policy, omitting estimating exact utility values of all
-states. Policy Iteration algorithm is an iterative algorithm. It alternates
-the following two steps, beginning with some initial policy $\pi_0$,
+issue, we utilize the iterative Policy Iteration algorithm that terminates
+when there is no update to the policy, omitting estimating exact utility
+values of all states. This algorithm alternates the following two steps,
+beginning with some initial policy $\pi_0$,
 
 \begin{itemize}
     \item \emph{Policy evaluation:} given a policy $\pi_i$,
@@ -717,9 +791,13 @@ is the number of vertices in the graph.
 
 This solution to the MDP guarantees to find a route that maximizes the
 discounted rewards while searching for the free parking lot and walking from
-the found one to the goal. Under the assumption of the discount factor leans
+the found one to the goal. Under the assumption that the discount factor leans
 to 1 this route is also the one that minimizes the expected time for searching
 for the parking lot.
+
+% subsection solution_to_the_mdp (end)
+\subsection{Re-planning} % (fold)
+\label{sub:re_planning}
 
 The agent carries out an optimal strategy to the point when he decides to
 park. Let us imagine for a moment that the parking lot at which the agent
@@ -727,13 +805,19 @@ wants to park is occupied. From the point of view of the MDPs the optimal
 decision would be to wait and try once again, which is clearly a suboptimal
 decision. Therefore, we also utilize the observations of the world.
 
-Whenever we move past a parking lot, we check if it is occupied and update
-the occupancy probability in the related state to 1 or 0 respectively.
-This allows for carrying out a decision based on the better background.
+Whenever we move past a parking lot, we check if it is occupied and update the
+occupancy probability in the related state to 1 or 0 respectively. This allows
+for carrying out further decisions based on the better background, having more
+knowledge about the state of the world.
 
-Because the graph is updated, we carry out the policy iteration algorithm
-once more to define the new optimal actions for each state.
+The update to the occupancy of the state $s$ consequently changes the
+probability of the action $a_\mathrm{park}$ that can be carried out in this
+state, updating the transition function $T(s_\mathrm{goal} \mid s,
+a_\mathrm{park})$ to either 1 or 0. We carry out the policy iteration
+algorithm again to define the new optimal actions for each state taking into
+account the changes in the transition model. We keep re-planning until we find
+a free parking lot or prove that there is none.
 
-We repeat this re-planning step until we find a free parking lot.
+% subsection re_planning (end)
 
 % section action_planning (end)
