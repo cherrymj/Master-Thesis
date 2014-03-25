@@ -4,6 +4,114 @@
 		"selected_items":
 		[
 			[
+				"occ",
+				"occupancy"
+			],
+			[
+				"sear",
+				"searching"
+			],
+			[
+				"vehice",
+				"vehicles"
+			],
+			[
+				"train",
+				"training"
+			],
+			[
+				"appro",
+				"approximately"
+			],
+			[
+				"approxima",
+				"approximately"
+			],
+			[
+				"diffe",
+				"different"
+			],
+			[
+				"improve",
+				"improvement"
+			],
+			[
+				"interes",
+				"interesting"
+			],
+			[
+				"expe",
+				"experiments"
+			],
+			[
+				"additio",
+				"additionally"
+			],
+			[
+				"assign",
+				"assigning"
+			],
+			[
+				"occup",
+				"occupancy"
+			],
+			[
+				"sess",
+				"session"
+			],
+			[
+				"parking",
+				"parking_lots"
+			],
+			[
+				"lase",
+				"laser_fusion"
+			],
+			[
+				"repre",
+				"representation"
+			],
+			[
+				"observa",
+				"observations"
+			],
+			[
+				"move",
+				"movements"
+			],
+			[
+				"corres",
+				"correspond"
+			],
+			[
+				"addition",
+				"additionally"
+			],
+			[
+				"occu",
+				"occupancy"
+			],
+			[
+				"chan",
+				"changes"
+			],
+			[
+				"know",
+				"knowledge"
+			],
+			[
+				"sub",
+				"subs	Sub Sub Section"
+			],
+			[
+				"ss",
+				"ssection	subsection"
+			],
+			[
+				"prese",
+				"presented"
+			],
+			[
 				"behav",
 				"behavior"
 			],
@@ -20,10 +128,6 @@
 				"positions"
 			],
 			[
-				"occu",
-				"occupancy"
-			],
-			[
 				"differe",
 				"differences"
 			],
@@ -34,10 +138,6 @@
 			[
 				"wind",
 				"window"
-			],
-			[
-				"corres",
-				"corresponding"
 			],
 			[
 				"correspond",
@@ -76,10 +176,6 @@
 				"parts"
 			],
 			[
-				"prese",
-				"present"
-			],
-			[
 				"infer",
 				"inferred"
 			],
@@ -114,10 +210,6 @@
 			[
 				"minim",
 				"minimizes"
-			],
-			[
-				"sear",
-				"search"
 			],
 			[
 				"mini",
@@ -208,10 +300,6 @@
 				"width=0.8"
 			],
 			[
-				"observa",
-				"observation"
-			],
-			[
 				"model",
 				"modeling"
 			],
@@ -222,10 +310,6 @@
 			[
 				"resul",
 				"results"
-			],
-			[
-				"diffe",
-				"differences"
 			],
 			[
 				"contai",
@@ -268,20 +352,12 @@
 				"actions"
 			],
 			[
-				"occ",
-				"occupancy"
-			],
-			[
 				"probabili",
 				"probability"
 			],
 			[
 				"util",
 				"utilizes"
-			],
-			[
-				"additio",
-				"additional"
 			],
 			[
 				"class",
@@ -408,10 +484,6 @@
 				"transition"
 			],
 			[
-				"ss",
-				"sssection	subsubsection"
-			],
-			[
 				"environ",
 				"environment"
 			],
@@ -436,84 +508,12 @@
 				"alpha_"
 			],
 			[
-				"appro",
-				"approach"
-			],
-			[
 				"erro",
 				"erroneous"
 			],
 			[
 				"re",
 				"region"
-			],
-			[
-				"sub",
-				"subs	Sub Sub Section"
-			],
-			[
-				"relia",
-				"reliable"
-			],
-			[
-				"rang",
-				"range"
-			],
-			[
-				"wor",
-				"world"
-			],
-			[
-				"name",
-				"nameref"
-			],
-			[
-				"it",
-				"itd	\\item[description]"
-			],
-			[
-				"again",
-				"against"
-			],
-			[
-				"reason",
-				"reasonable"
-			],
-			[
-				"reaso",
-				"reasonable"
-			],
-			[
-				"comm",
-				"comment"
-			],
-			[
-				"f",
-				"fairy"
-			],
-			[
-				"focu",
-				"focused"
-			],
-			[
-				"w",
-				"works"
-			],
-			[
-				"fa",
-				"factionalism"
-			],
-			[
-				"face",
-				"face's"
-			],
-			[
-				"fac",
-				"facelift"
-			],
-			[
-				"arg",
-				"argc"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "results.tex",
 			"settings":
 			{
-				"buffer_size": 20731,
+				"buffer_size": 23397,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "refs.bib",
 			"settings":
 			{
-				"buffer_size": 25764,
+				"buffer_size": 25463,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,15 +547,7 @@
 			"file": "conclusion.tex",
 			"settings":
 			{
-				"buffer_size": 3465,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "intro.tex",
-			"settings":
-			{
-				"buffer_size": 8029,
+				"buffer_size": 4150,
 				"line_ending": "Unix"
 			}
 		},
@@ -563,7 +555,7 @@
 			"file": "related_works.tex",
 			"settings":
 			{
-				"buffer_size": 8211,
+				"buffer_size": 8213,
 				"line_ending": "Unix"
 			}
 		},
@@ -595,7 +587,7 @@
 			"file": "our_approach.tex",
 			"settings":
 			{
-				"buffer_size": 38098,
+				"buffer_size": 41479,
 				"line_ending": "Unix"
 			}
 		},
@@ -611,7 +603,15 @@
 			"file": "abstract.tex",
 			"settings":
 			{
-				"buffer_size": 1571,
+				"buffer_size": 1666,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "intro.tex",
+			"settings":
+			{
+				"buffer_size": 8029,
 				"line_ending": "Unix"
 			}
 		}
@@ -635,6 +635,14 @@
 				"Git: Add..."
 			],
 			[
+				"pus",
+				"Git: Push"
+			],
+			[
+				"ad",
+				"Git: Add..."
+			],
+			[
 				"pu",
 				"Git: Push"
 			],
@@ -653,10 +661,6 @@
 			[
 				"status",
 				"Git: Status"
-			],
-			[
-				"pus",
-				"Git: Push"
 			],
 			[
 				"stat",
@@ -871,6 +875,8 @@
 	},
 	"file_history":
 	[
+		"/home/igor/Work/Thesis/Text/template/intro.tex",
+		"/home/igor/Work/Thesis/Text/template/Thesis.bbl",
 		"/home/igor/.config/sublime-text-3/Packages/User/LaTeXTools.sublime-settings",
 		"/home/igor/Work/Thesis/Text/template/titlepage.log",
 		"/home/igor/Work/Thesis/Text/template/titlepage.aux",
@@ -880,7 +886,6 @@
 		"/home/igor/Work/Thesis/Text/template/todo.todo",
 		"/home/igor/.config/sublime-text-3/Packages/LaTeXTools/Default (Linux).sublime-keymap",
 		"/home/igor/Work/Thesis/Text/template/refs.bib",
-		"/home/igor/Work/Thesis/Text/template/Thesis.bbl",
 		"/home/igor/Work/Thesis/Text/template/Thesis.out",
 		"/home/igor/Work/Thesis/Text/template/pictures/svg/parking_lots_detections.svg",
 		"/home/igor/Work/Thesis/Text/template/pictures/parking_lots_detections.pdf",
@@ -898,7 +903,6 @@
 		"/home/igor/Work/Thesis/Text/template/conclusion.tex",
 		"/home/igor/Work/Thesis/Text/template/results.tex",
 		"/home/igor/Work/Thesis/Text/template/related_works.tex",
-		"/home/igor/Work/Thesis/Text/template/intro.tex",
 		"/home/igor/Work/Thesis/Text/template/Thesis.aux",
 		"/home/igor/Work/Thesis/MiscCode/HOGclassifier/source/SVM_COPYRIGHT",
 		"/home/igor/Work/HiWi/bogoslai-normals-svm/traverse/source/SVM_readme.txt",
@@ -1017,6 +1021,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"45",
+			"pictures/det_4.jpg",
+			"3",
+			"_",
 			"16",
 			"25",
 			"ref",
@@ -1140,11 +1148,7 @@
 			"// ",
 			"Foobar",
 			"max",
-			"startIndex",
-			"_startIndex",
-			"pixels",
-			"CV_32F",
-			"getDepthMedian"
+			"startIndex"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1167,7 +1171,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1176,15 +1180,19 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20731,
+						"buffer_size": 23397,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11847,
-								11847
+								15034,
+								15034
+							],
+							[
+								15162,
+								15162
 							]
 						],
 						"settings":
@@ -1192,46 +1200,46 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close"
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
 							],
 							"codeintel": true,
 							"codeintel_config":
@@ -1342,10 +1350,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 758.0,
+						"translation.y": 5163.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1521,7 +1529,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -1530,15 +1538,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 25764,
+						"buffer_size": 25463,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16070,
-								16070
+								1107,
+								1107
 							]
 						],
 						"settings":
@@ -1546,26 +1554,10 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -1574,18 +1566,34 @@
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close"
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close"
 							],
 							"codeintel": true,
 							"codeintel_config":
@@ -1696,7 +1704,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7072.0,
+						"translation.y": 23.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
@@ -1708,15 +1716,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3465,
+						"buffer_size": 4150,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								962,
-								962
+								2636,
+								2636
 							]
 						],
 						"settings":
@@ -1728,26 +1736,14 @@
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1756,10 +1752,22 @@
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -1874,205 +1882,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 57.0,
+						"translation.y": 285.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "intro.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8029,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								843,
-								843
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close"
-							],
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"sublime_auto_complete": true,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "related_works.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8211,
+						"buffer_size": 8213,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8172,
-								8172
+								4690,
+								4690
 							]
 						],
 						"settings":
@@ -2084,30 +1914,6 @@
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -2116,10 +1922,34 @@
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
-								"bh_square_close"
+								"bh_square_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close"
 							],
 							"codeintel": true,
 							"codeintel_config":
@@ -2229,14 +2059,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2166.0,
+						"translation.y": 1358.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"file": "background.tex",
 					"semi_transient": false,
 					"settings":
@@ -2414,7 +2244,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "preamble.tex",
 					"semi_transient": false,
 					"settings":
@@ -2426,8 +2256,8 @@
 						"selection":
 						[
 							[
-								32,
-								32
+								1020,
+								1020
 							]
 						],
 						"settings":
@@ -2435,42 +2265,42 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -2584,14 +2414,14 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 480.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "Thesis.tex",
 					"semi_transient": false,
 					"settings":
@@ -2763,24 +2593,24 @@
 						"translation.y": 456.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "our_approach.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 38098,
+						"buffer_size": 41479,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								32140,
-								32140
+								27864,
+								27864
 							]
 						],
 						"settings":
@@ -2792,42 +2622,42 @@
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
-								"bh_regex_close"
+								"bh_regex_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
 							],
 							"codeintel": true,
 							"codeintel_config":
@@ -2938,14 +2768,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 11224.0,
+						"translation.y": 9691.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 9,
 					"file": "titlepage.tex",
 					"semi_transient": false,
 					"settings":
@@ -3117,24 +2947,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 10,
 					"file": "abstract.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1571,
+						"buffer_size": 1666,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								951,
-								951
+								1662,
+								1662
 							]
 						],
 						"settings":
@@ -3142,10 +2972,6 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
@@ -3158,6 +2984,10 @@
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -3166,22 +2996,22 @@
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close"
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
 							],
 							"codeintel": true,
 							"codeintel_config":
@@ -3293,7 +3123,87 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 11,
+					"file": "intro.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8029,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
+							],
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 798.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -3316,11 +3226,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -3373,6 +3290,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"con",
+				"conclusion.tex"
+			],
+			[
+				"n",
+				"intro.tex"
+			],
 			[
 				"tit",
 				"titlepage.tex"

@@ -3,57 +3,68 @@
 \chapter{Conclusion and Further Work} % (fold)
 \label{cha:conclusion_and_further_work}
 
-    We have presented and implemented a proof of concept system that
-    integrates perception, mapping and planning for solving a task of
-    efficient search for a free on-street parking lot. Our relies on visual
-    detection of the cars in the streets.
+    The task of this thesis was to develop a framework for supporting drivers
+    in finding free parking spaces. The system to solve this task should
+    perceive cars in the environment, model parking places, and suggest
+    trajectories towards free parking lots.
 
-    Throughout the course of the work we experiment with different methods for
-    combining metric information with visual detections such as utilizing
-    depth from a stereo camera or a laser range finder. Currently the laser
-    range scanner s proven to provide a better result, however it is of great
-    interest to build a system that would provide the same level of detail
-    adopting purely visual information.
+    As the result of this thesis we present a proof of concept of an
+    integrated system, that only relies on on-board perception, models the
+    parking situation and generates optimal trajectories for finding a free
+    parking space and reaching the target location as fast as possible. Our
+    system automatically quantifies the occupancy probability of each parking
+    lot in an area of interest and provides a behavior that minimizes the
+    expected time for reaching the target destination.
 
-    It is important to have a reliable depth estimate and of the same
-    importance is having likewise a good estimate of the position in the
-    world. We use SLAM
-    (\cite{stachniss11isrr,kuemmerle11auro,kretzschmar10ki}) for estimating a
-    precise position of the agent in the world.
+    Our approach requires only on-board sensing to perceive the environment.
+    So far, we used a camera and a laser range finder to observe the scene and
+    to detect cars from the perceptual input. This sub-task was solved by a
+    supervised learning approach using a support vector machine and histograms
+    of oriented gradients (HOG) as features. The detections are fused into a
+    model of the environment that allows for building up a representation of
+    the scene depicting the occupancy probability of each parking lot. Based
+    on this representation, we define a Markov Decision Process that allows us
+    to generate the optimal path, given the current knowledge, to find a
+    parking lot and at the same time park as close as possible to the desired
+    target location.
 
-    Not only we experiment with perception, but also with mapping. We
-    implement the occupancy grids based approach, which, however, suffers from
-    the discretization errors as well as from ad-hoc estimation of the
-    position (including orientation) of the detected cars in the occupancy
-    grid. Eventually we promote the system where we provide additional
-    knowledge about where the parking lots are situated. This information has
-    to be obtained only once for any new environment.
+    We present a series of experiments carried out with the use of the Obelix
+    robot at the campus of the University of Freiburg. We evaluate HOG based
+    visual detection of the cars, assignment of the detections to the parking
+    lots, estimation of their occupancy probability and planning with the use
+    of MDPs. The visual detection fused with the laser measurements shows
+    steady car detection rates, where approximately 90\% of the parking lots
+    are labeled correctly. The MDP based planner was evaluated on the real
+    occupancy data acquired from the parking lot at the University Freiburg
+    campus. It is shown to find the optimal route to the goal, while adopting
+    to current system parameters, such as walking and driving speeds.
 
-    This system then provides a good estimate of the occupancy information
-    that we estimate via multiple observations of the same spot on different
-    days or simply in different times. It may be a subject for future work to
-    estimate the occupancy information for particular day of week or
-    particular time of a working day, etc. The occupancy information is
-    basically a probability of a parking lot to be free when observed.
+    There is, however, still place for the future work. The visual detection
+    rates can be improved by adjusting the parameters of the HOG descriptors
+    and adjusting the training datasets. This, however, requires extensive
+    additional study.
 
-    This occupancy information along with the position of the parking lots in
-    the world allows us to introduce a planner. This planner, unlike greedy A*
-    and alike, searches not for the best parking lot in the means of position
-    or occupancy, but takes into account the trade-off between these two
-    quantities, minimizing the expected time required by an agent to park a
-    car and get to the final goal by foot. It is still possible to experience
-    difficulties finding the best parking lot, but our approach eliminates the
-    high uncertainty of this process and provides an opportunity to carry out
-    the parking process in a fully-autonomous fashion, while guaranteeing to
-    find the best action in the means of expected time needed for the whole
-    process.
+    Also the component integration can be improved to form an more consistent
+    framework. In the current work the planner is a stand-alone application,
+    written in Octave. Though it was not in the scope of this thesis, it may
+    be subject to the future work to integrate it with the robot's planner
+    system.
 
-    There is however place for future work. To see a fully integrated and
-    easily accessible system we will further focus on detecting the parked car
-    position purely based on visual data (via improving stereo-camera depth
-    acquisition). The other vector of interest is improving the approach for
-    mapping in order to leave pre-defined parking lots' positions behind and
-    to be able to efficiently map any given environment without any prior
-    knowledge about it.
+    The improvements can also be made to the parking lots modeling. Our
+    current approach relies on the pre-defined parking lot positions. It is
+    tempting to improve the performance of the occupancy grid maps in order to
+    map the parking lots in an autonomous fashion based on the observations of
+    the parked cars at different times. In our work we rely on the
+    Simultaneous Localization and Mapping (SLAM) approach in order to
+    precisely estimate the position of the robot while taking measurements.
+    This part is crucial for data association. It would, however, be a great
+    improvement to find an way of estimating the parking lots' occupancy
+    information relying only on GPS measurements.
+
+    Overall, the system, presented in this thesis as a proof of concept, when
+    merged with all further developments, might become a helpful tool in the
+    task of parking in densely occupied parking areas. The described system
+    may also be used in autonomous vehicles as it provides a way to deal with
+    searching for a parking lot in a fully autonomous fashion.
 
 % chapter conclusion_and_further_work (end)

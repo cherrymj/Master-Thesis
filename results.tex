@@ -200,20 +200,61 @@ observed.
     \label{fig:occupancy_accumulated}
 \end{figure}
 
-Because of these issues, we mostly utilize the pre-defined positions of the
+
+\begin{figure}[p]%
+\centering
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_13_12.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_13_12.png}}\\
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_13_1.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_13_1.png}}\\
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_15_1.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_15_1.png}}\\
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_12_12.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_12_12.png}}\\
+\caption{Examples of detections of different cars under different light conditions.}
+\label{fig:mapping_examples_1}
+\end{figure}
+
+\begin{figure}[p]%
+\centering
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_5_12.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_5_12.png}}\\
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_6_12.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_6_12.png}}\\
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_9_12.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_9_12.png}}\\
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_11_12.pdf}}\hspace{2mm}
+\subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_11_12.png}}\\
+\caption{Examples of detections of different cars under different light conditions.}
+\label{fig:mapping_examples_2}
+\end{figure}
+
+Because of these issues, we mostly rely on the pre-defined positions of the
 parking lots for occupancy estimation. An example of the occupancy information
 from the data gathered during one run is presented in
 Figure~\ref{subfig:pre_defined}. The exact positions of the parking lots and
 deterministic association of detections to them allows us to quantify the
-mapping precision. For this system we measure the detection rate as a relation
-of the number of correctly labeled parking lots to the total number of parking
-lots. This results in: $\frac{\mathrm{correct}}{\mathrm{correct} +
-\mathrm{wrong}} \approx 92\% $ of all parking lots to be labeled correctly as
-occupied or free respectively. The biggest source of error is failing to
-detect the cars or assigning them to the wrong parking lot. The first problem
-comes from the visual visual detection part, that, of course, propagates the
-error. The second one is usually due to abnormal sizes of the cars or improper
-position in the parking lot.
+parking lot positions estimation precision. For this system we measure the
+detection rate throughout the course of 21 data acquisition sessions. A
+session is a sequence of measurements that provide the occupancy information
+of every parking lot in the area of interest.
+Figure~\ref{fig:mapping_examples_1} and Figure~\ref{fig:mapping_examples_2}
+each show 4 examples of such sessions. We estimate the precision of parking
+lot occupancy detection as a relation of the number of correctly labeled
+parking lots to the total number of parking lots. This results in:
+$\frac{\mathrm{correct}}{\mathrm{total}} \approx 90\% $ of all parking lots to
+be labeled correctly as occupied or free respectively. The exact precision, if
+calculated on the subset of sessions presented in
+Figure~\ref{fig:mapping_examples_1} and Figure~\ref{fig:mapping_examples_2},
+equals 90.83\% as a result of 132 wrongly labeled parking lots out of the
+total number of 1440.
+
+There are two main sources of errors. The first one is failing to detect the
+cars or assigning them to the wrong parking lot. Failing to detect a car
+logically propagates from the visual detection part. The data association
+error is usually due to abnormal sizes of the cars or improper position in the
+parking lot. The second source of error is an assumption that the world stays
+static while the dataset is being acquired.
 
 % section parking_lots_modeling (end)
 
@@ -227,6 +268,16 @@ position in the parking lot.
 \end{center}
 \caption{A visual representation of the parking lot graph useful for planner visualization. The edges are defined similarly to~\ref{fig:graph}. Each state contains prediction and observation information. This can be seen as combining occupancy information in Figure~\ref{subfig:pre_defined} with Figure~\ref{fig:occupancy_accumulated}.}
 \label{fig:graph_accumulated_illustration}
+\end{figure}
+
+
+\begin{figure}[t]
+\begin{center}
+\subfloat[]{\includegraphics[width=0.4\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_states.pdf}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.4\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_path_1.pdf}}\hspace{2mm}
+\end{center}
+\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 10 seconds. Each state is presented by an inner and an outer circles. The inner circle depicts the real occupancy status on the day the experiment was held. The outer one presents the occupancy estimate based on the data accumulated from multiple runs. Both circle's colors vary from red for occupied parking lots to green for free ones.}
+\label{fig:w_4_d_10_w_10_log_12_12}
 \end{figure}
 
 \begin{figure}[b]%
@@ -262,14 +313,6 @@ the agent as he drives by. The actions, that the agent is able to carry out,
 as presented in~\eqref{eq:actions} are visualized in the way shown in
 Figure~\ref{fig:actions}.
 
-\begin{figure}[tb]
-\begin{center}
-\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_states.pdf}}\hspace{2mm}
-\subfloat[]{\includegraphics[width=0.45\textwidth]{pictures/walk_4_drive_10_wait_10_data_log_12_12_2013_path_1.pdf}}\hspace{2mm}
-\end{center}
-\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 10 seconds. Each state is presented by an inner and an outer circles. The inner circle depicts the real occupancy status on the day the experiment was held. The outer one presents the occupancy estimate based on the data accumulated from multiple runs. Both circle's colors vary from red for occupied parking lots to green for free ones.}
-\label{fig:w_4_d_10_w_10_log_12_12}
-\end{figure}
 
 As described in Section~\ref{sec:action_planning} there are 3 core parameters
 that influence the performance of the planner: $v_{\mathrm{walk}}$, $v_{\mathrm{drive}}$ and the

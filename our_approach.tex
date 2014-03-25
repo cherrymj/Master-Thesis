@@ -72,8 +72,8 @@ training stage. Despite, not being a crucial measure of an algorithm
 performance, the training time is still an important argument, as it
 influences the usability of the method, especially on implementation stage.
 
-Throughout the development of this thesis, we tried all these and finally
-decided to apply the HOG-based detector following the work
+Throughout the development of this thesis, we tried all these methods and
+finally decided to apply the HOG-based detector following the work
 of~\citet{dalal2005}. It relies on the gradient-based features and is
 therefore invariant to illumination and brightness changes. Additionally, the
 presented method stays robust to slight changes in rotation and shape.
@@ -245,11 +245,10 @@ EUROPA robot Obelix which has a laser with an opening angle of $270^\circ$
 mounted approximately on the human knee level. This setup proves to be more
 robust in terms of finding the exact relative position of the detected car.
 
-The laser mounted on the robot provides a sufficient opening angle to cover
-the field of view of the camera. We search for the beams, that span through
-the area covered by the image. The camera is mounted on the same vertical axis
-with the laser. This yields the choice of the laser beams, that contain depth
-values associated with the car:
+We search for the beams, that span through the area covered by the image. The
+camera is mounted on the same vertical axis with the laser as in
+Figure~\ref{subfig:obelix}. This yields the choice of the laser beams, that
+contain depth values associated with the car:
 
 \begin{equation}
 Z = \{ \mathrm{beam}_n \mid \forall n : \beta_{l} < \alpha_{\mathrm{camera}} + \alpha_{0} + \alpha_{n} < \beta_{r} \}
@@ -500,10 +499,10 @@ on finding a free parking lot and walking from the found one to the goal.
 \subsection{Parking Area as a Graph} % (fold)
 \label{sub:parking_area_as_a_graph_}
 
-We formally describe the parking as a graph. The states are defined as the set
-of vertices $V$, each of which represents a point in $\mathbb{R}^2$. The set
-of edges $E$ is then a function $V \rightarrow V$, that corresponds to the
-actions that can be carried out from one state to another.
+We represent the parking area as a graph $G = (V,E)$. The states are defined
+as a set of vertices $V$, where each vertex represents a point in
+$\mathbb{R}^2$. Each edge $e \in E$ is a function $V \rightarrow V$, that
+corresponds to the actions that can be carried out from one state to another.
 
 \begin{figure}[t]
     \begin{center}
@@ -515,13 +514,21 @@ actions that can be carried out from one state to another.
     \label{fig:graph}
 \end{figure}
 
-In the case where we explicitly map the parking lots --- they, along with
-their spacial information, form the vertices of the graph. In this case we
-define the edges so that they hold the spacial information about the
-connectivity and distances between the parking lots. All vertices are
-connected to the goal state. The probability of the action that allows the
-agent to follow the edges to the goal depends on the occupancy probability of
-the related parking lot and is formally defined later.
+
+In order to define the set of vertices for modeling the parking area as a
+graph, we consider the movements of the car that are allowed by the parking
+area's structure. We present such a representation in Figure~\ref{fig:graph}.
+The graph to the left has two distinct sets of vertices. The ones in blue
+represent the points in $\mathbb{R}^2$ that model the paths around the parking
+lot, suitable car movements. The red vertices represent the positions of the
+parking spaces, which are additionally connected to the goal state (not shown
+in the figure). The graph to the right represents the reduced version, where
+all vertices correspond to the parking spaces' positions. By reducing the
+graph in such way we move the focus from modeling the actual car movements to
+the observations the agent makes, that is: it is irrelevant for the planner
+what the actual position of the car is if it is able to observe a parking
+slot. We define the edges so that they hold the spacial information about the
+connectivity and distances between the parking lots.
 
 % subsection parking_area_as_a_graph_ (end)
 
