@@ -3,22 +3,22 @@
 \chapter{Conclusion and Further Work} % (fold)
 \label{cha:conclusion_and_further_work}
 
-    The task of this thesis was to develop a framework for supporting drivers
-    in finding free parking spaces. The system to solve this task should
-    perceive cars in the environment, model parking places, and suggest
-    trajectories towards free parking lots.
+    The task of this thesis was to develop a proof of concept framework for
+    supporting drivers in finding free parking spaces. The system should solve
+    this task by perceiving cars in the environment, modeling parking places,
+    and suggesting trajectories towards free parking lots.
 
-    As the result of this thesis we present a proof of concept of an
-    integrated system, that only relies on on-board perception, models the
-    parking situation and generates optimal trajectories for finding a free
-    parking space and reaching the target location as fast as possible. Our
-    system automatically quantifies the occupancy probability of each parking
-    lot in an area of interest and provides a behavior that minimizes the
-    expected time for reaching the target destination.
+    As the result of this task we present a proof of concept of an integrated
+    system, that only relies on on-board perception, models the parking
+    situation and generates optimal trajectories for finding a free parking
+    space and reaching the target location as fast as possible. Our system
+    automatically quantifies the occupancy probability of each parking lot in
+    an area of interest and provides a behavior that minimizes the expected
+    time for reaching the target destination.
 
     Our approach requires only on-board sensing to perceive the environment.
-    So far, we used a camera and a laser range finder to observe the scene and
-    to detect cars from the perceptual input. This sub-task was solved by a
+    So far, we use a camera and a laser range finder to observe the scene and
+    to detect cars from the perceptual input. We solve this subtask by a
     supervised learning approach using a support vector machine and histograms
     of oriented gradients (HOG) as features. The detections are fused into a
     model of the environment that allows for building up a representation of
@@ -28,43 +28,43 @@
     parking lot and at the same time park as close as possible to the desired
     target location.
 
-    We present a series of experiments carried out with the use of the Obelix
-    robot at the campus of the University of Freiburg. We evaluate HOG based
-    visual detection of the cars, assignment of the detections to the parking
-    lots, estimation of their occupancy probability and planning with the use
-    of MDPs. The visual detection fused with the laser measurements shows
-    steady car detection rates, where approximately 90\% of the parking lots
-    are labeled correctly. The MDP based planner was evaluated on the real
-    occupancy data acquired from the parking lot at the University Freiburg
-    campus. It is shown to find the optimal route to the goal, while adopting
-    to current system parameters, such as walking and driving speeds.
+    We present a series of experiments carried out with the Obelix robot at
+    the campus of the University of Freiburg. We evaluate the HOG based visual
+    detection of the cars, the assignment of the detections to the parking
+    lots, and the trajectory planning using MDPs. The visual detection fused
+    with the laser measurements shows steady car detection rates, where
+    approximately 90\% of the parking lots are labeled correctly. The MDP
+    based planner was evaluated on the real occupancy data acquired from the
+    parking lot at the University Freiburg campus. It is shown to find the
+    optimal route to the goal, while adopting to current system parameters,
+    such as walking and driving speeds.
 
-    There is, however, still place for the future work. The visual detection
-    rates can be improved by adjusting the parameters of the HOG descriptors
-    and adjusting the training datasets. This, however, requires extensive
-    additional study.
+    Although the system solves the given task of this thesis, there is space
+    for the future work. The visual detection rates can be improved by
+    adjusting the parameters of the HOG descriptors and adjusting the training
+    datasets. This, however, requires extensive additional study.
 
-    Also the component integration can be improved to form an more consistent
-    framework. In the current work the planner is a stand-alone application,
-    written in Octave. Though it was not in the scope of this thesis, it may
-    be subject to the future work to integrate it with the robot's planner
+    Whereas the perception and modeling part was written in C++ and runs on
+    the robot, the planner is a stand-alone application, written in Octave.
+    Thus, for an integrated system, all components need to be implemented on
+    the same platform. Though it was not an explicit task of this thesis, it
+    may be subject to the future work to integrate it with the robot's planner
     system.
 
     The improvements can also be made to the parking lots modeling. Our
-    current approach relies on the pre-defined parking lot positions. It is
-    tempting to improve the performance of the occupancy grid maps in order to
-    map the parking lots in an autonomous fashion based on the observations of
-    the parked cars at different times. In our work we rely on the
-    Simultaneous Localization and Mapping (SLAM) approach in order to
-    precisely estimate the position of the robot while taking measurements.
-    This part is crucial for data association. It would, however, be a great
-    improvement to find an way of estimating the parking lots' occupancy
-    information relying only on GPS measurements.
+    current approach relies on the pre-defined parking lot positions as this
+    gave the best performance in our settings. It is tempting to improve the
+    performance of the occupancy grid maps in order to map the parking lots in
+    an autonomous fashion based on the observations of the parked cars at
+    different times. In our work we rely on a simultaneous localization and
+    mapping approach in order to precisely estimate the position of the robot
+    while taking measurements. This part is crucial for data association. It
+    would, however, be an interesting improvement to find a way of estimating
+    the parking lots' occupancy information relying only on GPS measurements.
 
-    Overall, the system, presented in this thesis as a proof of concept, when
-    merged with all further developments, might become a helpful tool in the
-    task of parking in densely occupied parking areas. The described system
-    may also be used in autonomous vehicles as it provides a way to deal with
-    searching for a parking lot in a fully autonomous fashion.
+    Overall, the system, presented in this thesis is a proof of concept
+    implementation. The described system, however, has the potential to be
+    used in autonomous vehicles as it provides a way to deal with searching
+    for a parking lot in a fully autonomous fashion.
 
 % chapter conclusion_and_further_work (end)
