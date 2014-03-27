@@ -3,9 +3,9 @@
 \chapter{Experimental Results}
 \label{cha:experimental_results}
 
-Through the course of this work, we make extensive use three core components:
-visual car detection, parking lot modeling and planning. In this section, we
-present the experimental evaluation of each of these parts.
+Through the course of this work, we make extensive use of three core
+components: visual car detection, parking lot modeling and planning. In this
+section, we present the experimental evaluation of each of these parts.
 
 \section{Visual Car Detection}
 \label{sec:visual_car_detection}
@@ -52,13 +52,13 @@ right sides.
 The sides of the car are invariant under the mirror transformation. This
 allows to use the same image for training a classifier for each side which
 simplifies the training data generation. Front and back of the car, though
-different to human point of view, seem to be similar in the HOG visualization.
-Therefore, the corresponding datasets can be combined into one.
+different from human point of view, seem to be similar in the HOG
+visualization. Therefore, the corresponding datasets can be combined into one.
 
 These datasets contain respectively images of sizes $128 \times 128$ pixels
 for front/rear car view and $128 \times 64$ pixels for side view. We utilize
 682 positive images that contain cars for training the front/rear detector. In
-addition to these positive examples we also convene 7972 negative images. Some
+addition to these positive examples we also gather 7972 negative images. Some
 examples from the front/rear positive and negative training datasets are
 presented in Figure~\ref{fig:pos_neg_examples}.
 
@@ -117,22 +117,19 @@ Figure~\ref{fig:detection_examples}.
 
 \begin{figure}[p]%
 \centering
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_1.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_2.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_3.jpg}}\\
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_4.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_5.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_6.jpg}}\\
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_7.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_8.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_9.jpg}}\\
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_10.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_11.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_12.jpg}}\\
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_1.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/undet_2.jpg}}\hspace{2mm}
-\subfloat{\includegraphics[width=0.3\textwidth]{pictures/det_14.jpg}}\\
-\caption{Examples of detections of different cars under different light conditions.}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_2.jpg}\label{subfig:car_1}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_3.jpg}\label{subfig:car_2}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_14.jpg}\label{subfig:beetle}}\\
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_5.jpg}\label{subfig:pickup}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_10.jpg}\label{subfig:vw_van}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_6.jpg}\label{subfig:two_det}}\\
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_11.jpg}\label{subfig:minivan}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_19.jpg}\label{subfig:hard_light}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_18.jpg}\label{subfig:bmw}}\\
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/undet_1.jpg}\label{subfig:fail_squary}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/undet_2.jpg}\label{subfig:fail_mers}}\hspace{2mm}
+\subfloat[]{\includegraphics[width=0.28\textwidth]{pictures/det_7.jpg}\label{subfig:fail_van}}\\
+\caption{Examples of detections of different cars under different light conditions. The cars vary in shape \subref{subfig:pickup}, \subref{subfig:beetle}, \subref{subfig:vw_van}, \subref{subfig:bmw} in color and lightning \subref{subfig:hard_light}, \subref{subfig:minivan}, \subref{subfig:beetle}. The cars on the sides of the images are often not detected. This, however, does not cause errors given the fact that data acquisition is carried out in continuous manner, and the missed cars are detected in the frames taken at adjacent times \subref{subfig:car_1}, \subref{subfig:car_2}. The bottom row presents some detection failures. The main cause is the shape of the car that significantly differs from an average one.}
 \label{fig:detection_examples}
 \end{figure}
 
@@ -143,11 +140,11 @@ Figure~\ref{fig:detection_examples}.
 
 \begin{figure}[p]%
 \centering
-\subfloat[Aerial view.]{\includegraphics[width=0.6\textwidth]{pictures/google_map.pdf}\label{subfig:aerial}} \\
-\subfloat[Car detections over the map built with the laser-based SLAM procedure.]{\includegraphics[width=0.6\textwidth]{pictures/laser_fusion.pdf}\label{subfig:slam_detections}} \\
-\subfloat[Occupancy grid map acquired as described in Section~\ref{sub:occupancy_grids}.]{\includegraphics[width=0.6\textwidth]{pictures/occupancy_cars.pdf}\label{subfig:occ_maps_detections}} \\
-\subfloat[Cars positions mapped to pre-defined parking lot positions.]{\includegraphics[width=0.6\textwidth]{pictures/parking_lots_detections.pdf}\label{subfig:pre_defined}}
-\caption{Representations of the campus parking lot at the university of Freiburg. \\ Images \subref{subfig:slam_detections}, \subref{subfig:occ_maps_detections},~\subref{subfig:pre_defined}  represent the same occupancy state of the parking lot.}
+\subfloat[Aerial view.]{\includegraphics[width=0.47\textwidth]{pictures/google_map.pdf}\label{subfig:aerial}} \\
+\subfloat[Car detections over the map built with the laser-based SLAM procedure.]{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion.pdf}\label{subfig:slam_detections}} \\
+\subfloat[Occupancy grid map acquired as described in Section~\ref{sub:occupancy_grids}.]{\includegraphics[width=0.47\textwidth]{pictures/occupancy_cars.pdf}\label{subfig:occ_maps_detections}} \\
+\subfloat[Cars positions mapped to pre-defined parking lot positions.]{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_detections.pdf}\label{subfig:pre_defined}}
+\caption{Representations of the campus parking lot at the University of Freiburg. \\ Images \subref{subfig:slam_detections}, \subref{subfig:occ_maps_detections},~\subref{subfig:pre_defined}  represent the same occupancy state of the parking lot.}
 \label{fig:different_mappings}
 \end{figure}
 
@@ -211,7 +208,7 @@ observed.
 \subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_15_1.png}}\\
 \subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_12_12.pdf}}\hspace{2mm}
 \subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_12_12.png}}\\
-\caption{Examples of detections of different cars under different light conditions.}
+\caption{This figure shows the precision of occupancy modeling. Each pair of images represents the occupancy state of the parking lot on a specific day. The images on the left show a map of the environment build by laser range measurements. The detected cars are represented in red dots. The right images show the occupancy of each parking space, where green stands for ``free'' and red for ``occupied''. Part 1.}
 \label{fig:mapping_examples_1}
 \end{figure}
 
@@ -225,7 +222,7 @@ observed.
 \subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_9_12.png}}\\
 \subfloat{\includegraphics[width=0.47\textwidth]{pictures/laser_fusion_11_12.pdf}}\hspace{2mm}
 \subfloat{\includegraphics[width=0.47\textwidth]{pictures/parking_lots_11_12.png}}\\
-\caption{Examples of detections of different cars under different light conditions.}
+\caption{This figure shows the precision of occupancy modeling. Each pair of images represents the occupancy state of the parking lot on a specific day. The images on the left show a map of the environment build by laser range measurements. The detected cars are represented in red dots. The right images show the occupancy of each parking space, where green stands for ``free'' and red for ``occupied''. Part 2.}
 \label{fig:mapping_examples_2}
 \end{figure}
 
@@ -333,9 +330,23 @@ different sets of the parameters.
 \subfloat[$2^{nd}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_2.pdf}}\hspace{2mm}
 \subfloat[$3^{rd}$ iteration.]{\includegraphics[width=0.35\textwidth]{pictures/walk_4_drive_10_wait_90_data_artificial_path_3.pdf}}\\\vspace{-5mm}
 \end{center}
-\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 90 seconds carried out on an artificial dataset.}
+\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 90 seconds carried out on an artificial dataset. The optimal actions are different for each iteration and are depicted as presented in Figure~\ref{fig:actions}.}
 \label{fig:w_4_d_10_w_90_artificial}
 \end{figure}
+
+\begin{figure}[p]
+\begin{center}
+\subfloat[Initial parking lot state.]{\includegraphics[width=0.33\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_states.pdf}}\hspace{2mm}
+\subfloat[$1^{st}$ iteration.]{\includegraphics[width=0.33\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_1.pdf}}\\
+\subfloat[$3^{rd}$ iteration.]{\includegraphics[width=0.33\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_3.pdf}}\hspace{2mm}
+\subfloat[$4^{th}$ iteration.]{\includegraphics[width=0.33\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_4.pdf}}\\
+\subfloat[$16^{th}$ iteration.]{\includegraphics[width=0.33\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_16.pdf}}\hspace{2mm}
+\subfloat[$22^{nd}$ iteration.]{\includegraphics[width=0.33\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_22.pdf}}
+\end{center}
+\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 10 seconds carried out on an artificial dataset.}
+\label{fig:w_4_d_10_w_10_artificial}
+\end{figure}
+
 
 Figure~\ref{fig:w_4_d_10_w_10_log_12_12} shows the path considered optimal by
 the agent, given the driving speed of 10 km/h and walking speed of 4 km/h.
@@ -382,19 +393,6 @@ may be explained as follows: if the walking speed is equal to the driving
 speed it makes no sense driving around the parking lot when it is possible to
 walk straight to the goal.
 
-
-\begin{figure}[tbh]
-\begin{center}
-\subfloat[Initial parking lot state.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_states.pdf}}\hspace{2mm}
-\subfloat[$1^{st}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_1.pdf}}\\
-\subfloat[$3^{rd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_3.pdf}}\hspace{2mm}
-\subfloat[$4^{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_4.pdf}}\\
-\subfloat[$16^{th}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_16.pdf}}\hspace{2mm}
-\subfloat[$22^{nd}$ iteration.]{\includegraphics[width=0.40\textwidth]{pictures/walk_4_drive_10_wait_10_data_artificial_path_22.pdf}}
-\end{center}
-\caption{An optimal strategy for $v_{\mathrm{walk}} = 4$ km/h, $v_{\mathrm{drive}} = 10$ km/h and the failure cost of 10 seconds carried out on an artificial dataset.}
-\label{fig:w_4_d_10_w_10_artificial}
-\end{figure}
 % section planning_results (end)
 % chapter experimental_results (end)
 

@@ -8,27 +8,27 @@ that the people cruising in the search for a parking space can generate more
 than 10\% of an overall city traffic and the times until they eventually find
 a parking space can reach 20 minutes.
 
-Therefore we investigate the problem of how to map and predict the occupancy
+We therefore investigate the problem of how to map and predict the occupancy
 of parking spaces. This information, when integrated into navigation devices
-as they are today found in cell phones and GPS navigation systems, has the
-potential to drastically improve the experience of searching for an empty
-parking lot.
+as they are found today in cell phones and GPS navigation systems, has the
+potential to drastically improve the experience of searching for a free
+parking space.
 
 We present a proof of concept of an automated approach for gathering and
 interpreting the parking lot occupancy information using a mobile platform. It
 allows for planning the route not only with respect to spatial information but
-additionally taking into account parking lots' occupancy information.
+additionally taking into account parking spaces' occupancy information.
 
 The proposed approach uses an in-vehicle camera setup to repeatedly detect the
-parked cars and assign them to the parking lots in the area of interest. It
+parked cars and assign them to the parking spaces in the area of interest. It
 estimates the occupancy probability of each found position suitable for
-parking throughout all runs. The framework is easily expandable to account for
+parking throughout all runs. The framework is easily extendable to account for
 querying for occupancy information on specific date or even time of day.
 
 Furthermore, we introduce a planner that relies not only on the position but
-also on the occupancy probability of each parking lot in order to find the
+also on the occupancy probability of each parking space in order to find the
 path that minimizes the expected time spent on searching for an unoccupied
-parking place and walking from the found one to the destination by foot.
+parking space and walking from the found one to the destination by foot.
 
 We evaluated our system based on real world data gathered with a mobile robot
 over several days in a real parking lot.

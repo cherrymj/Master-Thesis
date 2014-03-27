@@ -19,10 +19,8 @@ of concept system prototyped for in-vehicle sensor setup: visual car
 detection, creation of the map of parking lots capable to store their
 occupancy information and a planner able to find a free parking lot in the
 minimum expected time. We also present the way of integrating these parts into
-a single consistent framework.
-
-We start by a coarse outline of these different sections and present each of
-these sub-parts in detail later in the chapter.
+a single consistent framework. We start by a coarse outline of these different
+sections and present each of these subparts in detail later in the chapter.
 
 \begin{itemize}
 
@@ -62,18 +60,18 @@ differ in shape and angle from which they are observed. They also can be
 occluded by people walking in front of them or other cars. In addition to
 these variations, we may also observe them in different lighting conditions.
 
-Utilizing the local binary patterns (LBPs) as presented by~\citet{lbp2010}
-addresses the illumination issues and overall boosts the detection rates and
-performance. It is, however, similarly to Haar features, vulnerable to
+\citet{lbp2010} utilize the local binary patterns (LBPs). This approach
+addresses the illumination issues and overall boosts the detection rate and
+performance speed. It is, however, similarly to Haar features, vulnerable to
 rotation and shape changes.
 
-Moreover, to the extent of our knowledge, LBP-based methods are slow on the
-training stage. Despite, not being a crucial measure of an algorithm
+Moreover, to the extent of our knowledge, LBP-based methods are slow at the
+training stage. Despite not being a crucial measure of an algorithm
 performance, the training time is still an important argument, as it
 influences the usability of the method, especially on implementation stage.
 
 Throughout the development of this thesis, we tried all these methods and
-finally decided to apply the HOG-based detector following the work
+decided to apply the HOG-based detector following the work
 of~\citet{dalal2005}. It relies on the gradient-based features and is
 therefore invariant to illumination and brightness changes. Additionally, the
 presented method stays robust to slight changes in rotation and shape.
@@ -91,8 +89,8 @@ much smaller than the local spatial or orientation bin size.
 \centering
 \subfloat[]{\includegraphics[width=0.27\textwidth]{pictures/gradients.pdf}\label{subfig:gradient}} \hspace{3mm}
 \subfloat[]{\includegraphics[width=0.27\textwidth]{pictures/hog.pdf}\label{subfig:hog}} \hspace{3mm}
-\subfloat[]{\includegraphics[width=0.4\textwidth]{pictures/hog_dist.pdf}\label{subfig:histogram}}
-\caption{This figures shows gradient orientations for every pixel of the detection window \subref{subfig:gradient}, the corresponding histogram \subref{subfig:histogram} and its visualization \subref{subfig:hog}. The directions of the arrows in \subref{subfig:histogram} represent the angle covered by each bin, the lengths of arrows correspond to the magnitude of the gradients that fall into the corresponding bin. In this example, for better visualization, the histogram consists of 5 values, covering the range of $180^\circ$, meaning that each bin covers the angle of $36^\circ$, whereas the experiments in this thesis, use the histograms consisting of 9 bins.}
+\subfloat[]{\includegraphics[width=0.4\textwidth]{pictures/hog_hist.pdf}\label{subfig:histogram}}
+\caption{This figures shows gradient orientations for every pixel of the detection window \subref{subfig:gradient}, the corresponding histogram \subref{subfig:histogram} and its visualization as a glyph \subref{subfig:hog}. The directions of the arrows in \subref{subfig:histogram} represent the angle covered by each bin, the lengths of arrows correspond to the magnitude of the gradients that fall into the corresponding bin. In this example, for better visualization, the histogram consists of 5 values, covering the range of $180^\circ$, meaning that each bin covers the angle of $36^\circ$, whereas the experiments in this thesis, use the histograms consisting of 9 bins.}
 \label{fig:hog_simple}
 \end{figure}
 
@@ -104,16 +102,16 @@ the detection window and storing the orientations in a histogram. For each $8
 gradient orientations to distinct histogram bins, that cover all possible
 orientation angles of the gradient. We do not take into account the direction
 of the gradient vector, focusing only on its orientation. This allows for the
-histogram bins to cover an angle of $180^{\circ}$ instead of $360^{\circ}$ to
-ensure storing all possible orientations. A visualization of an example
+histogram bins to cover an angle of $180^{\circ}$ instead of $360^{\circ}$
+while still storing all possible orientations. A visualization of an example
 histogram can be seen in Figure~\ref{fig:hog_simple}.
 
 \begin{figure}[b]
  \centering
-\subfloat[]{\includegraphics[width=0.31\textwidth]{pictures/original.jpg}\label{subfig:original}} \hspace{3mm}
-\subfloat[]{\includegraphics[width=0.31\textwidth]{pictures/glyph.jpg}\label{subfig:glyph}} \hspace{3mm}
-\subfloat[]{\includegraphics[width=0.31\textwidth]{pictures/ihog.jpg}\label{subfig:ihog}}
-\caption{This figure shows a car image \subref{subfig:original}, a visual representation of the histogram values \subref{subfig:glyph} and a HOG inversion image from HOGles \cite{vondrick2013hoggles} \subref{subfig:ihog}.}
+\subfloat[]{\includegraphics[width=0.27\textwidth]{pictures/original.jpg}\label{subfig:original}} \hspace{3mm}
+\subfloat[]{\includegraphics[width=0.27\textwidth]{pictures/glyph.jpg}\label{subfig:glyph}} \hspace{3mm}
+\subfloat[]{\includegraphics[width=0.27\textwidth]{pictures/ihog.jpg}\label{subfig:ihog}}
+\caption{This figure shows a car image \subref{subfig:original}, a representation of the histogram values using glyphs (similar to Fig.~\ref{subfig:hog}) \subref{subfig:glyph} and a HOG inversion image via HOGles~\cite{vondrick2013hoggles}~\subref{subfig:ihog}. The shadows around the car have a high influence on the corresponding HOG. Such details are smoothed out via learning the descriptor from the training data.}
 \label{fig:hog_car}
 \end{figure}
 
@@ -171,13 +169,13 @@ we make extensive use of libSVM library by~\citet{libSVM2011}.
     \begin{center}
         \includegraphics[width=0.6\textwidth]{pictures/cascades.png}
     \end{center}
-    \caption{Each part of this figure illustrates a cut from the query image, sub-sampled with the corresponding scaling factor.}
+    \caption{Each part of this figure illustrates a cut from the query image, subsampled with the corresponding scaling factor. For example, a $1024 \times 768$ pixel image subsampled with the factor of 50\% has the size of $512 \times 384$ pixels. A set of images with different scaling factors form a cascade and are used as base for the sliding window approach for object detection. This allows us to detect objects of similar structure on different scales.}
     \label{fig:cascades}
 \end{figure}
 
 Based on the trained classifier, we carry out the detection in a cascade
 fashion via the sliding window approach. That is: for every image we generate
-a cascade which is effectively a set of images, sub-sampled with different
+a cascade which is effectively a set of images, subsampled with different
 scaling factors. For every image in a cascade we slide a detection window of
 the pre-defined size over the image. Every sliding window content yields a HOG
 descriptor which we test against the pre-trained SVM classifier to find out to
@@ -197,9 +195,11 @@ and combined with the visual detections described in the previous sections.
 \subsubsection{Stereo Camera}\label{ssub:stereo_camera}
 
 In order to find the depth from the stereo camera, we calculate the disparity
-image from left and right images taken from the video stream. Knowing the
-internal camera parameters we reconstruct the relative position of each pixel
-of the disparity image.
+image from left and right images taken from the video stream.
+Following~\citet{konolige}, we carry out the disparity computation making use
+of block matching along the epipolar lines in the image. Knowing the internal
+camera parameters we reconstruct the relative 3D position of each pixel from
+the disparity image.
 
 The distance along the camera $z$ axis: $Z = \frac{fB}{d}$, where $f$ is the
 focal length of the camera, $B$ is the baseline and $d$ is the disparity.
@@ -226,7 +226,7 @@ values that fall into the corresponding region of interest. These depth values
 contain high variance. The first reason for this is that they originate on the
 surface of the car and the variance represents the difference in the distance
 between different parts of the car. The second reason comes from the method in
-which these depth values were acquired. The depth map from the stereo camera
+which these depth values are acquired. The depth map from the stereo camera
 setup proves to be noisy in the urban environments with homogeneous regions
 like the sides or the hood of the car. Moreover parts of the environment are
 seen through the windows of the car, adding additional noise to measurements.
@@ -273,17 +273,19 @@ we take the median of these values.
 \label{sec:model}
 
 The methods mentioned above provide the cars positions relative to the camera.
-Integrating this information with GPS measurements or SLAM-based pose
-estimates, we calculate the positions of the detected cars in the world frame.
-In this section we present two approaches for storing these detections. We
-also describe the approach to modeling the positions of the parking lots and
-their occupancy probability.
+Integrating this information with GPS coordinates or pose estimates based on
+simultaneous localization and
+mapping~\cite{stachniss11isrr,kretzschmar10ki,kuemmerle11auro}, we calculate
+the positions of the detected cars in the world frame. In this section we
+present two approaches for storing these detections. We also describe the
+approach to modeling the positions of the parking lots and their occupancy
+probability.
 
 \subsection{Occupancy Grids}
 \label{sub:occupancy_grids}
 
 The first approach that we consider utilizes the grid maps. Grid maps
-partition the space into a grid of rectangular cells. Each grid contains
+partition the space into a grid of rectangular cells. Each grid cell contains
 information about the corresponding area in the environment. We make use of
 one particular realization of grid maps --- the \emph{occupancy grid maps} as
 presented by~\citet{occupancy_grids}. Occupancy grid maps assume that each
@@ -480,7 +482,7 @@ for a path to a free parking lot. It, however, depends on the application what
 an optimal solution to this problem is. We therefore explicitly define the
 criterium of optimality that we consider throughout this work.
 
-There are typically sub-areas of the parking area, which are better in the
+There are typically subareas of the parking area, which are better in the
 sense of their distance to a common destination. This also means that the
 ``better'' areas of the parking lots are more likely to be occupied than the
 other. An illustration of such situation can be seen in
@@ -517,18 +519,19 @@ corresponds to the actions that can be carried out from one state to another.
 
 In order to define the set of vertices for modeling the parking area as a
 graph, we consider the movements of the car that are allowed by the parking
-area's structure. We present such a representation in Figure~\ref{fig:graph}.
-The graph to the left has two distinct sets of vertices. The ones in blue
-represent the points in $\mathbb{R}^2$ that model the paths around the parking
-lot, suitable car movements. The red vertices represent the positions of the
-parking spaces, which are additionally connected to the goal state (not shown
-in the figure). The graph to the right represents the reduced version, where
-all vertices correspond to the parking spaces' positions. By reducing the
-graph in such way we move the focus from modeling the actual car movements to
-the observations the agent makes, that is: it is irrelevant for the planner
-what the actual position of the car is if it is able to observe a parking
-slot. We define the edges so that they hold the spacial information about the
-connectivity and distances between the parking lots.
+area's structure. We present a representation of this structure in
+Figure~\ref{fig:graph}. The graph to the left has two distinct sets of
+vertices. The ones in blue represent the points in $\mathbb{R}^2$ that model
+all possible paths around the parking lot, suitable car movements. The red
+vertices represent the positions of the parking spaces, which are additionally
+connected to the goal state (not shown in the figure). The graph to the right
+represents the reduced version, where all vertices correspond to the parking
+spaces' positions. By reducing the graph in such way we move the focus from
+modeling the actual car movements to the observations the agent makes, that
+is: it is irrelevant for the planner what the actual position of the car is if
+it is able to observe a parking slot. We define the edges so that they hold
+the spacial information about the connectivity and distances between the
+parking lots.
 
 % subsection parking_area_as_a_graph_ (end)
 
@@ -673,13 +676,13 @@ In addition to these costs, we also penalize staying in one place. In our
 system the agent stays in the same state only if he fails to carry out an
 optimal action. We define this cost in such way, that the agent looses a
 constant amount of time $\Delta t$ if he fails to carry out any action $a \in
-A_\mathrm{move}$. However, the cost for failing to carry out the action to
-park is different. This cost can be used to control the agent's behavioral
-model. The higher the cost of the failure is, the less aggressive the agent's
-behavior will be. Setting the failure cost to a high value results in the
-agent's behavior that avoids carrying out the parking action in a parking lot
-with a high occupancy probability. We present examples of the impact of this
-cost in the experimental section.
+A_\mathrm{move}$. However, the cost for failing to carry out the action
+$a_\mathrm{park}$ is different. This cost can be used to control the agent's
+behavioral model. The higher the cost of the failure is, the less aggressive
+the agent's behavior will be. Setting the failure cost to a high value results
+in the agent's behavior that avoids carrying out the parking action in a
+parking lot with a high occupancy probability. We present examples of the
+impact of this cost in the experimental section.
 
 % subsubsection failure_costs (end)
 
@@ -745,7 +748,7 @@ equivalent to~\eqref{eq:optimal_route} leading to $\pi^*$ being an optimal
 decision in the means of minimizing the expected time that the agent needs to
 find a parking lot.
 
-However, as times goes to infinity the sum in~\eqref{eq:non_discount_utility}
+However, as time goes to infinity the sum in~\eqref{eq:non_discount_utility}
 also tends to lean to infinitely big values. In order to avoid this, we make
 use of discounted rewards:
 
@@ -754,8 +757,8 @@ use of discounted rewards:
 U^{\pi}(s) = E\left[\sum_{t=0}^{\infty} \gamma R(s_t) \mid \pi,s_0 = s \right]
 \end{equation}
 
-where $\gamma$ is the discount factor --- a number in $[0, 1)$. Formulating
-the utility function in such way allows to avoid infinitely big
+where $\gamma \in [0, 1)$ is the discount factor. Formulating the utility
+function in such way allows to avoid infinitely big
 sums~\cite{Russell:2003:AIM:773294} and allows for searching for the optimal
 policy in the way, that we present further in this section. In order to
 minimize the deviation of the MDP solution from the one that minimizes the
@@ -817,7 +820,7 @@ occupancy probability in the related state to 1 or 0 respectively. This allows
 for carrying out further decisions based on the better background, having more
 knowledge about the state of the world.
 
-The update to the occupancy of the state $s$ consequently changes the
+The update of the occupancy of the state $s$ consequently changes the
 probability of the action $a_\mathrm{park}$ that can be carried out in this
 state, updating the transition function $T(s_\mathrm{goal} \mid s,
 a_\mathrm{park})$ to either 1 or 0. We carry out the policy iteration
