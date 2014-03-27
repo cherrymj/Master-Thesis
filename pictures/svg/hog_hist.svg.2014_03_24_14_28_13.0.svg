@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="424.28571"
+   height="395.50708"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="hog_simple.svg"
+   inkscape:dataloss="true">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="241.03147"
+     inkscape:cy="174.67813"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1149"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     showguides="false"
+     inkscape:guide-bbox="true"
+     showborder="true"
+     borderlayer="true"
+     inkscape:showpageshadow="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <sodipodi:guide
+       id="guide6729"
+       position="104.28569,297.85708"
+       orientation="1,0" />
+    <sodipodi:guide
+       id="guide6731"
+       position="164.28569,362.85708"
+       orientation="0,1" />
+    <sodipodi:guide
+       id="guide6733"
+       position="199.28569,292.85708"
+       orientation="0,1" />
+    <sodipodi:guide
+       id="guide6735"
+       position="179.28569,217.85708"
+       orientation="0,1" />
+    <inkscape:grid
+       snapvisiblegridlinesonly="true"
+       enabled="true"
+       visible="true"
+       empspacing="5"
+       id="grid6737"
+       type="xygrid"
+       originx="-0.71430959px"
+       originy="-2.1429226px" />
+    <sodipodi:guide
+       id="guide6739"
+       position="189.28569,142.85708"
+       orientation="0,1" />
+    <sodipodi:guide
+       id="guide6741"
+       position="179.28569,262.85708"
+       orientation="1,0" />
+    <sodipodi:guide
+       id="guide6743"
+       position="254.28569,287.85708"
+       orientation="1,0" />
+    <sodipodi:guide
+       id="guide6745"
+       position="329.28569,137.85708"
+       orientation="1,0" />
+    <sodipodi:guide
+       id="guide6555"
+       position="58.571405,362.85708"
+       orientation="1,0" />
+    <sodipodi:guide
+       id="guide7259"
+       position="413.57141,27.142791"
+       orientation="0,1" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mstart"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path5383"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6298" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304" />
+    </marker>
+    <clipPath
+       id="clipPath5145"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         transform="scale(1,-1)"
+         y="-716.27228"
+         x="119.78642"
+         height="152.62061"
+         width="373.69232"
+         id="rect5147"
+         style="fill:#a00000;fill-opacity:0.12290506;stroke:#000000;stroke-width:2.85719991;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0.37430193;stroke-dasharray:none;stroke-dashoffset:0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4031">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 1260,5509.2 3599.99,0 0,1605.95 -3599.99,0 0,-1605.95 z"
+         id="path4033" />
+    </clipPath>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-7"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-0"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-32"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-09"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-4"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-79"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-9"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-72"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-45"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-2"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-97"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-78"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-08"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-8"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-6"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-68"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-094"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-723"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-20"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-33"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-453"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-089"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-5"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-05"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-11"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-89"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-98"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-07"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-65"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-08"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-57"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-456"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-3"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-78"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-66"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-579"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6304-51"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath7570">
+      <rect
+         style="fill:#a00000;fill-opacity:0.12290506;stroke:#2f6491;stroke-width:1.41972661;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect7572"
+         width="150.59242"
+         height="147.04311"
+         x="121.31503"
+         y="-701.77637"
+         transform="scale(1,-1)" />
+    </clipPath>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-0.71430959,-654.71219)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <g
+       clip-path="url(#clipPath7570)"
+       id="g4023"
+       inkscape:label="lowe"
+       transform="matrix(2.8174439,0,0,-2.8174439,-341.08399,2613.1491)">
+      <g
+         id="g4025"
+         transform="scale(0.1,0.1)">
+        <g
+           id="g4651"
+           transform="scale(10,10)">
+          <text
+             transform="matrix(1,0,0,-1,104.4,536.28)"
+             id="text4653">
+            <tspan
+               style="font-size:9.96263981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 5.5199895 8.2799969 13.319983 18.359983 21.719986 28.799986 33.839985 40.199974 50.160126 55.080044 59.399963 64.439964 69.479965 74.519951 77.279945 82.319946 87.599945 92.639946 97.079941 100.91994 105.35995 108.71994 111.47997 116.51995 119.27997 124.31995 130.19997 132.95998 139.68005 144.12004 147.48006 151.92004 156.36006 159.12006 163.56007 171.24022 176.28021 183.96013 189.48013 192.84013 196.68013 202.2 206.63998 211.67999 219.48 224.51999 229.55998 232.31999 235.08002 240.12 247.67999 250.44002 255.48001 262.56009 267.60007 270.96008 275.40009 280.44009 283.20007 287.64011 292.68008 297.96008 305.7601 310.2001 315.24011 320.28018 323.04013 325.80014 330.84015 335.88019 342.84027 347.2803 352.32031 360.00049 365.04053 368.40051 371.16049 375.60052 380.64053 383.40051 387.84055 390.60052 393.36053 398.40054"
+               y="0"
+               sodipodi:role="line"
+               id="tspan4655">Figure7:Akeypointdescriptoriscreatedbyﬁrstcomputingthegradientmagnitudeandorientation</tspan>
+            <tspan
+               style="font-size:9.96263981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 4.4400015 9.9601507 14.400152 18.840155 23.280144 30.960144 33.720139 41.520145 45.960144 51.000145 57.960144 61.800152 66.24015 74.040146 79.080147 81.840141 88.920296 93.960297 99.000298 101.76029 106.8003 112.20039 114.9604 122.64024 129.72031 133.08032 137.40039 142.44038 145.20041 150.24039 157.8004 162.24039 165.6004 170.6404 175.6804 180.72038 188.16055 190.92056 195.96056 203.16055 208.08047 212.40039 217.44038 222.48039 227.52039 230.2804 235.32039 240.48047 243.24049 248.28049 252.72 257.16 259.92001 262.68002 267.72 272.76004 277.79996 282.23996 288.83981 292.67981 297.71982 302.51987 309.71988 317.39999 322.44 330.00003 332.76001 337.80005 345.00006 347.76004 352.20007 355.56006 358.32004 364.56018 370.68021 375.72021 380.16022 384.00018 391.08017 395.52017 398.88016"
+               y="12"
+               sodipodi:role="line"
+               id="tspan4657">ateachimagesamplepointinaregionaroundthekeypointlocation,asshownontheleft.Theseare</tspan>
+            <tspan
+               style="font-size:9.96263981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 7.1999965 11.639997 14.399993 19.439991 24.479979 27.239986 31.679976 38.639824 43.679825 50.759747 57.359745 64.559738 68.999741 74.039726 77.879738 81.719742 84.479736 88.919739 95.99958 103.19958 105.9596 110.9996 116.03958 120.83943 127.43944 131.87929 134.63931 139.67929 144.71928 147.47931 151.9193 156.3593 159.11929 163.55931 170.51915 175.55914 182.63907 185.39909 190.43907 197.03908 201.959 206.87892 211.31891 214.67892 217.43893 221.87892 224.63895 231.47894 235.91893 238.67894 242.039 246.47899 249.23901 253.679 259.07901 265.19901 270.23901 274.67899 278.51898 284.99893 288.8389 293.27893 301.07892 306.11893 308.87888 313.31894 319.19891 323.63892 326.9989 333.59894 336.35892 341.39896 345.83896 352.79898 357.23898 361.67902 366.11908 371.15909 378.95911 383.99911 386.75909 391.19913 393.95911 398.39911"
+               y="24"
+               sodipodi:role="line"
+               id="tspan4659">weightedbyaGaussianwindow,indicatedbytheoverlaidcircle.Thesesamplesarethenaccumulated</tspan>
+            <tspan
+               style="font-size:9.96263981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 2.7599947 7.799994 10.559989 17.63983 22.679829 26.039831 28.799826 33.239826 38.279827 41.039822 45.479824 48.239819 50.999813 56.039814 62.999962 68.039963 70.799957 74.639961 77.399956 82.439957 87.479942 90.839958 95.279945 103.07996 108.83979 112.67979 117.7198 125.51981 133.31981 137.7598 141.11981 143.87981 148.31982 151.07982 156.11983 163.07967 165.83969 170.87967 177.35976 181.79974 186.83975 191.87975 194.63977 199.07976 204.11974 206.87976 212.75977 217.67969 222.59961 227.0396 232.32001 237.35999 242.39999 249.35983 253.19983 258.23984 263.27982 266.63983 270.95984 275.99982 278.75986 283.79984 288.83984 292.67984 297.12 301.56 307.55981 311.39981 316.43982 321.23993 328.43994 335.52002 340.56006 347.63998 350.39999 355.44 361.9201 365.28009 368.0401 373.08011 378.12012 380.8801 385.44 392.64001 395.39999 398.16"
+               y="35.8801"
+               sodipodi:role="line"
+               id="tspan4661">intoorientationhistogramssummarizingthecontentsover4x4subregions,asshownontheright,with</tspan>
+            <tspan
+               style="font-size:9.96263981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 2.7599947 7.799994 14.160153 16.920149 21.360149 26.400148 31.440136 34.200142 40.920292 45.960293 51.240211 55.680214 60.120216 64.560204 71.40036 75.840363 79.200371 82.560371 87.360527 96.360527 100.80051 105.84053 109.20052 112.56053 117.00052 120.84054 125.88052 130.92052 135.96053 141.00052 143.76053 148.80052 155.28044 158.04047 164.88046 167.64047 172.68047 179.04062 182.88062 187.92062 197.64062 202.68062 207.84064 210.60065 215.64064 222.00079 227.04079 230.4008 234.84079 239.8808 242.64101 247.08101 252.121 256.56116 264.36118 268.80118 273.84119 278.88116 281.64117 284.40118 289.44119 294.48117 298.92117 304.44125 309.48126 313.9213 318.36136 323.52139 326.2814 331.32141 335.76141 340.32141 345.36142 348.1214 351.48138 355.92142 360.36142 363.12143 365.88141 370.92142 377.76129 384.9613 387.72128 390.48129 395.5213 398.28128"
+               y="47.8801"
+               sodipodi:role="line"
+               id="tspan4663">thelengthofeacharrowcorrespondingtothesumofthegradientmagnitudesnearthatdirectionwithin</tspan>
+            <tspan
+               style="font-size:9.96263981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 2.7599947 7.799994 15.119914 18.479918 22.799997 27.839996 30.599991 35.639992 40.679977 47.280056 53.400055 58.440052 61.20005 67.919899 73.439888 78.479889 83.51989 86.87989 94.080048 97.920052 102.96007 107.76014 114.96014 121.68006 128.99998 134.03998 139.07999 146.88005 151.92004 156.36005 160.20004 164.64006 168.00005 170.76007 175.80006 178.56007 183.60007 189.59999 194.03998 197.39999 200.76001 205.2 213 217.43999 222.48001 230.28001 235.31999 240.35999 243.12001 247.56 255.24001 258.60001 261.95999 267.00003 277.55994 281.99994 289.92007 294.96008 300.00009 307.68024 311.5202 315.96021 321.72021 326.76022 333.00027 336.84027 341.28027 349.08026 354.12033 356.88028 361.32034 365.16031 370.56046 377.76044 382.80048 387.24048 390.60046 395.0405 399.48053"
+               y="59.8801"
+               sodipodi:role="line"
+               id="tspan4665">theregion.Thisﬁgureshowsa2x2descriptorarraycomputedfroman8x8setofsamples,whereas</tspan>
+            <tspan
+               style="font-size:9.96263981px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 2.7599947 7.799994 14.639834 18.959755 23.999756 29.039755 33.479744 36.839748 39.599754 47.399761 51.839748 56.879749 59.639744 65.75975 68.519745 75.959747 78.719742 83.759743 86.519737 92.879669 97.919662 102.35968 107.39967 111.83968 117.47968 122.51967 126.35969 133.1996 138.23959 143.2796 150.59959 155.63959 160.07959 163.91959 168.3596 171.71959 174.47961 179.51959 182.27962 187.31961 190.67963 196.79962 201.23961 206.27962 214.07962 219.11961 224.15961 226.91962 231.3596 238.6797 242.03999 245.39999 250.44 260.51984 267.35968 272.39966 277.43967 282.47968 287.51968 294.83975 298.67975 303.11975 310.91971 315.95978 318.71973 325.55969 329.99969 333.35968 336.71967 341.1597 345.59955"
+               y="71.760201"
+               sodipodi:role="line"
+               id="tspan4667">theexperimentsinthispaperuse4x4descriptorscomputedfroma16x16samplearray.</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,104.4,431.3999)"
+             id="text4669">
+            <tspan
+               style="font-size:11.9552002px;font-variant:normal;font-weight:bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Bold"
+               x="0 6.0000124 9.0000181 26.880144 35.520172 40.800179 45.480198 50.760204 56.040226 59.400234 66.000252 69.960266 75.960281 84.360382 89.400246 94.68026 101.28028 106.32021 111.60021 116.28023 121.56021 128.16023 132.12024 138.12025 142.08025 145.44026 151.44028"
+               y="0"
+               sodipodi:role="line"
+               id="tspan4671">6.1Descriptorrepresentation</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,104.4,410.5198)"
+             id="text4673">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 6.1200051 9.1200075 14.520012 19.920017 23.52002 31.080112 39.119968 42.119968 45.119972 48.119976 53.519978 57.719982 60.719986 64.319984 69.119995 72.119995 76.919998 84.239929 87.239929 92.639938 100.2001 105.0001 110.4001 118.9201 124.3201 129.72011 132.72009 137.5201 140.5201 143.52008 148.92009 157.3201 162.72009 168.95995 171.95993 177.35994 184.92009 190.20018 194.88026 200.28026 205.68027 211.08028 214.08026 219.48027 225.48026 230.88026 235.68027 239.88028 244.68028 248.28027 251.28 256.67999 259.67999 265.07999 268.07999 274.56006 280.68008 283.68005 287.28006 291.48007 297.24014 300.24011 305.64014 313.20029 316.20029 324.72034 329.52032 334.92032 342.36044 347.76047 351.36047 356.16046 361.56046 364.56049 369.36047 374.76047 380.7605 389.28052 394.08051 399.48053"
+               y="0"
+               sodipodi:role="line"
+               id="tspan4675">Figure7illustratesthecomputationofthekeypointdescriptor.Firsttheimagegradientmag-</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 5.4000044 8.4000072 11.400009 16.800014 22.200018 27.000023 35.639877 40.43988 45.839886 55.559818 60.959824 64.559822 67.55983 72.359833 77.759834 80.759842 85.559845 88.559845 91.559845 96.959854 102.35986 111.23994 116.03995 119.63994 128.63994 132.83995 137.63995 146.15994 151.55995 154.55994 159.35994 169.20012 174.00012 177.60011 183.00012 188.40012 193.80013 203.52005 206.52005 211.92004 221.03998 226.32007 231.00015 236.40015 241.80016 247.20016 250.20015 255.60016 263.04001 266.03998 271.44 276.23999 281.04001 284.04001 287.03998 292.44 297.84 305.40015 310.80017 315.00015 318.00015 323.40018 333.24002 336.24005 341.64005 350.75995 354.95993 359.75992 364.55991 367.55994 376.67984 382.07983 389.87985 392.87988 398.27988"
+               y="13.5598"
+               sodipodi:role="line"
+               id="tspan4677">nitudesandorientationsaresampledaroundthekeypointlocation,usingthescaleofthe</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 5.2800832 9.960165 15.36017 20.760174 26.160179 29.160181 34.560184 41.40004 44.40004 53.400047 57.600052 62.400055 65.400063 70.200066 75.000069 81.83992 84.83992 90.239929 98.639931 101.63992 106.20008 111.48016 116.28017 122.88017 128.28017 135.60008 143.5201 148.3201 153.72011 157.9201 162.12012 165.1201 169.9201 179.03996 184.43997 187.43996 192.83997 200.15988 203.75987 209.15988 216.35986 219.35986 224.75986 233.2798 236.27979 244.79977 249.59978 254.99979 259.7998 268.43997 272.04001 281.04001 286.44 290.04001 295.44 300.24002 307.55994 310.55994 319.55997 324.35995 329.15994 334.55994 337.55994 342.12009 347.40018 355.92007 361.3201 364.9201 367.9201 372.72009 378.12012 381.12012 385.9201 388.92014 391.92014 397.32016"
+               y="27.120001"
+               sodipodi:role="line"
+               id="tspan4679">keypointtoselectthelevelofGaussianblurfortheimage.Inordertoachieveorientation</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 3.0000024 7.9199281 13.080089 17.880093 21.480095 24.480099 29.280102 34.680107 39.48011 44.280113 50.280121 53.280121 58.680126 66.480133 71.280136 76.680138 82.080147 85.680145 91.080154 94.080154 99.480164 104.28017 107.28015 112.08016 119.52001 124.92001 131.40009 134.40009 139.80008 147.60008 153.00009 157.80009 162.00011 166.80011 170.4001 173.40009 178.80009 181.80008 187.20009 194.03993 198.83994 204.23993 212.63994 215.63994 221.03993 228.72002 234.12003 237.72002 242.52002 247.92003 250.92 255.72 261.12 267.35986 272.75986 276.35983 279.35983 284.15985 289.55984 292.55984 297.35983 300.35983 303.35983 308.75983 314.15982 321.71997 326.51996 330.12 337.80005 341.40005 346.80008 349.80008 354.60007 357.6001 362.40009 370.92001 374.52002 379.32001 382.32004 387.12003 390.12003 392.88019 398.16028"
+               y="40.680199"
+               sodipodi:role="line"
+               id="tspan4681">invariance,thecoordinatesofthedescriptorandthegradientorientationsarerotatedrelative</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 3.0000024 11.280086 14.280088 19.680092 27.360176 32.640259 37.320339 42.720345 48.12035 53.520355 56.520355 61.920361 68.040291 73.440292 77.040298 80.040298 84.840302 90.240311 93.240311 98.040314 101.04031 104.0403 109.4403 114.8403 121.44031 127.44032 132.84032 139.20047 144.00047 147.36061 153.48062 158.28062 161.28062 166.08063 171.48062 176.16063 180.84071 186.48056 189.48056 194.88055 202.56064 207.96065 211.56064 216.36064 221.76065 224.76064 229.56064 234.96065 237.96063 245.40048 250.2 253.79999 261.48007 266.88007 270.48007 275.28006 280.08008 285.48007 294.00009 299.40009 304.80008 307.80005 312.60004 321.1199 324.71994 330.11993 336.60004 341.40002 344.40002 350.28012 353.28015 357.84027 363.12036 367.92035 370.92038 378.00043 383.40045 389.88052 392.88055 398.28055"
+               y="54.119999"
+               sodipodi:role="line"
+               id="tspan4683">tothekeypointorientation.Forefﬁciency,thegradientsareprecomputedforalllevelsofthe</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 5.2800832 10.680087 14.28009 19.080095 27.600101 30.600103 39.840275 44.640278 52.440285 57.84029 62.640293 66.840302 71.640305 75.240303 78.240311 83.640312 88.440315 97.920403 100.92039 109.92039 116.04041 120.84041 125.64041 128.6404 131.6404 137.04039 146.28056 151.68057 160.32043 167.04044 172.44043 177.24045 181.44044 189.9603 194.7603 198.36029 206.88022 209.88022 212.8802 215.8802 221.2802 225.48021 228.48019 232.08018 236.88019 239.88017 244.68019 254.04034 261.96036 264.96033 267.95999 277.07986 281.27985 289.79987 294.59985 297.59985 304.3197 309.11969 312.7197 316.3197 321.47986 329.3999 337.3197 342.11969 348.7197 353.51968 358.31967 363.11966 372.23959 376.43958 381.23956 389.75961 395.15964 398.15964"
+               y="67.680199"
+               sodipodi:role="line"
+               id="tspan4685">pyramidasdescribedinSection5.Theseareillustratedwithsmallarrowsateachsample</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 3.0000024 8.4000072 13.200011 18.000015 21.000017 24.000019 29.400024 37.919956 43.319962 51.480118 54.480122 59.880127 67.560211 70.560211 75.360214 78.96022 84.840302 89.040306 92.040306 97.440308 105.12039 110.5204 117.00047 123.12048 126.12046 131.52046 136.92047 140.52046 148.20047 153.60048"
+               y="81.239998"
+               sodipodi:role="line"
+               id="tspan4687">locationontheleftsideofFigure7.</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="16.919901 27.71991 35.639915 40.439919 45.839924 50.039928 54.239929 57.239933 62.039936 70.559792 78.479797 83.2798 86.279808 91.67981 97.079811 100.07982 103.0798 108.47981 117.11998 120.71997 126.11998 131.51999 136.31999 139.31998 142.31996 147.71997 156.35983 164.27983 167.27983 170.27982"
+               y="94.800201"
+               sodipodi:role="line"
+               id="tspan4689">AGaussianweightingfunctionwith</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,283.0799,315.7196)"
+             id="text4691">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:CMMI10;-inkscape-font-specification:CMMI10"
+               x="0"
+               y="0"
+               id="tspan4693">σ</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,292.55998,315.7196)"
+             id="text4695">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 4.800004 10.200008 15.600013 20.400017 26.519936 29.519926 37.919933 43.319939 48.71994 56.519947 61.919952 66.719955 69.719948 76.319939 79.319931 84.71994 92.63987 100.55988 103.55986 108.95987 111.95986 120.35986 125.75987 132.35989 135.35991 140.7599 148.55991 153.9599 158.75989 162.95988 167.75987 171.35988 174.35989 179.7599 182.75992 188.15993 194.99979 202.91982 205.91983 211.31982"
+               y="0"
+               sodipodi:role="line"
+               id="tspan4697">equaltoonehalfthewidthofthedescriptorwin-</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -182.75999 -177.59984 -165.83966 -162.83966 -154.7998 -149.3998 -145.1998 -140.3998 -130.91971 -127.91971 -118.67986 -113.87984 -109.67985 -105.47984 -102.47984 -97.079834 -87.599747 -78.959892 -71.039886 -66.239883 -63.239895 -57.83989 -52.439884 -45.359879 -42.35989 -33.120033 -30.120043 -24.720037 -15.959878 -7.4398837 -2.6398797 2.7601249 8.1601295 11.16012 14.16011 19.560114 24.960119 33.960049 39.360054 46.799896 51.599903 56.399906 61.199909 70.560074 74.760071 79.560074 88.08007 93.48008 96.480064 105.36008 110.76 116.16 119.16002 124.56002 127.56004 137.16002 143.88004 149.28003 152.28004 160.32018 163.32019 171.36003 174.36005 177.36005 180.36006 185.76007 189.96007 192.96008 196.56009 201.36008 204.36009 209.16008"
+               y="13.5598"
+               sodipodi:role="line"
+               id="tspan4699">dowisusedtoassignaweighttothemagnitudeofeachsamplepoint.Thisisillustrated</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -180.23999 -177.23999 -174.23999 -165.59982 -157.67989 -152.87988 -149.87988 -146.27988 -141.47987 -136.07986 -133.07986 -128.27986 -121.19978 -113.27978 -110.27977 -104.87977 -99.479759 -94.319672 -83.279816 -77.879814 -69.23996 -66.239967 -60.839966 -52.80011 -49.800121 -45.000114 -41.400124 -35.160282 -30.960279 -27.960289 -22.560286 -14.400126 -9.0001211 -2.1602793 3.9597259 6.9597163 12.359721 17.759726 21.359716 29.399887 34.799892 40.799896 45.599899 48.599892 51.59988 56.999886 62.399891 67.799896 73.199898 78.599907 84.959999 90.360008 97.079926 101.87993 107.27993 112.67994 116.27993 120.47991 125.2799 131.51973 134.51974 139.91975 147.95958 155.87961 160.6796 163.67961 169.07962 174.47961 180.83969 184.31978 189.11977 192.11978 195.1198 202.55963 207.95964 211.31981"
+               y="27.120001"
+               sodipodi:role="line"
+               id="tspan4701">withacircularwindowontheleftsideofFigure7,although,ofcourse,theweightfallsoff</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -183.95999 -175.43999 -170.03998 -164.63998 -161.63998 -156.23997 -153.23997 -148.55997 -142.1998 -135.4798 -130.07979 -122.51969 -117.11969 -111.71969 -108.11968 -102.71968 -97.319672 -93.119667 -85.319664 -79.919662 -73.559509 -70.559525 -65.159515 -62.159527 -55.079445 -47.159439 -42.359432 -36.959431 -32.759426 -28.559422 -25.559431 -20.759428 -12.359421 -4.439414 -1.4394233 3.9605813 9.3605862 14.520673 25.200769 28.20076 35.160919 38.160908 46.321068 50.881229 56.041389 61.441391 64.441383 72.841393 77.041397 82.441399 87.841003 93.241005 98.041008 106.44102 111.24102 116.64102 121.44101 126.84102 132.24103 137.04102 144.241 147.24101 155.40118 158.4012 163.80119 171.36134 176.76135 181.56134 185.76132 190.56131 194.16133 197.16135 202.56136 205.56137 210.96136"
+               y="40.679798"
+               sodipodi:role="line"
+               id="tspan4703">smoothly.ThepurposeofthisGaussianwindowistoavoidsuddenchangesinthedescriptor</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -180.23999 -177.23999 -174.23999 -165.95998 -161.75998 -153.23997 -148.43997 -145.43997 -139.55997 -134.75995 -129.35995 -124.55994 -119.15994 -113.75994 -108.95993 -101.64001 -98.639999 -90.359917 -87.359924 -81.959923 -74.279839 -68.879837 -63.479832 -59.279827 -56.279839 -53.279846 -50.279858 -44.879852 -36.359921 -30.959917 -24.479847 -21.479856 -16.079851 -8.3997688 -0.47976178 2.5202286 7.9202332 13.320238 18.480326 25.68033 31.200258 36.000263 41.400269 49.800274 52.800266 61.080349 66.480354 69.240501 74.520584 82.200668 85.200996 90.001007 94.201004 101.28109 106.08109 114.60109 120.00109 125.4011 130.20108 134.40108 137.40109 144.60109 147.6011 155.88118 161.28119 164.8812 169.68118 175.08119 178.08121 182.8812 188.2812 191.28122 198.72105 201.72107 207.12106 211.92105"
+               y="54.240002"
+               sodipodi:role="line"
+               id="tspan4705">withsmallchangesinthepositionofthewindow,andtogivelessemphasistogradientsthat</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -183.36 -179.75999 -172.07991 -168.59982 -163.79982 -157.43967 -153.83966 -150.23965 -144.83966 -133.43965 -130.43965 -125.03964 -117.35956 -112.55956 -107.75955 -102.35954 -99.359543 -94.55954 -87.959534 -82.559525 -76.199379 -73.199387 -67.799385 -60.119305 -54.719299 -49.919296 -45.719292 -40.919289 -37.319298 -34.319305 -28.919302 -25.919312 -20.519306 -17.399395 -11.519313 -6.7193089 0.36077347 3.360764 8.7607689 13.560773 17.760777 25.440859 30.240862 33.840855 41.520935 50.040932 55.440937 59.640938 65.401009 70.201012 73.560997 77.160988 81.960999 86.761002 89.760986 94.560997 103.08092 108.48093 116.64109 125.16113 128.16115 132.36113 135.96115 140.64111 146.04112 149.04114 153.24112 156.24113 159.84116 164.64114 167.64116 170.64117 176.04118 184.68103 189.48102 193.08104 196.68105 202.08105 205.68108 209.88106"
+               y="67.800201"
+               sodipodi:role="line"
+               id="tspan4707">arefarfromthecenterofthedescriptor,asthesearemostaffectedbymisregistrationerrors.</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-171.24001 -164.51999 -159.12 -150.9599 -145.67981 -140.99973 -135.59973 -130.19972 -124.79971 -121.79971 -116.39971 -109.79971 -104.3997 -99.599693 -95.399689 -90.599686 -86.999695 -83.99971 -78.599701 -75.599709 -70.199707 -62.879787 -59.879799 -52.319637 -48.119637 -42.719631 -37.559471 -29.639463 -20.759457 -15.359452 -6.5992923 -3.5993018 1.8007027 9.9608622 13.560853 16.560844 21.960848 27.360853 33.840923 38.040928 41.040916 46.440922 54.721004 60.12101 67.081154 73.201164 76.201157 81.601158 87.00116 90.601151 98.881157 104.281 112.08101 115.681 122.04117 126.84116 129.84117 132.84119 138.00134 145.92137 153.60133 157.20135 162.60136 169.56152 173.76152 176.76154 182.16154 187.56154 190.56155 196.68156 201.48155 206.28154 211.68155"
+               y="81.360001"
+               sodipodi:role="line"
+               id="tspan4709">ThekeypointdescriptorisshownontherightsideofFigure7.Itallowsforsigniﬁcant</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -183.95999 -178.56 -175.55998 -171.95999 -165.4799 -162.4799 -153.71974 -148.31973 -144.71974 -139.91972 -134.51973 -131.51973 -126.71972 -121.31972 -114.71971 -109.3197 -103.9197 -99.719696 -96.719696 -93.719688 -90.719688 -85.319687 -79.919678 -71.999748 -66.599747 -57.839584 -53.039581 -49.43959 -44.639587 -39.839584 -36.839592 -33.839603 -28.439598 -19.43959 -14.039585 -10.439594 -7.4396038 -2.6396 2.7604046 5.7603951 10.560399 13.56039 16.560381 21.960384 31.080317 36.48032 39.480312 43.680313 46.680305 52.080311 57.48 61.07999 65.879997 74.399986 82.199921 87.480003 92.760086 97.560089 104.52024 109.92024 115.32024 124.20033 128.40031 133.2003 141.72035 147.12036 150.12036 158.40034 162.00035 166.68042 172.08043 175.08044 180.48045 185.88045 190.08044 198.12027 204.84027 210.24028"
+               y="94.920197"
+               sodipodi:role="line"
+               id="tspan4711">shiftingradientpositionsbycreatingorientationhistogramsover4x4sampleregions.The</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -182.03999 -176.63998 -171.23999 -167.63998 -159.24005 -155.04005 -149.64005 -144.47989 -136.55988 -128.75995 -123.95995 -120.95994 -115.55994 -110.15993 -103.44 -98.040001 -95.039993 -91.439995 -86.639992 -81.839981 -78.839996 -75.840004 -70.440002 -65.039993 -57.000141 -53.40015 -48.000145 -40.800152 -36.000145 -31.200142 -26.400139 -17.280207 -11.880202 -8.2802114 -5.2802205 -0.48021668 4.9197879 7.9197783 12.719782 15.719772 18.719763 24.119768 33.359623 38.759628 41.759617 45.959621 48.95961 54.359615 59.759621 63.359612 68.160004 76.679993 83.399849 91.319855 94.319847 97.319832 106.31976 109.31976 114.71976 123.11976 126.11977 130.91975 136.31976 141.71977 144.71979 153.83972 159.23972 166.43974 171.23973 176.03972 180.83971 189.83971 194.63969 198.23972 201.83972 206.99989"
+               y="108.36"
+               sodipodi:role="line"
+               id="tspan4713">ﬁgureshowseightdirectionsforeachorientationhistogram,withthelengthofeacharrow</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -183.36 -177.95999 -174.35999 -170.75998 -165.95998 -161.75998 -156.35997 -150.95998 -145.55997 -140.15996 -137.15996 -131.75995 -122.27986 -119.27985 -110.27985 -107.27985 -101.87984 -93.479836 -84.959839 -80.159836 -74.759834 -69.359825 -66.359833 -63.359844 -57.959839 -52.559837 -43.919666 -38.519661 -31.319666 -28.319675 -22.91967 -18.119667 -11.519672 -6.1196675 -3.1196771 1.0803263 4.080317 9.4803209 14.880326 18.480316 23.280321 35.640484 40.440487 45.840492 48.840485 52.440475 57.120556 65.640488 77.040497 82.440498 86.040001 90.840004 96.240005 99.239998 104.04 109.44001 116.27985 120.47984 125.27982 133.79987 139.19987 142.19989 150.7197 156.11971 164.99979 167.9998 173.39981 181.91971 184.91972 189.71971 193.31973 199.91975 204.71974 209.51973"
+               y="121.9202"
+               sodipodi:role="line"
+               id="tspan4715">correspondingtothemagnitudeofthathistogramentry.Agradientsampleontheleftcan</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -183.95999 -178.56 -175.55998 -171.95999 -164.75998 -159.35997 -149.8799 -146.87988 -137.51973 -128.03964 -123.83964 -119.03963 -110.51963 -105.11963 -102.11962 -93.239616 -87.839607 -82.439606 -78.239601 -75.239609 -72.239624 -69.239632 -63.839626 -58.439621 -49.799767 -41.879761 -36.479755 -33.479767 -30.479776 -21.599768 -17.399765 -14.399775 -11.399784 -8.3997936 -1.3197222 3.4802818 8.8802862 14.280291 17.280281 20.880272 23.880262 29.040422 34.440426 37.440418 40.440407 45.840412 55.800575 58.800564 68.280647 71.28064 76.681 85.561081 89.761086 94.561089 103.08109 111.96109 117.3611 120.36111 124.5611 127.56112 132.96112 138.36113 141.96114 146.76112 159.48108 164.88107 174.36116 177.36118 182.76118 191.76118 195.36119 198.36121 203.76122 209.16122 212.16124"
+               y="135.48"
+               sodipodi:role="line"
+               id="tspan4717">shiftupto4samplepositionswhilestillcontributingtothesamehistogramontheright,</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -185.16 -179.75999 -174.95999 -171.35999 -166.55998 -161.15997 -152.75996 -147.95996 -143.15996 -137.75996 -134.75995 -130.1998 -124.79979 -121.79979 -116.39979 -107.87985 -104.87985 -99.479843 -91.799767 -86.399757 -80.999756 -77.999763 -73.19976 -68.399757 -65.399765 -62.639618 -57.359535 -49.559528 -44.159527 -37.679455 -32.879452 -29.879459 -26.879469 -21.719309 -13.799303 -10.799313 -5.3993077 3.0006993 6.6006904 12.000695 18.360842 21.360832 26.160837 29.520983 34.920986 39.720993 46.320988 49.320976 54.720982 59.520985 64.320999 70.320992 75.721001 81.121002 85.321007 88.320999 91.320984 94.320976 99.720985 105.12099 109.92099 116.04091 120.2409 125.6409 128.64091 132.24094 135.24095 139.44093"
+               y="149.04021"
+               sodipodi:role="line"
+               id="tspan4719">therebyachievingtheobjectiveofallowingforlargerlocalpositionalshifts.</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-171.24001 -167.64 -162.00015 -159.00014 -152.03998 -149.03998 -140.51997 -135.11996 -129.71997 -126.11996 -123.11996 -118.31995 -112.91995 -107.03995 -104.03995 -95.879784 -91.319626 -86.159462 -80.75946 -77.759468 -69.479385 -64.679382 -61.67939 -56.039551 -50.639545 -45.23954 -39.839539 -34.439533 -29.039528 -24.239525 -20.639534 -12.119602 -7.3195982 -3.9594514 -0.3594605 4.4405437 9.2405472 12.240538 19.200697 22.200687 30.360847 38.280853 43.680859 46.680847 51.480854 59.640945 62.640938 68.040939 75.601097 81.001106 85.801109 90.000999 94.801003 98.400993 101.40099 106.80099 109.80098 115.20099 121.801 126.60099 132.00099 135.60101 141.00101 146.40102 149.40103 152.40105 160.80106 165.60104 171.00105 175.80104 181.20103 186.60104 191.40103 198.48111 203.2811 210.24124"
+               y="162.6004"
+               sodipodi:role="line"
+               id="tspan4721">Itisimportanttoavoidallboundaryaffectsinwhichthedescriptorabruptlychangesasa</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -183.95999 -179.15999 -170.63998 -165.23997 -162.23997 -154.07988 -149.87988 -144.47987 -141.47987 -137.87987 -134.87987 -127.31971 -123.11971 -114.5997 -109.19969 -103.79969 -100.79969 -95.399681 -92.399681 -83.639587 -80.039597 -76.439606 -71.039597 -59.279438 -53.879433 -49.07943 -46.079437 -40.679432 -31.919273 -23.999266 -20.999275 -17.999285 -12.599281 -9.5992908 -0.83919591 4.5608087 9.9608135 18.000668 23.400671 26.400661 30.600666 33.600655 39.00066 44.400665 48.000656 52.800659 64.800667 67.800659 76.440514 81.240517 86.639999 92.040001 95.039993 100.44 105.24001 112.32008 117.72008 124.55994 128.15996 131.75998 137.15997 148.92017 154.32016 159.72017 167.76001 173.16 176.76003 179.76004 184.56003 189.96004 192.96005 197.76004 200.76006 203.76007 209.16006"
+               y="176.1602"
+               sodipodi:role="line"
+               id="tspan4723">sampleshiftssmoothlyfrombeingwithinonehistogramtoanotherorfromoneorientation</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -185.16 -176.27991 -171.4799 -166.07991 -160.6799 -157.6799 -152.27989 -147.47989 -144.47989 -136.1998 -129.4798 -124.0798 -119.27979 -115.67979 -110.87978 -107.27978 -101.87978 -98.27977 -93.479767 -86.999763 -83.999771 -80.39978 -77.399788 -74.399803 -71.399811 -65.999809 -61.199802 -56.399799 -49.07988 -46.079887 -40.679882 -37.679893 -32.87989 -29.279898 -23.879894 -18.479889 -15.479898 -10.679894 -7.679904 -4.6799135 0.72009087 9.9599457 12.959936 20.640018 26.040024 30.240026 35.040031 43.920116 46.920105 55.80019 61.200001 64.199989 68.399994 71.399986 74.999977 77.999969 83.160126 88.560127 91.56012 100.08006 103.08004 108.48005 116.76013 121.92029 126.72028 129.72029 135.1203 143.52029 148.9203 156.0004 160.80038 165.60037 170.40036 179.28044 184.68045 188.28046 193.08044 198.48045 201.48047 206.28046 211.68047"
+               y="189.7204"
+               sodipodi:role="line"
+               id="tspan4725">toanother.Therefore,trilinearinterpolationisusedtodistributethevalueofeachgradient</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -183.95999 -179.15999 -170.63998 -165.23997 -162.23997 -154.32013 -151.32013 -145.92012 -142.92012 -134.52011 -129.72011 -124.3201 -121.3201 -116.5201 -111.72009 -106.92008 -101.52008 -95.15992 -89.759918 -86.759926 -82.559921 -79.559937 -74.159927 -68.759926 -65.159935 -60.359928 -48.720085 -43.32008 -40.320087 -34.920082 -30.720081 -23.880228 -20.280237 -11.880229 -6.4802251 -3.4802344 1.91977 6.7197742 13.439692 21.239698 26.639704 30.239695 35.639698 39.839703 45.719784 50.519787 55.31979 60.119797 68.639725 73.439728 78.839996 81.839989 85.43998 93.959915 96.9599 102.35991 105.3599 113.87983 121.5599 126.95991 129.95992 138.47984 141.47986 148.55994 157.07999 162.47998 165.48 168.48001 171.48003 176.88004 179.88005 182.88007 187.68005 196.32021 201.7202 210.24014"
+               y="203.2802"
+               sodipodi:role="line"
+               id="tspan4727">sampleintoadjacenthistogrambins.Inotherwords,eachentryintoabinismultipliedbya</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-188.16 -180.23999 -175.43999 -172.43999 -167.03998 -161.63998 -155.15997 -149.75996"
+               y="216.84039"
+               sodipodi:role="line"
+               id="tspan4729">weightof</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,149.63978,98.8792)"
+             id="text4731">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:CMR10;-inkscape-font-specification:CMR10"
+               x="0"
+               y="0"
+               id="tspan4733">1</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,157.91986,98.8792)"
+             id="text4735">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:CMSY10;-inkscape-font-specification:CMSY10"
+               x="0"
+               y="0"
+               id="tspan4737">−</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,169.19996,98.8792)"
+             id="text4739">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:CMMI10;-inkscape-font-specification:CMMI10"
+               x="0"
+               y="0"
+               id="tspan4741">d</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,178.19996,98.8792)"
+             id="text4743">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 3.600003 9.0000076 15.960166 20.76017 25.560175 30.360178 39.120338 44.520344 47.520332 56.040329 60.840332 66.240334 70.440338 73.440331 78.840332 84.240341 90.720345 98.64035 104.04036 108.84036 112.44035"
+               y="0"
+               sodipodi:role="line"
+               id="tspan4745">foreachdimension,where</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,298.79996,98.8792)"
+             id="text4747">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:CMMI10;-inkscape-font-specification:CMMI10"
+               x="0"
+               y="0"
+               id="tspan4749">d</tspan>
+          </text>
+          <text
+             transform="matrix(1,0,0,-1,307.68004,98.8792)"
+             id="text4751">
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="0 2.9999905 10.560149 13.56014 18.960144 27.120304 32.520309 35.520298 39.720303 42.720295 47.520298 52.920303 57.720306 66.120316 71.520317 78.480461 81.480453 86.880463 95.040619 99.240623 104.04061 112.56065 117.96066 120.96067 129.24065 132.84067 136.44067 141.84068 153.72079 156.72081 162.1208 170.28096 175.08095 179.88094 185.28094 188.28096 191.88097 196.68095"
+               y="0"
+               sodipodi:role="line"
+               id="tspan4753">isthedistanceofthesamplefromthecentral</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-203.28 -198.11984 -193.31984 -190.31984 -184.91983 -177.23975 -171.83974 -165.35966 -162.35965 -156.95966 -149.27957 -143.87956 -140.87956 -132.59947 -127.79948 -120.83932 -112.31931 -107.5193 -102.7193 -98.519295 -93.119293 -89.519302 -84.719299 -76.31929 -73.319298 -65.039215 -59.639214 -54.239208 -51.23922 -48.239227 -41.159145 -35.75914 -29.27907 -26.279079 -20.879076 -13.318916 -7.9189119 -4.9189215 -0.71891809 2.2810724 7.681077 13.081081 16.681072 21.481077 33.120922 38.520927 41.520916 49.801003 54.001003 59.401009 64.201012 69.000999 72.000992 77.400993 82.801003"
+               y="13.5602"
+               sodipodi:role="line"
+               id="tspan4755">valueofthebinasmeasuredinunitsofthehistogrambinspacing.</tspan>
+            <tspan
+               style="font-size:10.90909958px;font-variant:normal;font-weight:normal;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times-Roman"
+               x="-7.0798998 -1.6798955"
+               y="50.400002"
+               sodipodi:role="line"
+               id="tspan4757">15</tspan>
+          </text>
+        </g>
+        <path
+           sodipodi:nodetypes="ccc"
+           transform="matrix(3.5493165,0,0,-3.5493165,1192.8684,7119.1725)"
+           inkscape:connector-curvature="0"
+           id="path6559"
+           d="m 59.285715,55 0,335 321.428575,0.71427"
+           style="fill:none;stroke:#2f6491;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)" />
+        <g
+           transform="translate(513.1811,198.1)"
+           id="box">
+          <path
+             d="M 8.7399999,0 C 9.55,0 10,0.54000002 10,1.6200001 l 0,0.18 -10,0 0,-0.18 C 0,0.54000002 0.45000002,0 1.2600001,0 z"
+             id="box-inner-close-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 0,1.8000001 10,0 0,3 -10,0 z"
+             id="box-upper-close-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 10,1.8000001 2.4,0 L 13,4.2 l 0,0.6000001 -3,0 z"
+             id="box-upper-right-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 26,1.8000001 -2.4,0 L 23,4.2 l 0,0.6000001 3,0 z"
+             id="box-upper-left-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 0,4.8000001 -1.5,0.75 L -1.5,19.05 0,19.8 z"
+             id="box-left-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 0,4.8000001 10,0 L 10,19.8 0,19.8 z"
+             id="box-front"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 10,4.8000001 3,0 L 13,19.8 l -3,0 z"
+             id="box-right"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 13,4.8000001 10,0 L 23,19.8 l -10,0 z"
+             id="box-back"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 23,4.8000001 3,0 L 26,19.8 l -3,0 z"
+             id="box-left"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 0,19.8 0,1.5 10,0 0,-1.5 z"
+             id="box-bottom-front-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 10,19.8 0,4 3,0 0,-4 z"
+             id="box-bottom-right-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 13,19.8 0,1.5 10,0 0,-1.5 z"
+             id="box-bottom-back-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+          <path
+             d="m 23,19.8 0,4 3,0 0,-4 z"
+             id="box-bottom-left-tab"
+             style="fill:none;stroke:#000000"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-222.81462"
+     y="35.092052"
+     id="text7545"
+     sodipodi:linespacing="125%"
+     transform="matrix(0,-1,1,0,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan7547"
+       x="-222.81462"
+       y="35.092052">Magnitude</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="265.94308"
+     y="387.25656"
+     id="text7545-1"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan7547-1"
+       x="265.94308"
+       y="387.25656">Angle</tspan></text>
+</svg>
